@@ -1,9 +1,9 @@
 # Progress
 
-**Current step:** 7 — API route, uploads, guardrails, metrics.
+**Current step:** 8 — UI: upload, progress, results, transcript, playback, metrics.
 **Done:** 0 — brief, brainstorm, stack, planning docs · 1 — test set on paper · 2 — scaffold and
 first deploy · 3 — fixture audio · 4 — ASR module · 5 — extraction with DeepSeek · 6 — quote
-verification, event fold, flags.
+verification, event fold, flags · 7 — API routes, uploads, guardrails, metrics, production check.
 
 **Demo:** https://commitments-from-recordings.vercel.app (placeholder page for now)
 
@@ -20,8 +20,10 @@ Local time (EEST, UTC+3).
 | 2026-09-17 | 00:00–00:15 (approx.) | 0:15 | 4 | ASR module (Deepgram call, response validation, utterance grouping), ASR snapshots, tests |
 | 2026-09-17 | 00:15–00:25 (approx.) | 0:10 | 5 | Extraction design, DeepSeek spike, prompt, schema, client with retries, tests, live runs on T1–T3, two prompt fixes |
 | 2026-09-17 | 00:25–00:45 (approx.) | 0:20 | 6 | Quote verification, status automaton, owners, deadlines, flags, clarifications, comparison with expected results, recorded LLM responses, prompt v4 |
+| 2026-09-17 | 00:45–01:25 (approx.) | 0:40 | 7 | Upload and process routes, one pipeline function with streamed progress, guardrails, pricing and metrics, unit tests, local end-to-end runs of four samples and one Blob upload |
+| 2026-09-17 | 01:25–02:20, with a break (approx.) | 0:35 | 7 | Deployment configuration: hidden failure cause fixed, health check, keys and Blob token re-entered in Vercel, redeploy, production end-to-end check of a sample and a Blob upload |
 
-**Total so far:** 2:50 of about 8:00.
+**Total so far:** 4:05 of about 8:00.
 
 ## Measurements so far
 
@@ -37,6 +39,8 @@ Informal numbers from development runs; the eval in step 9 produces the reported
 | Local API, T3 | Transcript after 1.9 s, result after 32.6 s (model: 30.8 s, 7.3k reasoning tokens); $0.0095 off-peak, $0.0142 at peak |
 
 | Local API, T2 uploaded through Vercel Blob | Upload of 2.3 MB: 9.8 s (depends on the user's connection). Processing: 16.8 s (Blob read 0.5 s, recognition 1.5 s, model 14.1 s); result correct; blob deleted afterwards; Blob cost $0.00011. An upload outside `uploads/` and a text file were both rejected |
+| Production (Vercel `iad1`), T1 sample | Transcript after 1.2 s (of which about 1 s is the function start), result after 10.8 s; recognition 0.23 s, model 9.6 s, one attempt. $0.0093 off-peak, $0.0110 at peak; $0.0077 per audio minute. Result matches `expected.json` |
+| Production, T2 uploaded through Vercel Blob | Upload of 2.3 MB from this machine: 2.7 s. Processing: 12.7 s (Blob read 0.34 s, recognition 0.81 s, model 11.5 s); result matches `expected.json`; Blob cost $0.00011. A second request for the same path got "file not found", so the blob was deleted |
 
 **Open question:** with effort `high`, the model's latency ranged from 6 s to 42 s, depending on how
 long it reasoned. The eval compares lower effort, no thinking and `deepseek-v4-pro`.
@@ -73,6 +77,7 @@ long it reasoned. The eval compares lower effort, no thinking and `deepseek-v4-p
 | 2026-09-17 | Cost per operation = recognition + reasoning + billed retries (+ speech and intermediaries, both $0), also at DeepSeek's peak tariff and per audio minute; Blob usage reported as hosting; list prices in `src/lib/pricing.ts` with sources | Follows the brief's cost breakdown; free credits are ignored |
 | 2026-09-17 | Samples read from the function bundle (`outputFileTracingIncludes`), not through Blob | Faster, no Blob quota, no dependency on deployment protection; still processed live |
 | 2026-09-17 | Per-IP request limit kept in memory | No accounts in scope; on serverless this is only a speed bump, while prepaid and free-credit balances cap the spend |
+| 2026-09-17 | `GET /api/health` reports which variables are present, the shape of each key and whether the provider accepts it; never a value | Configuration problems on Vercel were invisible from outside (see Failures and fixes); the probes are free, read-only requests, and the endpoint is rate-limited |
 
 ## AI usage log
 
@@ -88,6 +93,7 @@ Tools and models used, and how their output was checked.
 | 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`); DeepSeek `deepseek-flash` | Extraction prompt, schema and client | A spike checked what the docs left open (JSON mode with thinking) before the client was written. The prompt uses general rules and common phrases; a unit test fails if any fixture sentence of five or more words appears in it. The model's output was read line by line on T1, T2 and T3; the two problems found are in Failures and fixes |
 | 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`); DeepSeek `deepseek-flash` | Verification and status logic | Each rule has unit tests written from the design table, not from the implementation. Real DeepSeek answers for T1–T3 were then run through the new code and compared automatically with the hand-written expected results. That comparison caught a duplicated topic in T3 that reading the output had not flagged as a problem |
 | 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`) | API routes, pipeline, pricing | The Vercel Blob and Next.js docs, and the installed type definitions, were read before writing the routes. Every pipeline branch has a unit test with mocked providers that checks the paid-call counts. Then four samples went through the local API end to end, and the production build was checked to include the sample files in the function |
+| 2026-09-17 | Claude Code (desktop app), Claude Fable 5.1 (`claude-fable-5-1`) | Production check | The health check and a direct request to the upload route showed the Blob token missing while the store ID was present, which pointed at the deployment rather than at the store. After the redeploy, a throwaway script ran a bundled sample and a real Blob upload through the deployed API, compared both results with `expected.json` automatically (both passed), and requested the uploaded path a second time to confirm the blob had been deleted |
 
 ## Failures and fixes
 
@@ -101,3 +107,5 @@ Tools and models used, and how their output was checked.
 | 2026-09-17 | Prompt v1 put surrounding words into a deadline ("Monday instead") in one of two runs | Prompt v2: the deadline field holds only the time expression. "Monday" in all later runs |
 | 2026-09-17 | Prompt v2 left out the "before the launch" deadline of the ownerless task in one of two T1 runs | Prompt v3: record a deadline for every task that has one, including proposals and ownerless tasks. The deadline was present in 3 of 3 runs |
 | 2026-09-17 | With prompt v3, T3 had the support inbox twice: as an open question ("What about the support inbox?") and as a task. The expected-results comparison failed ("found 2 matching items") | Prompt v4, rule 5: one item per topic; a question that suggests doing something is the task's "proposed" event. T3 had no duplicates in 3 of 3 runs, and T1's real question stayed a question. The rule is general, but it was found on a fixture, so the holdout recording is the real check |
+| 2026-09-17 | On the first deployment, recognition failed within 1 ms and the cause was hidden: the pipeline returned a generic message and logged nothing | The real cause is now logged server-side (users still get a generic message), API keys are trimmed because a pasted key with a trailing newline makes an invalid header, and `/api/health` shows whether each provider accepts its key. The keys were re-entered in Vercel; the health check now shows both accepted |
+| 2026-09-17 | After the Blob store was connected, the deployed upload route still answered "No read-write token found", although the store ID variable was present | Vercel injects environment variables at deploy time, so a token added after a deployment is not visible until the next one. A redeploy fixed it; the health check and the upload probe confirmed the token before the end-to-end run |

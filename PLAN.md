@@ -209,7 +209,7 @@ One step at a time, in this order. The estimates keep the total within about 8 h
 | 4 | ASR module → normalised transcript | 0:25 | ✅ done |
 | 5 | Extraction: DeepSeek prompt, schema, retry | 0:50 | ✅ done |
 | 6 | Quote verification, event fold, flags + unit tests | 0:50 | ✅ done |
-| 7 | API route, guardrails, metrics | 0:25 (realistic: 0:50) | code done; upload and deploy check pending |
+| 7 | API route, guardrails, metrics | 0:25 (realistic: 0:50) | ✅ done (1:15 incl. deployment troubleshooting) |
 | 8 | UI: upload, progress, results, transcript, playback, metrics | 1:20 | |
 | 9 | Eval runs and report; model comparison if time allows (the comparison with `expected.json` already exists: `scripts/lib/compare.ts`) | 0:40 | |
 | 10 | Deploy, README, delivery notes, video | 0:40 | |
