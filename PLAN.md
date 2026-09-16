@@ -117,7 +117,7 @@ the local copy of the file in the browser.
 | Hosting | Vercel (Hobby) + Vercel Blob | Render: free tier sleeps. Railway / Fly.io: paid from day one. Firebase: paid plan required |
 | ASR | Deepgram Nova-3, pre-recorded, `diarize_model=v2` | AssemblyAI: async polling. OpenAI diarize model: segment-level timestamps only. Multimodal LLM: imprecise timestamps |
 | LLM | DeepSeek: `deepseek-flash` by default; `deepseek-v4-pro` and thinking mode compared in eval | Claude Opus 5: strongest candidate (schema-guaranteed output), dropped because of the budget |
-| LLM client | `openai` npm package pointed at DeepSeek's OpenAI-compatible API, behind a thin adapter | — |
+| LLM client | `fetch` to DeepSeek's OpenAI-compatible endpoint, behind a thin adapter, response validated with Zod | `openai` npm package: `thinking`, `reasoning_effort: "max"` and the cache fields in `usage` are not in its types |
 | Validation | Zod | — |
 | Tests | Vitest + eval script | — |
 | Test audio | Deepgram Aura-2 TTS | ElevenLabs: extra account, free-tier licence limits. macOS `say`: licence forbids public sharing. Kokoro: longer setup |
@@ -132,8 +132,8 @@ demo. The cost report still uses list prices.
   guarantees valid JSON but not our schema, and the docs warn it "may occasionally return empty
   content". Mitigation: Zod validation plus one retry that feeds back the validation error.
   Retries are counted in time and cost.
-- **Thinking mode compatibility is unknown.** The docs do not say whether JSON mode works with
-  thinking mode (`thinking: {type: "enabled"}`). A quick spike in step 5 checks it.
+- **Thinking mode compatibility.** The docs do not say whether JSON mode works with thinking
+  mode (`thinking: {type: "enabled"}`). A spike on 2026-09-17 confirmed that it does.
 - **Data location.** DeepSeek's privacy policy says personal data is stored in the PRC and may
   be used for model training (with an opt-out). This is acceptable for fictional test data. For
   real client recordings, the thin adapter lets us swap providers; this goes into the delivery
@@ -207,7 +207,7 @@ One step at a time, in this order. The estimates keep the total within about 8 h
 | 2 | Scaffold: Next.js, Tailwind, shadcn/ui, Vitest; first Vercel deploy | 0:25 | ✅ done |
 | 3 | Generate fixture audio (Deepgram Aura-2) | 0:25 | ✅ done |
 | 4 | ASR module → normalised transcript | 0:25 | ✅ done |
-| 5 | Extraction: DeepSeek prompt, schema, retry | 0:50 | |
+| 5 | Extraction: DeepSeek prompt, schema, retry | 0:50 | ✅ done |
 | 6 | Quote verification, event fold, flags + unit tests | 0:50 | |
 | 7 | API route, guardrails, metrics | 0:25 | |
 | 8 | UI: upload, progress, results, transcript, playback, metrics | 1:20 | |

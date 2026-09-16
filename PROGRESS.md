@@ -1,8 +1,8 @@
 # Progress
 
-**Current step:** 5 — commitment extraction with DeepSeek.
+**Current step:** 6 — quote verification, event fold, flags.
 **Done:** 0 — brief, brainstorm, stack, planning docs · 1 — test set on paper · 2 — scaffold and
-first deploy · 3 — fixture audio · 4 — ASR module.
+first deploy · 3 — fixture audio · 4 — ASR module · 5 — extraction with DeepSeek.
 
 **Demo:** https://commitments-from-recordings.vercel.app (placeholder page for now)
 
@@ -17,8 +17,18 @@ Local time (EEST, UTC+3).
 | 2026-09-16 | 21:50–22:10 (approx.) | 0:20 | 2 | Next.js 16 scaffold, shadcn/ui, Vitest, env template, GitHub repo, first Vercel deploy |
 | 2026-09-16 | 22:10–23:55, with a break (approx.) | 0:50 | 3 | Deepgram key setup, fixture generator and tests, audio generation, ASR check of the audio, fixes to T1/T2/T3, diarization model comparison |
 | 2026-09-17 | 00:00–00:15 (approx.) | 0:15 | 4 | ASR module (Deepgram call, response validation, utterance grouping), ASR snapshots, tests |
+| 2026-09-17 | 00:15–00:25 (approx.) | 0:10 | 5 | Extraction design, DeepSeek spike, prompt, schema, client with retries, tests, live runs on T1–T3, two prompt fixes |
 
-**Total so far:** 2:20 of about 8:00.
+**Total so far:** 2:30 of about 8:00.
+
+## Measurements so far
+
+Informal numbers from development runs; the eval in step 9 produces the reported figures.
+
+| Stage | Observed |
+|---|---|
+| ASR (Deepgram Nova-3), 16–72 s of audio | 2.1–2.3 s per file |
+| Extraction (`deepseek-flash`, thinking, effort `high`), T1–T3 | 5.8–15 s; 1.3–1.5k input tokens (up to 1.28k from cache); 1.4k–3.8k output tokens, of which 1.1k–2.7k reasoning |
 
 ## Decisions
 
@@ -36,6 +46,11 @@ Local time (EEST, UTC+3).
 | 2026-09-17 | `detect_language` instead of a fixed `language=en` | Needed to refuse non-English input; the effect on billing is undocumented and will be checked against Deepgram usage |
 | 2026-09-17 | Deepgram responses validated with Zod; the client module marked `server-only`; our own retry (max 2 attempts, counted) | The SDK types omit fields we use; the API key can't leak into client code; every paid attempt shows up in the metrics |
 | 2026-09-17 | Real Deepgram responses committed as test data (`fixtures/*/asr-response.json`) | Later stages are unit-tested on realistic transcripts, offline and for free |
+| 2026-09-17 | The LLM returns items with a timeline of typed events and quotes, not final states | Every change of state (acceptance, new deadline, cancellation) is explicit and quotable; the final state is computed by tested code |
+| 2026-09-17 | DeepSeek called with `fetch` instead of the `openai` package | The DeepSeek-specific parameters and usage fields are not in the SDK types; the response is validated with Zod anyway |
+| 2026-09-17 | Start with `deepseek-flash`, thinking on, effort `high` | Correct results on T1–T3 in development runs at a fraction of a cent; the eval will compare other settings |
+| 2026-09-17 | One retry: a complete but invalid answer is sent back with the validation error, a truncated or empty one is simply requested again | Most invalid answers are fixable by the model; every attempt is counted |
+| 2026-09-17 | Versioned system prompt (`PROMPT_VERSION`), static and placed first | Eval reports show which prompt produced a result; DeepSeek serves the static prefix from its cache at a lower price |
 
 ## AI usage log
 
@@ -48,6 +63,7 @@ Tools and models used, and how their output was checked.
 | 2026-09-16 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`) | Project scaffold | The Next.js docs bundled with the installed version were read before writing code, as the generated `AGENTS.md` requires. The new `cn` dependency added by shadcn was checked on npm: its repository is `shadcn-ui/cn` and its maintainer is shadcn. Reading the generated CSS showed that shadcn expects the `--font-sans` variable while the template defined `--font-geist-sans`, so the page would have silently used a fallback font. After the fix, the computed style on the deployed page shows Geist |
 | 2026-09-16 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`); Deepgram Aura-2 (TTS) and Nova-3 (ASR) | Fixture generator, audio generation and its verification | The generated audio was checked with a separate model: Deepgram Nova-3 transcribed each file, and a throwaway script compared the transcript with the script (word error rate) and each script line's time range with the detected speaker. This caught three problems before any pipeline code depended on the audio (see Failures and fixes) |
 | 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`) | ASR module | Before writing the code, the SDK's type definitions were read instead of relying on memory. They turned out to omit `punctuated_word` and `language_confidence`, which the API does return, so the response is validated with an explicit Zod schema. Recorded responses confirmed both fields, and tests on them check that every script line is transcribed and that Mark's short replies keep Mark's label |
+| 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`); DeepSeek `deepseek-flash` | Extraction prompt, schema and client | A spike checked what the docs left open (JSON mode with thinking) before the client was written. The prompt uses general rules and common phrases; a unit test fails if any fixture sentence of five or more words appears in it. The model's output was read line by line on T1, T2 and T3; the two problems found are in Failures and fixes |
 
 ## Failures and fixes
 
@@ -58,3 +74,5 @@ Tools and models used, and how their output was checked.
 | 2026-09-16 | ASR transcribed T1 line 10 "We could also add a dark mode" as "We can also add…", so the brief's "we could" trap would never reach the model | Reworded line 10 in T1 and T2 to "Maybe we could build a dark mode before the launch, too." The transcript now keeps "could" |
 | 2026-09-16 | In the 22-second T3, diarization found a single speaker, with three different voice pairs | Extended T3 to about 45 seconds with the same meaning, plus a "somebody might…" item. Both voices are now separated and every line is attributed correctly. Lesson for the app: short recordings can merge voices, so fewer than two speakers must trigger a clarification |
 | 2026-09-16 | After regeneration, the deprecated `diarize=true` attributed Mark's short reply (T1/T2 line 17) to Anna | Compared it with `diarize_model=v2`, which attributed every line of every fixture correctly; the app will use v2. Lesson: speaker labels on short replies are hints, not facts |
+| 2026-09-17 | Prompt v1 put surrounding words into a deadline ("Monday instead") in one of two runs | Prompt v2: the deadline field holds only the time expression. "Monday" in all later runs |
+| 2026-09-17 | Prompt v2 left out the "before the launch" deadline of the ownerless task in one of two T1 runs | Prompt v3: record a deadline for every task that has one, including proposals and ownerless tasks. The deadline was present in 3 of 3 runs |

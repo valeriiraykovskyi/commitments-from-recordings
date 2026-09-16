@@ -11,7 +11,8 @@
     "test:watch": "vitest",
     "typecheck": "next typegen && tsc --noEmit",
     "fixtures": "tsx scripts/generate-fixtures.ts",
-    "asr:snapshot": "tsx --conditions=react-server scripts/asr-snapshot.ts"
+    "asr:snapshot": "tsx --conditions=react-server scripts/asr-snapshot.ts",
+    "extract": "tsx --conditions=react-server scripts/extract.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
