@@ -2,7 +2,7 @@ import type { Transcript } from "@/lib/asr/transcript";
 import { formatTimestamp } from "@/lib/format-time";
 
 /** Bump when the prompt changes, so eval reports show which version produced a result. */
-export const PROMPT_VERSION = "2026-09-17.3";
+export const PROMPT_VERSION = "2026-09-17.4";
 
 // Written from general rules. Examples are common phrases, never sentences from
 // the test fixtures (a unit test guards this). The prompt is static and comes
@@ -40,7 +40,7 @@ RULES
 2. A task is agreed only through "committed" or "accepted". Never turn "we could" into "we will".
 3. Owners come only from "committed", from a "requested" that was then accepted, or from an explicit assignment. A task that "somebody" should do has no owner: leave "owner" null. Never guess an owner.
 4. Later statements override earlier ones. Record changed deadlines and cancellations as new events; do not edit earlier events.
-5. One item per task or question, even if it comes up several times. Title it with the discussion's own words.
+5. One item per topic, even if it comes up several times. A question that suggests doing something ("what about X?", "should we X?") is the "proposed" event of that task, not a separate question item. Title each item with the discussion's own words.
 6. Speakers: give a name only when that speaker introduces themselves ("I'm Olga"); otherwise "name" is null. Quote the introduction.
 
 OUTPUT

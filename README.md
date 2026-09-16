@@ -46,7 +46,8 @@ To re-record the Deepgram responses that unit tests use:
 npm run asr:snapshot -- --force
 ```
 
-To run the extraction on a fixture's recorded transcript (requires `DEEPSEEK_API_KEY`):
+To run the extraction on a fixture's recorded transcript and see the verified result (requires
+`DEEPSEEK_API_KEY`; `--save` re-records the model response that unit tests use):
 
 ```bash
 npm run extract -- t1-launch-sync

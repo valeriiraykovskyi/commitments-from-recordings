@@ -1,8 +1,9 @@
 # Progress
 
-**Current step:** 6 — quote verification, event fold, flags.
+**Current step:** 7 — API route, uploads, guardrails, metrics.
 **Done:** 0 — brief, brainstorm, stack, planning docs · 1 — test set on paper · 2 — scaffold and
-first deploy · 3 — fixture audio · 4 — ASR module · 5 — extraction with DeepSeek.
+first deploy · 3 — fixture audio · 4 — ASR module · 5 — extraction with DeepSeek · 6 — quote
+verification, event fold, flags.
 
 **Demo:** https://commitments-from-recordings.vercel.app (placeholder page for now)
 
@@ -18,8 +19,9 @@ Local time (EEST, UTC+3).
 | 2026-09-16 | 22:10–23:55, with a break (approx.) | 0:50 | 3 | Deepgram key setup, fixture generator and tests, audio generation, ASR check of the audio, fixes to T1/T2/T3, diarization model comparison |
 | 2026-09-17 | 00:00–00:15 (approx.) | 0:15 | 4 | ASR module (Deepgram call, response validation, utterance grouping), ASR snapshots, tests |
 | 2026-09-17 | 00:15–00:25 (approx.) | 0:10 | 5 | Extraction design, DeepSeek spike, prompt, schema, client with retries, tests, live runs on T1–T3, two prompt fixes |
+| 2026-09-17 | 00:25–00:45 (approx.) | 0:20 | 6 | Quote verification, status automaton, owners, deadlines, flags, clarifications, comparison with expected results, recorded LLM responses, prompt v4 |
 
-**Total so far:** 2:30 of about 8:00.
+**Total so far:** 2:50 of about 8:00.
 
 ## Measurements so far
 
@@ -51,6 +53,11 @@ Informal numbers from development runs; the eval in step 9 produces the reported
 | 2026-09-17 | Start with `deepseek-flash`, thinking on, effort `high` | Correct results on T1–T3 in development runs at a fraction of a cent; the eval will compare other settings |
 | 2026-09-17 | One retry: a complete but invalid answer is sent back with the validation error, a truncated or empty one is simply requested again | Most invalid answers are fixable by the model; every attempt is counted |
 | 2026-09-17 | Versioned system prompt (`PROMPT_VERSION`), static and placed first | Eval reports show which prompt produced a result; DeepSeek serves the static prefix from its cache at a lower price |
+| 2026-09-17 | Quotes must match the transcript word for word (case and punctuation ignored); a wrong utterance reference is corrected to the nearest match and flagged | The model copies text it was given, so exact matching should hold; an unmatched quote drops only that event, never adds anything. Fuzzy matching only if the eval shows a need |
+| 2026-09-17 | Status automaton: only `committed`/`accepted` agree; a tentative answer always leaves a task unconfirmed; declining or cancelling after agreement cancels it | Conservative on purpose: the brief penalises overstating commitments |
+| 2026-09-17 | Owners only from a commitment or an accepted request; a requested owner must be named in the quote or be the other named participant; speaker names only from a verified self-introduction said by that speaker | "Do not infer an owner" enforced in code, not just in the prompt |
+| 2026-09-17 | A deadline counts as a date only when it is a full calendar date with a year; everything else is kept as spoken and flagged | The recordings never state their date, so relative wording can't be resolved |
+| 2026-09-17 | One comparison with `expected.json` (`scripts/lib/compare.ts`), used by the snapshot tests now and by the eval later; recorded LLM responses committed as test data | The same definition of "correct" everywhere; the deterministic stage is regression-tested offline on real model output |
 
 ## AI usage log
 
@@ -64,6 +71,7 @@ Tools and models used, and how their output was checked.
 | 2026-09-16 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`); Deepgram Aura-2 (TTS) and Nova-3 (ASR) | Fixture generator, audio generation and its verification | The generated audio was checked with a separate model: Deepgram Nova-3 transcribed each file, and a throwaway script compared the transcript with the script (word error rate) and each script line's time range with the detected speaker. This caught three problems before any pipeline code depended on the audio (see Failures and fixes) |
 | 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`) | ASR module | Before writing the code, the SDK's type definitions were read instead of relying on memory. They turned out to omit `punctuated_word` and `language_confidence`, which the API does return, so the response is validated with an explicit Zod schema. Recorded responses confirmed both fields, and tests on them check that every script line is transcribed and that Mark's short replies keep Mark's label |
 | 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`); DeepSeek `deepseek-flash` | Extraction prompt, schema and client | A spike checked what the docs left open (JSON mode with thinking) before the client was written. The prompt uses general rules and common phrases; a unit test fails if any fixture sentence of five or more words appears in it. The model's output was read line by line on T1, T2 and T3; the two problems found are in Failures and fixes |
+| 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`); DeepSeek `deepseek-flash` | Verification and status logic | Each rule has unit tests written from the design table, not from the implementation. Real DeepSeek answers for T1–T3 were then run through the new code and compared automatically with the hand-written expected results. That comparison caught a duplicated topic in T3 that reading the output had not flagged as a problem |
 
 ## Failures and fixes
 
@@ -76,3 +84,4 @@ Tools and models used, and how their output was checked.
 | 2026-09-16 | After regeneration, the deprecated `diarize=true` attributed Mark's short reply (T1/T2 line 17) to Anna | Compared it with `diarize_model=v2`, which attributed every line of every fixture correctly; the app will use v2. Lesson: speaker labels on short replies are hints, not facts |
 | 2026-09-17 | Prompt v1 put surrounding words into a deadline ("Monday instead") in one of two runs | Prompt v2: the deadline field holds only the time expression. "Monday" in all later runs |
 | 2026-09-17 | Prompt v2 left out the "before the launch" deadline of the ownerless task in one of two T1 runs | Prompt v3: record a deadline for every task that has one, including proposals and ownerless tasks. The deadline was present in 3 of 3 runs |
+| 2026-09-17 | With prompt v3, T3 had the support inbox twice: as an open question ("What about the support inbox?") and as a task. The expected-results comparison failed ("found 2 matching items") | Prompt v4, rule 5: one item per topic; a question that suggests doing something is the task's "proposed" event. T3 had no duplicates in 3 of 3 runs, and T1's real question stayed a question. The rule is general, but it was found on a fixture, so the holdout recording is the real check |

@@ -1,0 +1,217 @@
+{
+  "model": "deepseek-flash",
+  "promptVersion": "2026-09-17.4",
+  "config": {
+    "model": "deepseek-flash",
+    "thinking": true,
+    "reasoningEffort": "high",
+    "maxTokens": 32000,
+    "timeoutMs": 120000
+  },
+  "extraction": {
+    "speakers": [
+      {
+        "label": "S0",
+        "name": "Anna",
+        "utterance": "U01",
+        "quote": "I'm Anna, the product manager"
+      },
+      {
+        "label": "S1",
+        "name": "Mark",
+        "utterance": "U02",
+        "quote": "I'm Mark, the developer on the project"
+      }
+    ],
+    "items": [
+      {
+        "kind": "task",
+        "title": "Set up analytics on the landing page",
+        "events": [
+          {
+            "type": "requested",
+            "utterance": "U05",
+            "quote": "Mark, can you set up analytics on the landing page?",
+            "by": "S0",
+            "owner": "Mark",
+            "deadline": null
+          },
+          {
+            "type": "accepted",
+            "utterance": "U06",
+            "quote": "Sure",
+            "by": "S1",
+            "owner": null,
+            "deadline": null
+          },
+          {
+            "type": "committed",
+            "utterance": "U06",
+            "quote": "I'll have it done by Wednesday",
+            "by": "S1",
+            "owner": null,
+            "deadline": null
+          },
+          {
+            "type": "deadline",
+            "utterance": "U06",
+            "quote": "by Wednesday",
+            "by": "S1",
+            "owner": null,
+            "deadline": "by Wednesday"
+          }
+        ]
+      },
+      {
+        "kind": "task",
+        "title": "Write the release notes",
+        "events": [
+          {
+            "type": "committed",
+            "utterance": "U07",
+            "quote": "I'll write the release notes by Friday",
+            "by": "S0",
+            "owner": null,
+            "deadline": null
+          },
+          {
+            "type": "deadline",
+            "utterance": "U07",
+            "quote": "by Friday",
+            "by": "S0",
+            "owner": null,
+            "deadline": "by Friday"
+          },
+          {
+            "type": "deadline",
+            "utterance": "U13",
+            "quote": "Let's say Monday instead",
+            "by": "S0",
+            "owner": null,
+            "deadline": "Monday"
+          },
+          {
+            "type": "accepted",
+            "utterance": "U14",
+            "quote": "Monday works",
+            "by": "S1",
+            "owner": null,
+            "deadline": null
+          }
+        ]
+      },
+      {
+        "kind": "task",
+        "title": "Write a migration script for the old beta users",
+        "events": [
+          {
+            "type": "committed",
+            "utterance": "U08",
+            "quote": "I'll write a migration script for the old beta users",
+            "by": "S1",
+            "owner": null,
+            "deadline": null
+          },
+          {
+            "type": "accepted",
+            "utterance": "U09",
+            "quote": "Sounds good",
+            "by": "S0",
+            "owner": null,
+            "deadline": null
+          },
+          {
+            "type": "reinstated",
+            "utterance": "U15",
+            "quote": "we still need the migration script. Let's keep it",
+            "by": "S0",
+            "owner": null,
+            "deadline": null
+          },
+          {
+            "type": "accepted",
+            "utterance": "U16",
+            "quote": "Okay",
+            "by": "S1",
+            "owner": null,
+            "deadline": null
+          }
+        ]
+      },
+      {
+        "kind": "task",
+        "title": "Build a dark mode",
+        "events": [
+          {
+            "type": "proposed",
+            "utterance": "U10",
+            "quote": "Maybe we could build a dark mode before the launch too",
+            "by": "S1",
+            "owner": null,
+            "deadline": null
+          },
+          {
+            "type": "deadline",
+            "utterance": "U10",
+            "quote": "before the launch",
+            "by": "S1",
+            "owner": null,
+            "deadline": "before the launch"
+          },
+          {
+            "type": "declined",
+            "utterance": "U11",
+            "quote": "Let's park that for now",
+            "by": "S0",
+            "owner": null,
+            "deadline": null
+          }
+        ]
+      },
+      {
+        "kind": "task",
+        "title": "Update the App Store screenshots",
+        "events": [
+          {
+            "type": "proposed",
+            "utterance": "U11",
+            "quote": "Someone also needs to update the App Store screenshots before the launch",
+            "by": "S0",
+            "owner": null,
+            "deadline": null
+          },
+          {
+            "type": "deadline",
+            "utterance": "U11",
+            "quote": "before the launch",
+            "by": "S0",
+            "owner": null,
+            "deadline": "before the launch"
+          },
+          {
+            "type": "accepted",
+            "utterance": "U12",
+            "quote": "Yeah. That has to happen.",
+            "by": "S1",
+            "owner": null,
+            "deadline": null
+          }
+        ]
+      },
+      {
+        "kind": "question",
+        "title": "Are we launching in Canada at the same time?",
+        "events": [
+          {
+            "type": "asked",
+            "utterance": "U12",
+            "quote": "Are we launching in Canada at the same time?",
+            "by": "S1",
+            "owner": null,
+            "deadline": null
+          }
+        ]
+      }
+    ]
+  }
+}

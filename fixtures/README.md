@@ -42,11 +42,17 @@ slightly different audio, so only regenerate when a script changes, and check th
 - Every line of T1, T2, T3 and G2 is attributed to the right speaker.
 - G2 is detected as Spanish.
 
-## ASR snapshots
+## Recorded responses
 
-`<id>/asr-response.json` holds a real Deepgram response for each scripted fixture, recorded
-with `npm run asr:snapshot`. Unit tests of later pipeline stages use these files to run on
-realistic transcripts without network calls. The app and the eval always call Deepgram live.
+For each scripted fixture, two real API responses are committed as test data:
+
+- `<id>/asr-response.json`: the Deepgram response, recorded with `npm run asr:snapshot`.
+- `<id>/llm-response.json`: the DeepSeek extraction with its model, prompt version and
+  settings, recorded with `npm run extract -- <id> --save`.
+
+`scripts/snapshots.test.ts` runs them through the deterministic part of the pipeline and
+compares the result with `expected.json`, offline. The app and the eval always call the APIs
+live. When the prompt changes, re-record the LLM responses.
 
 ## `script.md`
 

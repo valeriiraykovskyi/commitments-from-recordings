@@ -1,0 +1,117 @@
+{
+  "model": "deepseek-flash",
+  "promptVersion": "2026-09-17.4",
+  "config": {
+    "model": "deepseek-flash",
+    "thinking": true,
+    "reasoningEffort": "high",
+    "maxTokens": 32000,
+    "timeoutMs": 120000
+  },
+  "extraction": {
+    "speakers": [
+      {
+        "label": "S0",
+        "name": null,
+        "utterance": null,
+        "quote": null
+      },
+      {
+        "label": "S1",
+        "name": null,
+        "utterance": null,
+        "quote": null
+      }
+    ],
+    "items": [
+      {
+        "kind": "task",
+        "title": "Look at the onboarding flow",
+        "events": [
+          {
+            "type": "proposed",
+            "utterance": "U01",
+            "quote": "we should probably look at it at some point",
+            "by": "S0",
+            "owner": null,
+            "deadline": null
+          },
+          {
+            "type": "tentative",
+            "utterance": "U02",
+            "quote": "I might have some time next week, but no promises",
+            "by": "S1",
+            "owner": null,
+            "deadline": null
+          },
+          {
+            "type": "deadline",
+            "utterance": "U02",
+            "quote": "next week",
+            "by": "S1",
+            "owner": null,
+            "deadline": "next week"
+          }
+        ]
+      },
+      {
+        "kind": "task",
+        "title": "Refresh the pricing page",
+        "events": [
+          {
+            "type": "proposed",
+            "utterance": "U03",
+            "quote": "The pricing page could use a refresh too",
+            "by": "S0",
+            "owner": null,
+            "deadline": null
+          },
+          {
+            "type": "declined",
+            "utterance": "U04",
+            "quote": "Let's see how the sprint goes before we pick anything up",
+            "by": "S1",
+            "owner": null,
+            "deadline": null
+          }
+        ]
+      },
+      {
+        "kind": "task",
+        "title": "Move the team demo",
+        "events": [
+          {
+            "type": "proposed",
+            "utterance": "U05",
+            "quote": "should we move the team demo?",
+            "by": "S0",
+            "owner": null,
+            "deadline": null
+          }
+        ]
+      },
+      {
+        "kind": "task",
+        "title": "Look at the support inbox",
+        "events": [
+          {
+            "type": "proposed",
+            "utterance": "U07",
+            "quote": "What about the support inbox?",
+            "by": "S0",
+            "owner": null,
+            "deadline": null
+          },
+          {
+            "type": "proposed",
+            "utterance": "U08",
+            "quote": "Somebody might want to look at it",
+            "by": "S1",
+            "owner": null,
+            "deadline": null
+          }
+        ]
+      }
+    ]
+  }
+}

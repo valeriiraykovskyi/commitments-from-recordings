@@ -1,19 +1,22 @@
 /**
- * Runs the extraction on a fixture's recorded transcript and prints the result.
- * The transcript comes from fixtures/<id>/asr-response.json (no ASR call);
- * the DeepSeek call is real.
+ * Runs the extraction on a fixture's recorded transcript and prints the
+ * model's events and the verified result. The transcript comes from
+ * fixtures/<id>/asr-response.json (no ASR call); the DeepSeek call is real.
+ * --save writes the model's answer to fixtures/<id>/llm-response.json, which
+ * unit tests use.
  *
  * Usage: npm run extract -- <fixture-id>
  *          [--model deepseek-flash|deepseek-v4-pro] [--effort low|high|max]
- *          [--no-thinking] [--transcript] [--json]
+ *          [--no-thinking] [--transcript] [--json] [--save]
  */
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { parseArgs } from "node:util";
 
 import { loadEnvConfig } from "@next/env";
 
 import { toTranscript } from "@/lib/asr/transcript";
+import { buildCommitments } from "@/lib/commitments/build";
 import { DEFAULT_LLM_CONFIG, type LlmConfig } from "@/lib/extraction/deepseek";
 import { ExtractionError, extractCommitments } from "@/lib/extraction/extract";
 import { formatTranscript } from "@/lib/extraction/prompt";
@@ -38,6 +41,7 @@ async function main() {
       "no-thinking": { type: "boolean", default: false },
       transcript: { type: "boolean", default: false },
       json: { type: "boolean", default: false },
+      save: { type: "boolean", default: false },
     },
   });
   const [id] = positionals;
@@ -49,9 +53,8 @@ async function main() {
     reasoningEffort: oneOf(values.effort, EFFORTS, "effort"),
     thinking: !values["no-thinking"],
   };
-  const response = JSON.parse(
-    await readFile(path.join("fixtures", id, "asr-response.json"), "utf8"),
-  );
+  const fixtureDir = path.join("fixtures", id);
+  const response = JSON.parse(await readFile(path.join(fixtureDir, "asr-response.json"), "utf8"));
   const transcript = toTranscript(response);
   if (values.transcript) console.log(`${formatTranscript(transcript)}\n`);
 
@@ -76,6 +79,34 @@ async function main() {
         );
       }
     }
+  }
+
+  const commitments = buildCommitments(transcript, result.extraction);
+  console.log("\nVerified result:");
+  for (const item of commitments.items) {
+    const owner = item.owner ? (item.owner.name ?? `S${item.owner.speaker}`) : "-";
+    const deadline = item.deadline ? `"${item.deadline.text}"` : "-";
+    console.log(
+      `  ${item.id} ${item.status.padEnd(18)} owner=${owner.padEnd(6)} deadline=${deadline.padEnd(20)} ${item.title}  [${item.flags.join(", ")}]`,
+    );
+  }
+  for (const clarification of commitments.clarifications) {
+    console.log(`  clarification: ${JSON.stringify(clarification)}`);
+  }
+  for (const dropped of commitments.dropped) {
+    console.log(`  dropped ${dropped.type} (${dropped.item}): ${dropped.reason} "${dropped.quote}"`);
+  }
+
+  if (values.save) {
+    const file = path.join(fixtureDir, "llm-response.json");
+    const snapshot = {
+      model: result.model,
+      promptVersion: result.promptVersion,
+      config,
+      extraction: result.extraction,
+    };
+    await writeFile(file, `${JSON.stringify(snapshot, null, 2)}\n`);
+    console.log(`\nSaved ${file}`);
   }
 
   console.log(
