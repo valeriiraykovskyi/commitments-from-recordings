@@ -31,6 +31,15 @@ Informal numbers from development runs; the eval in step 9 produces the reported
 |---|---|
 | ASR (Deepgram Nova-3), 16–72 s of audio | 2.1–2.3 s per file |
 | Extraction (`deepseek-flash`, thinking, effort `high`), T1–T3 | 5.8–15 s; 1.3–1.5k input tokens (up to 1.28k from cache); 1.4k–3.8k output tokens, of which 1.1k–2.7k reasoning |
+| Local API, G1 (too long) | Declined in 3 ms before any paid call; $0 |
+| Local API, G2 (Spanish) | Declined after recognition (6.9 s, unusually slow ASR), no model call; $0.0017 |
+| Local API, T1 | Transcript after 1.3 s, result after 43.7 s. The model took 42.4 s and 11.0k output tokens (9.8k reasoning) this time. $0.0142 off-peak, $0.0209 at peak; $0.0118 per audio minute off-peak |
+| Local API, T3 | Transcript after 1.9 s, result after 32.6 s (model: 30.8 s, 7.3k reasoning tokens); $0.0095 off-peak, $0.0142 at peak |
+
+| Local API, T2 uploaded through Vercel Blob | Upload of 2.3 MB: 9.8 s (depends on the user's connection). Processing: 16.8 s (Blob read 0.5 s, recognition 1.5 s, model 14.1 s); result correct; blob deleted afterwards; Blob cost $0.00011. An upload outside `uploads/` and a text file were both rejected |
+
+**Open question:** with effort `high`, the model's latency ranged from 6 s to 42 s, depending on how
+long it reasoned. The eval compares lower effort, no thinking and `deepseek-v4-pro`.
 
 ## Decisions
 
@@ -58,6 +67,12 @@ Informal numbers from development runs; the eval in step 9 produces the reported
 | 2026-09-17 | Owners only from a commitment or an accepted request; a requested owner must be named in the quote or be the other named participant; speaker names only from a verified self-introduction said by that speaker | "Do not infer an owner" enforced in code, not just in the prompt |
 | 2026-09-17 | A deadline counts as a date only when it is a full calendar date with a year; everything else is kept as spoken and flagged | The recordings never state their date, so relative wording can't be resolved |
 | 2026-09-17 | One comparison with `expected.json` (`scripts/lib/compare.ts`), used by the snapshot tests now and by the eval later; recorded LLM responses committed as test data | The same definition of "correct" everywhere; the deterministic stage is regression-tested offline on real model output |
+| 2026-09-17 | One pipeline function (`runPipeline`) for the API and the eval; progress streamed as NDJSON, with the transcript sent as soon as it exists | The eval measures exactly what users get; users see progress and a first useful result in about 2 s instead of a silent wait |
+| 2026-09-17 | Duration checked from the file before any paid call; the browser's duration is the fallback; recognition's duration is checked again | The "too long" refusal costs nothing, even for files without duration metadata in the header |
+| 2026-09-17 | Declines (`too_long`, `unreadable_audio`, `no_speech`, `unsupported_language`) and failures return metrics too | Refusals and outages are measured like successes |
+| 2026-09-17 | Cost per operation = recognition + reasoning + billed retries (+ speech and intermediaries, both $0), also at DeepSeek's peak tariff and per audio minute; Blob usage reported as hosting; list prices in `src/lib/pricing.ts` with sources | Follows the brief's cost breakdown; free credits are ignored |
+| 2026-09-17 | Samples read from the function bundle (`outputFileTracingIncludes`), not through Blob | Faster, no Blob quota, no dependency on deployment protection; still processed live |
+| 2026-09-17 | Per-IP request limit kept in memory | No accounts in scope; on serverless this is only a speed bump, while prepaid and free-credit balances cap the spend |
 
 ## AI usage log
 
@@ -72,6 +87,7 @@ Tools and models used, and how their output was checked.
 | 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`) | ASR module | Before writing the code, the SDK's type definitions were read instead of relying on memory. They turned out to omit `punctuated_word` and `language_confidence`, which the API does return, so the response is validated with an explicit Zod schema. Recorded responses confirmed both fields, and tests on them check that every script line is transcribed and that Mark's short replies keep Mark's label |
 | 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`); DeepSeek `deepseek-flash` | Extraction prompt, schema and client | A spike checked what the docs left open (JSON mode with thinking) before the client was written. The prompt uses general rules and common phrases; a unit test fails if any fixture sentence of five or more words appears in it. The model's output was read line by line on T1, T2 and T3; the two problems found are in Failures and fixes |
 | 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`); DeepSeek `deepseek-flash` | Verification and status logic | Each rule has unit tests written from the design table, not from the implementation. Real DeepSeek answers for T1–T3 were then run through the new code and compared automatically with the hand-written expected results. That comparison caught a duplicated topic in T3 that reading the output had not flagged as a problem |
+| 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`) | API routes, pipeline, pricing | The Vercel Blob and Next.js docs, and the installed type definitions, were read before writing the routes. Every pipeline branch has a unit test with mocked providers that checks the paid-call counts. Then four samples went through the local API end to end, and the production build was checked to include the sample files in the function |
 
 ## Failures and fixes
 

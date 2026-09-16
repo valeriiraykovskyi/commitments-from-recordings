@@ -10,6 +10,19 @@ export const ASR_DIARIZER = "v2";
 
 const MAX_ATTEMPTS = 2;
 
+export class AsrError extends Error {
+  constructor(
+    message: string,
+    readonly attempts: number,
+    /** HTTP status from Deepgram, if a response came back. */
+    readonly status: number | undefined,
+    options?: { cause?: unknown },
+  ) {
+    super(message, options);
+    this.name = "AsrError";
+  }
+}
+
 export type AsrResult = {
   transcript: Transcript;
   /** The provider's response as received, for snapshots and debugging. */
@@ -59,7 +72,10 @@ export async function transcribe(audio: Buffer, { tag }: { tag: string }): Promi
         attempts: attempt,
       };
     } catch (error) {
-      if (attempt >= MAX_ATTEMPTS || !isRetryable(error)) throw error;
+      if (attempt < MAX_ATTEMPTS && isRetryable(error)) continue;
+      const status = error instanceof DeepgramError ? error.statusCode : undefined;
+      const suffix = status === undefined ? "" : ` (HTTP ${status})`;
+      throw new AsrError(`Deepgram request failed${suffix}`, attempt, status, { cause: error });
     }
   }
 }
