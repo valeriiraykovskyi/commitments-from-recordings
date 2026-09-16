@@ -1,7 +1,7 @@
 {
   "version": 1,
   "fixture": "t3-no-intros-hedged",
-  "purpose": "Clarify or decline. Nobody introduces themselves and every statement is hedged: nothing may be reported as agreed, and the app must ask who the speakers are.",
+  "purpose": "Clarify or decline. Nobody introduces themselves, every statement is hedged, and lines 9–10 say that nothing is decided. Nothing may be reported as agreed, and the app must ask who the speakers are.",
   "outcome": "ok",
   "clarifications": ["speaker_names"],
   "speakers": [],
@@ -29,6 +29,14 @@
       "match": ["demo"],
       "status": ["open", "not_agreed", "needs_confirmation"],
       "evidence_lines": [5, 6]
+    },
+    {
+      "id": "support-inbox",
+      "case": "\"somebody might\" without agreement (contrast with T1 lines 12–13)",
+      "kind": ["task", "question"],
+      "match": ["inbox"],
+      "status": ["not_agreed", "needs_confirmation", "open"],
+      "evidence_lines": [7, 8]
     }
   ],
   "absent_or_not_agreed": []

@@ -1,0 +1,168 @@
+{
+  "fixture": "t1-launch-sync",
+  "audio": "public/samples/t1-launch-sync.wav",
+  "sample_rate": 16000,
+  "duration_sec": 72.25,
+  "lines": [
+    {
+      "n": 1,
+      "speaker": "Anna",
+      "text": "Hi, I'm Anna, the product manager.",
+      "voice": "aura-2-thalia-en",
+      "start": 0.3,
+      "end": 2.62
+    },
+    {
+      "n": 2,
+      "speaker": "Mark",
+      "text": "And I'm Mark, the developer on the project.",
+      "voice": "aura-2-apollo-en",
+      "start": 3.07,
+      "end": 6.23
+    },
+    {
+      "n": 3,
+      "speaker": "Anna",
+      "text": "Great. Let's go through what we need for the beta launch.",
+      "voice": "aura-2-thalia-en",
+      "start": 6.68,
+      "end": 9.28
+    },
+    {
+      "n": 4,
+      "speaker": "Mark",
+      "text": "Quick update first: I already fixed the sign-up bug yesterday.",
+      "voice": "aura-2-apollo-en",
+      "start": 9.73,
+      "end": 14.61
+    },
+    {
+      "n": 5,
+      "speaker": "Anna",
+      "text": "Perfect, thanks. Mark, can you set up analytics on the landing page?",
+      "voice": "aura-2-thalia-en",
+      "start": 15.06,
+      "end": 19.34
+    },
+    {
+      "n": 6,
+      "speaker": "Mark",
+      "text": "Sure, I'll have it done by Wednesday.",
+      "voice": "aura-2-apollo-en",
+      "start": 19.79,
+      "end": 22.15
+    },
+    {
+      "n": 7,
+      "speaker": "Anna",
+      "text": "Good. I'll write the release notes by Friday.",
+      "voice": "aura-2-thalia-en",
+      "start": 22.6,
+      "end": 25.48
+    },
+    {
+      "n": 8,
+      "speaker": "Mark",
+      "text": "And I'll write a migration script for the old beta users.",
+      "voice": "aura-2-apollo-en",
+      "start": 25.93,
+      "end": 29.49
+    },
+    {
+      "n": 9,
+      "speaker": "Anna",
+      "text": "Sounds good.",
+      "voice": "aura-2-thalia-en",
+      "start": 29.94,
+      "end": 30.86
+    },
+    {
+      "n": 10,
+      "speaker": "Mark",
+      "text": "Maybe we could build a dark mode before the launch, too.",
+      "voice": "aura-2-apollo-en",
+      "start": 31.31,
+      "end": 35.75
+    },
+    {
+      "n": 11,
+      "speaker": "Anna",
+      "text": "Let's park that for now.",
+      "voice": "aura-2-thalia-en",
+      "start": 36.2,
+      "end": 37.64
+    },
+    {
+      "n": 12,
+      "speaker": "Anna",
+      "text": "Someone also needs to update the app store screenshots before the launch.",
+      "voice": "aura-2-thalia-en",
+      "start": 38.09,
+      "end": 42.01
+    },
+    {
+      "n": 13,
+      "speaker": "Mark",
+      "text": "Yeah, that has to happen.",
+      "voice": "aura-2-apollo-en",
+      "start": 42.46,
+      "end": 44.18
+    },
+    {
+      "n": 14,
+      "speaker": "Mark",
+      "text": "Are we launching in Canada at the same time?",
+      "voice": "aura-2-apollo-en",
+      "start": 44.63,
+      "end": 47.43
+    },
+    {
+      "n": 15,
+      "speaker": "Anna",
+      "text": "Good question. Nobody has decided that yet.",
+      "voice": "aura-2-thalia-en",
+      "start": 47.88,
+      "end": 51.08
+    },
+    {
+      "n": 16,
+      "speaker": "Anna",
+      "text": "Oh, and about the release notes: Friday won't work, I'm out that day. Let's say Monday instead.",
+      "voice": "aura-2-thalia-en",
+      "start": 51.53,
+      "end": 57.85
+    },
+    {
+      "n": 17,
+      "speaker": "Mark",
+      "text": "Monday works.",
+      "voice": "aura-2-apollo-en",
+      "start": 58.3,
+      "end": 59.46
+    },
+    {
+      "n": 18,
+      "speaker": "Anna",
+      "text": "One more thing. Legal says we can't import the old beta accounts, so we don't need the migration script. Let's drop it.",
+      "voice": "aura-2-thalia-en",
+      "start": 59.91,
+      "end": 66.99
+    },
+    {
+      "n": 19,
+      "speaker": "Mark",
+      "text": "Okay, noted.",
+      "voice": "aura-2-apollo-en",
+      "start": 67.44,
+      "end": 68.52
+    },
+    {
+      "n": 20,
+      "speaker": "Anna",
+      "text": "Great, that's everything. Thanks, Mark.",
+      "voice": "aura-2-thalia-en",
+      "start": 68.97,
+      "end": 71.65
+    }
+  ]
+}

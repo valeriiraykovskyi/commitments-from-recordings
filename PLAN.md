@@ -115,7 +115,7 @@ the local copy of the file in the browser.
 | App | Next.js (App Router) + React | Vite SPA + separate backend: two deployments |
 | UI | Tailwind CSS + shadcn/ui | — |
 | Hosting | Vercel (Hobby) + Vercel Blob | Render: free tier sleeps. Railway / Fly.io: paid from day one. Firebase: paid plan required |
-| ASR | Deepgram Nova-3, pre-recorded | AssemblyAI: async polling. OpenAI diarize model: segment-level timestamps only. Multimodal LLM: imprecise timestamps |
+| ASR | Deepgram Nova-3, pre-recorded, `diarize_model=v2` | AssemblyAI: async polling. OpenAI diarize model: segment-level timestamps only. Multimodal LLM: imprecise timestamps |
 | LLM | DeepSeek: `deepseek-flash` by default; `deepseek-v4-pro` and thinking mode compared in eval | Claude Opus 5: strongest candidate (schema-guaranteed output), dropped because of the budget |
 | LLM client | `openai` npm package pointed at DeepSeek's OpenAI-compatible API, behind a thin adapter | — |
 | Validation | Zod | — |
@@ -157,7 +157,8 @@ Fixtures live in `fixtures/<id>/`: `script.json` (the dialogue), the generated a
 - **T2 — one changed agreement.** The same script with exactly one line changed: the
   cancellation becomes a confirmation, so that task moves from "cancelled" to "agreed".
 - **T3 — clarify or decline.** The speakers never introduce themselves and only talk in hedges.
-  Expected:
+  It runs about 45 seconds: a 22-second draft was too short for diarization to separate the
+  two voices. Expected:
   - the app asks who the speakers are;
   - zero agreed tasks;
   - the items are marked as needing confirmation.
@@ -203,8 +204,8 @@ One step at a time, in this order. The estimates keep the total within about 8 h
 |---|---|---|---|
 | 0 | Brief, brainstorm, stack, planning docs | 0:50 | ✅ done |
 | 1 | Test set on paper: T1–T3 scripts + expected results → commit | 0:40 | ✅ done |
-| 2 | Scaffold: Next.js, Tailwind, shadcn/ui, Vitest; first Vercel deploy | 0:25 | |
-| 3 | Generate fixture audio (Deepgram Aura-2) | 0:25 | |
+| 2 | Scaffold: Next.js, Tailwind, shadcn/ui, Vitest; first Vercel deploy | 0:25 | ✅ done |
+| 3 | Generate fixture audio (Deepgram Aura-2) | 0:25 | ✅ done |
 | 4 | ASR module → normalised transcript | 0:25 | |
 | 5 | Extraction: DeepSeek prompt, schema, retry | 0:50 | |
 | 6 | Quote verification, event fold, flags + unit tests | 0:50 | |
@@ -250,7 +251,8 @@ Whatever is left unfinished is described in the delivery notes.
 | Paraphrased or invented quotes | Quote verification in code |
 | DeepSeek returns invalid or empty JSON | Zod + one retry, counted in metrics |
 | DeepSeek latency spikes | Timeouts; latency measured and reported |
-| Diarization mislabels a speaker, so the owner is wrong | Distinct voices in fixtures; speaker mapping visible and editable |
+| Diarization mislabels a short reply, so "I'll do it" is credited to the wrong person | `diarize_model=v2` (the deprecated `diarize=true` mislabelled a reply in T1); the prompt treats speaker labels as hints to check against content; speaker attribution is visible and editable |
+| A short recording merges both voices into one speaker | Fewer than two detected speakers triggers a clarification instead of guessed owners |
 | Prompt overfits the fixtures | Rules written generally; holdout run after the prompt is frozen |
 | Public demo abused, exhausting Blob or API quotas | File type and size limits, basic rate limiting, spend visible in provider dashboards |
 | 8-hour budget overrun | Cut list (§8); stop and document unfinished parts |

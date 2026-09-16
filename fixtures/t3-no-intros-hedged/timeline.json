@@ -1,0 +1,88 @@
+{
+  "fixture": "t3-no-intros-hedged",
+  "audio": "public/samples/t3-no-intros-hedged.wav",
+  "sample_rate": 16000,
+  "duration_sec": 45.87,
+  "lines": [
+    {
+      "n": 1,
+      "speaker": "Speaker 1",
+      "text": "So, the onboarding flow. We should probably look at it at some point, the first screens feel a bit slow.",
+      "voice": "aura-2-luna-en",
+      "start": 0.3,
+      "end": 7.58
+    },
+    {
+      "n": 2,
+      "speaker": "Speaker 2",
+      "text": "Yeah, maybe. I might have some time next week, but no promises. The sprint is already pretty full.",
+      "voice": "aura-2-orion-en",
+      "start": 8.03,
+      "end": 14.59
+    },
+    {
+      "n": 3,
+      "speaker": "Speaker 1",
+      "text": "The pricing page could use a refresh too. Some of the numbers there are out of date.",
+      "voice": "aura-2-luna-en",
+      "start": 15.04,
+      "end": 19.96
+    },
+    {
+      "n": 4,
+      "speaker": "Speaker 2",
+      "text": "Possibly. Let's see how the sprint goes before we pick anything up.",
+      "voice": "aura-2-orion-en",
+      "start": 20.41,
+      "end": 24.69
+    },
+    {
+      "n": 5,
+      "speaker": "Speaker 1",
+      "text": "And should we move the team demo? Thursday looks crowded.",
+      "voice": "aura-2-luna-en",
+      "start": 25.14,
+      "end": 28.7
+    },
+    {
+      "n": 6,
+      "speaker": "Speaker 2",
+      "text": "Not sure. It's hard to say right now.",
+      "voice": "aura-2-orion-en",
+      "start": 29.15,
+      "end": 31.99
+    },
+    {
+      "n": 7,
+      "speaker": "Speaker 1",
+      "text": "What about the support inbox? It has been growing lately.",
+      "voice": "aura-2-luna-en",
+      "start": 32.44,
+      "end": 35.96
+    },
+    {
+      "n": 8,
+      "speaker": "Speaker 2",
+      "text": "I don't know. Somebody might want to look at it, but it's not urgent.",
+      "voice": "aura-2-orion-en",
+      "start": 36.41,
+      "end": 40.45
+    },
+    {
+      "n": 9,
+      "speaker": "Speaker 1",
+      "text": "Okay. So nothing is decided yet.",
+      "voice": "aura-2-luna-en",
+      "start": 40.9,
+      "end": 43.02
+    },
+    {
+      "n": 10,
+      "speaker": "Speaker 2",
+      "text": "Right, nothing yet.",
+      "voice": "aura-2-orion-en",
+      "start": 43.47,
+      "end": 45.27
+    }
+  ]
+}

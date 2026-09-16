@@ -1,0 +1,11 @@
+{
+  "fixture": "g1-too-long",
+  "audio": "public/samples/g1-too-long.wav",
+  "sample_rate": 16000,
+  "duration_sec": 216.75,
+  "source": [
+    "t1-launch-sync",
+    "t1-launch-sync",
+    "t1-launch-sync"
+  ]
+}

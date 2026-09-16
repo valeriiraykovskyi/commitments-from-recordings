@@ -1,0 +1,40 @@
+{
+  "fixture": "g2-spanish",
+  "audio": "public/samples/g2-spanish.wav",
+  "sample_rate": 16000,
+  "duration_sec": 16.01,
+  "lines": [
+    {
+      "n": 1,
+      "speaker": "Lucía",
+      "text": "Hola, soy Lucía. ¿Repasamos el plan del lanzamiento?",
+      "voice": "aura-2-carina-es",
+      "start": 0.3,
+      "end": 4.06
+    },
+    {
+      "n": 2,
+      "speaker": "Pablo",
+      "text": "Sí, claro. Yo preparo las notas de la versión para el viernes.",
+      "voice": "aura-2-nestor-es",
+      "start": 4.51,
+      "end": 8.19
+    },
+    {
+      "n": 3,
+      "speaker": "Lucía",
+      "text": "Perfecto. Y yo reviso las capturas de pantalla antes del lanzamiento.",
+      "voice": "aura-2-carina-es",
+      "start": 8.64,
+      "end": 12.56
+    },
+    {
+      "n": 4,
+      "speaker": "Pablo",
+      "text": "De acuerdo. Hablamos el lunes.",
+      "voice": "aura-2-nestor-es",
+      "start": 13.01,
+      "end": 15.41
+    }
+  ]
+}

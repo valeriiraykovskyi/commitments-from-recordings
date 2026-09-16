@@ -11,7 +11,7 @@ Identical to T1 except line 18: the migration script is kept instead of dropped.
 7. **Anna:** Good. I'll write the release notes by Friday.
 8. **Mark:** And I'll write a migration script for the old beta users.
 9. **Anna:** Sounds good.
-10. **Mark:** We could also add a dark mode before the launch.
+10. **Mark:** Maybe we could build a dark mode before the launch, too.
 11. **Anna:** Let's park that for now.
 12. **Anna:** Someone also needs to update the app store screenshots before the launch.
 13. **Mark:** Yeah, that has to happen.

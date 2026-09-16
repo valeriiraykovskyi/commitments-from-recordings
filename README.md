@@ -5,6 +5,7 @@ tasks, owners and deadlines, plus the questions left open. Every item comes with
 timestamped quote you can play.
 
 > Work in progress: a prototype built for a test assignment ([brief](docs/TASK.md)).
+> Demo: https://commitments-from-recordings.vercel.app
 
 ## Project docs
 
@@ -28,4 +29,13 @@ npm run dev                  # http://localhost:3000
 npm run lint
 npm run typecheck
 npm test
+```
+
+## Test set
+
+Scripts, expected results and timelines live in [`fixtures/`](fixtures/README.md); the audio is in
+`public/samples/`. To regenerate the audio after changing a script (requires `DEEPGRAM_API_KEY`):
+
+```bash
+npm run fixtures -- --force
 ```

@@ -5,14 +5,13 @@ Expected results come from the scripts, never from the app's output, and were co
 Claude Code and approved by the author (see the AI usage log in
 [PROGRESS.md](../PROGRESS.md)). The app itself uses a different model (DeepSeek).
 
-The audio will be synthesized from the scripts in a later step (see [PLAN.md](../PLAN.md) §8).
-That step also adds a timeline recording where each line starts and ends in the audio.
+Audio and timelines are generated from the scripts; see [Audio](#audio) below.
 
 | Fixture | Type | What it checks |
 |---|---|---|
 | [`t1-launch-sync`](t1-launch-sync/) | Normal input | All five cases from the brief (proposal never accepted, accepted task, corrected deadline, cancelled task, task with no named owner), an open question, and a status update that must not become a task. Relative deadlines have no date context |
 | [`t2-migration-kept`](t2-migration-kept/) | One agreement changed | T1 with one line changed; the migration script must move from *cancelled* to *agreed* |
-| [`t3-no-intros-hedged`](t3-no-intros-hedged/) | Clarify or decline | No introductions and only hedged talk: nothing may be agreed, and the app must ask who the speakers are |
+| [`t3-no-intros-hedged`](t3-no-intros-hedged/) | Clarify or decline | No introductions and only hedged talk (about 45 s): nothing may be agreed, and the app must ask who the speakers are |
 | [`g1-too-long`](g1-too-long/) | Guardrail | T1 three times in a row (about 4 min): rejected before any paid API call |
 | [`g2-spanish`](g2-spanish/) | Guardrail | Spanish speech: rejected after transcription, without an LLM call |
 
@@ -22,6 +21,26 @@ The only dialogue difference between T1 and T2 is line 18:
 - 18. **Anna:** One more thing. Legal says we can't import the old beta accounts, so we don't need the migration script. Let's drop it.
 + 18. **Anna:** One more thing. Legal approved importing the old beta accounts, so we still need the migration script. Let's keep it.
 ```
+
+## Audio
+
+`npm run fixtures` synthesizes every script with Deepgram Aura-2, using the voices in
+[`voices.json`](voices.json). It makes one request per line and joins the lines with short
+pauses. It writes two files per fixture:
+
+- `public/samples/<id>.wav`: 16 kHz mono PCM. It lives in `public/` so the app can offer it as
+  a sample.
+- `<id>/timeline.json`: where each line starts and ends. The eval uses it to check that a
+  quote's timestamp falls on the right line.
+
+These files are committed test inputs. Regeneration (`npm run fixtures -- --force`) produces
+slightly different audio, so only regenerate when a script changes, and check the result again.
+
+**Check of the committed audio** (Deepgram Nova-3 with `diarize_model=v2`, 2026-09-16):
+
+- Transcripts match the scripts: word error rate is 0% for T1, T2 and T3, and 2.8% for G2.
+- Every line of T1, T2, T3 and G2 is attributed to the right speaker.
+- G2 is detected as Spanish.
 
 ## `script.md`
 
