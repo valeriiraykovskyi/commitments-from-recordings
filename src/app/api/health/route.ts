@@ -7,6 +7,15 @@ import { clientIp, createRateLimiter } from "@/lib/rate-limit";
 const allow = createRateLimiter({ limit: 10, windowMs: 10 * 60_000 });
 const TIMEOUT_MS = 5000;
 
+/** Variables the app uses; only their presence is reported. */
+const EXPECTED_VARIABLES = [
+  "DEEPGRAM_API_KEY",
+  "DEEPSEEK_API_KEY",
+  "BLOB_READ_WRITE_TOKEN",
+  "BLOB_STORE_ID",
+  "BLOB_WEBHOOK_PUBLIC_KEY",
+];
+
 type KeyCheck = {
   configured: boolean;
   length?: number;
@@ -57,8 +66,12 @@ export async function GET(request: Request): Promise<Response> {
   return Response.json(
     {
       commit: process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? null,
+      environment: process.env.VERCEL_ENV ?? null,
       region: process.env.VERCEL_REGION ?? null,
       node: process.version,
+      present: Object.fromEntries(
+        EXPECTED_VARIABLES.map((name) => [name, Boolean(process.env[name])]),
+      ),
       deepgram: deepgramCheck,
       deepseek: deepseekCheck,
       blob: { configured: Boolean(process.env.BLOB_READ_WRITE_TOKEN) },
