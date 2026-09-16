@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "fixture": "t1-launch-sync",
+  "purpose": "Normal input. Covers the five cases from the brief, plus an open question and a status update that is not a commitment.",
+  "outcome": "ok",
+  "clarifications": [],
+  "speakers": [
+    { "name": "Anna", "intro_line": 1 },
+    { "name": "Mark", "intro_line": 2 }
+  ],
+  "items": [
+    {
+      "id": "analytics",
+      "case": "accepted task",
+      "kind": ["task"],
+      "match": ["analytics"],
+      "status": ["agreed"],
+      "owner": "Mark",
+      "deadline": { "match": ["wednesday"], "date_context_missing": true },
+      "evidence_lines": [5, 6]
+    },
+    {
+      "id": "release-notes",
+      "case": "corrected deadline",
+      "kind": ["task"],
+      "match": ["release notes"],
+      "status": ["agreed"],
+      "owner": "Anna",
+      "deadline": {
+        "match": ["monday"],
+        "not_match": ["friday"],
+        "date_context_missing": true,
+        "corrected_from": ["friday"]
+      },
+      "evidence_lines": [7, 16, 17]
+    },
+    {
+      "id": "store-screenshots",
+      "case": "task with no named owner",
+      "kind": ["task"],
+      "match": ["screenshot"],
+      "status": ["agreed"],
+      "owner": null,
+      "deadline": { "match": ["launch"], "date_context_missing": true },
+      "evidence_lines": [12, 13]
+    },
+    {
+      "id": "canada-launch",
+      "case": "unresolved question",
+      "kind": ["question"],
+      "match": ["canada"],
+      "status": ["open"],
+      "evidence_lines": [14, 15]
+    },
+    {
+      "id": "dark-mode",
+      "case": "proposal never accepted",
+      "kind": ["task"],
+      "match": ["dark mode"],
+      "status": ["not_agreed"],
+      "evidence_lines": [10, 11]
+    },
+    {
+      "id": "migration-script",
+      "case": "cancelled task",
+      "kind": ["task"],
+      "match": ["migration"],
+      "status": ["cancelled"],
+      "evidence_lines": [8, 9, 18, 19]
+    }
+  ],
+  "absent_or_not_agreed": [
+    {
+      "id": "signup-bug",
+      "match": ["sign-up bug", "signup bug", "sign up bug"],
+      "why": "Already done (a status update), not a commitment."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "fixture": "g1-too-long",
+  "purpose": "Guardrail: audio longer than 3 minutes is rejected before any paid API call.",
+  "outcome": "declined",
+  "decline_reason": "too_long",
+  "calls": { "asr": 0, "llm": 0 },
+  "clarifications": [],
+  "speakers": [],
+  "items": [],
+  "absent_or_not_agreed": []
+}

@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "fixture": "t3-no-intros-hedged",
+  "purpose": "Clarify or decline. Nobody introduces themselves and every statement is hedged: nothing may be reported as agreed, and the app must ask who the speakers are.",
+  "outcome": "ok",
+  "clarifications": ["speaker_names"],
+  "speakers": [],
+  "items": [
+    {
+      "id": "onboarding-review",
+      "case": "tentative offer",
+      "kind": ["task"],
+      "match": ["onboarding"],
+      "status": ["needs_confirmation", "not_agreed"],
+      "evidence_lines": [1, 2]
+    },
+    {
+      "id": "pricing-page",
+      "case": "hedged proposal",
+      "kind": ["task"],
+      "match": ["pricing"],
+      "status": ["not_agreed", "needs_confirmation"],
+      "evidence_lines": [3, 4]
+    },
+    {
+      "id": "team-demo",
+      "case": "undecided question",
+      "kind": ["question", "task"],
+      "match": ["demo"],
+      "status": ["open", "not_agreed", "needs_confirmation"],
+      "evidence_lines": [5, 6]
+    }
+  ],
+  "absent_or_not_agreed": []
+}

@@ -166,8 +166,8 @@ Fixtures live in `fixtures/<id>/`: `script.json` (the dialogue), the generated a
 - **Holdout (optional).** A different conversation, run only after the prompt is frozen;
   ideally with human voices.
 
-**Order of work.** Scripts and `expected.json` are written by hand and committed before the
-pipeline exists. The git history is the evidence.
+**Order of work.** Scripts and `expected.json` are derived from the brief, never from the
+app's output, and committed before the pipeline exists. The git history is the evidence.
 
 **Eval script** (`npm run eval`) runs each fixture N times (3–5) and checks:
 
@@ -202,7 +202,7 @@ One step at a time, in this order. The estimates keep the total within about 8 h
 | # | Step | Est. | Status |
 |---|---|---|---|
 | 0 | Brief, brainstorm, stack, planning docs | 0:50 | ✅ done |
-| 1 | Test set on paper: T1–T3 scripts + hand-written expected results → commit | 0:40 | |
+| 1 | Test set on paper: T1–T3 scripts + expected results → commit | 0:40 | ✅ done |
 | 2 | Scaffold: Next.js, Tailwind, shadcn/ui, Vitest; first Vercel deploy | 0:25 | |
 | 3 | Generate fixture audio (Deepgram Aura-2) | 0:25 | |
 | 4 | ASR module → normalised transcript | 0:25 | |

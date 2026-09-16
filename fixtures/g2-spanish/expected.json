@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "fixture": "g2-spanish",
+  "purpose": "Guardrail: a non-English recording is rejected after transcription, without an LLM call.",
+  "outcome": "declined",
+  "decline_reason": "unsupported_language",
+  "calls": { "asr": 1, "llm": 0 },
+  "clarifications": [],
+  "speakers": [],
+  "items": [],
+  "absent_or_not_agreed": []
+}
