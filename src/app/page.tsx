@@ -1,15 +1,29 @@
+import { AudioLines } from "lucide-react";
+
+import { App } from "@/components/app/app";
+
 export default function Home() {
   return (
-    <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col justify-center px-6 py-16">
-      <h1 className="text-3xl font-semibold tracking-tight">
-        Commitments from recordings
-      </h1>
-      <p className="mt-4 text-lg leading-8 text-muted-foreground">
-        Upload a short recording of a project discussion and get back only what
-        was actually agreed: tasks, owners, deadlines and the questions left
-        open, each backed by a quote you can play.
-      </p>
-      <p className="mt-8 text-sm text-muted-foreground">Work in progress.</p>
-    </main>
+    <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-5 py-6 sm:px-8">
+      <header className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2.5">
+          <span className="flex size-8 items-center justify-center rounded-lg bg-foreground text-background">
+            <AudioLines className="size-4" />
+          </span>
+          <span className="text-sm font-medium tracking-tight">Commitments from recordings</span>
+        </div>
+        <p className="hidden text-xs text-muted-foreground sm:block">
+          Every quote is checked against the transcript before it is shown
+        </p>
+      </header>
+      <main className="flex flex-1 flex-col py-10">
+        <App />
+      </main>
+      <footer className="border-t border-foreground/10 pt-4 text-xs text-muted-foreground text-pretty">
+        Speech is transcribed by Deepgram and read by DeepSeek. Uploads are deleted right after
+        processing; nothing is stored. Owners and deadlines are never inferred: if it was not said,
+        it is not shown.
+      </footer>
+    </div>
   );
 }

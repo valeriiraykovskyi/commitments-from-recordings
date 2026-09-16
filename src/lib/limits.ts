@@ -1,5 +1,12 @@
+import { formatTimestamp } from "@/lib/format-time";
+
 /** The longest recording the app accepts (the brief's limit). */
 export const MAX_DURATION_SEC = 180;
+
+/** The refusal for a recording over the limit; the browser and the server say the same thing. */
+export function tooLongMessage(seconds: number): string {
+  return `The recording is ${formatTimestamp(seconds)} long; the limit is ${formatTimestamp(MAX_DURATION_SEC)}.`;
+}
 
 /** A 3-minute uncompressed stereo WAV at 48 kHz is about 35 MB. */
 export const MAX_UPLOAD_BYTES = 50 * 1024 * 1024;

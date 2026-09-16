@@ -1,9 +1,10 @@
 # Progress
 
-**Current step:** 8 — UI: upload, progress, results, transcript, playback, metrics.
+**Current step:** 9 — eval runs and report.
 **Done:** 0 — brief, brainstorm, stack, planning docs · 1 — test set on paper · 2 — scaffold and
 first deploy · 3 — fixture audio · 4 — ASR module · 5 — extraction with DeepSeek · 6 — quote
-verification, event fold, flags · 7 — API routes, uploads, guardrails, metrics, production check.
+verification, event fold, flags · 7 — API routes, uploads, guardrails, metrics, production check ·
+8 — UI.
 
 **Demo:** https://commitments-from-recordings.vercel.app (placeholder page for now)
 
@@ -22,8 +23,9 @@ Local time (EEST, UTC+3).
 | 2026-09-17 | 00:25–00:45 (approx.) | 0:20 | 6 | Quote verification, status automaton, owners, deadlines, flags, clarifications, comparison with expected results, recorded LLM responses, prompt v4 |
 | 2026-09-17 | 00:45–01:25 (approx.) | 0:40 | 7 | Upload and process routes, one pipeline function with streamed progress, guardrails, pricing and metrics, unit tests, local end-to-end runs of four samples and one Blob upload |
 | 2026-09-17 | 01:25–02:20, with a break (approx.) | 0:35 | 7 | Deployment configuration: hidden failure cause fixed, health check, keys and Blob token re-entered in Vercel, redeploy, production end-to-end check of a sample and a Blob upload |
+| 2026-09-17 | 02:20–02:50 (approx.) | 0:30 | 8 | UI: sample picker and drop zone, browser-side checks, Blob upload with progress, streamed progress steps with timings, early transcript, results in three blocks with playable quotes, clarifications, measurements; unit tests for the client helpers; every sample and one upload checked in the browser |
 
-**Total so far:** 4:05 of about 8:00.
+**Total so far:** 4:35 of about 8:00.
 
 ## Measurements so far
 
@@ -41,6 +43,10 @@ Informal numbers from development runs; the eval in step 9 produces the reported
 | Local API, T2 uploaded through Vercel Blob | Upload of 2.3 MB: 9.8 s (depends on the user's connection). Processing: 16.8 s (Blob read 0.5 s, recognition 1.5 s, model 14.1 s); result correct; blob deleted afterwards; Blob cost $0.00011. An upload outside `uploads/` and a text file were both rejected |
 | Production (Vercel `iad1`), T1 sample | Transcript after 1.2 s (of which about 1 s is the function start), result after 10.8 s; recognition 0.23 s, model 9.6 s, one attempt. $0.0093 off-peak, $0.0110 at peak; $0.0077 per audio minute. Result matches `expected.json` |
 | Production, T2 uploaded through Vercel Blob | Upload of 2.3 MB from this machine: 2.7 s. Processing: 12.7 s (Blob read 0.34 s, recognition 0.81 s, model 11.5 s); result matches `expected.json`; Blob cost $0.00011. A second request for the same path got "file not found", so the blob was deleted |
+| Browser UI (local dev server), T1 and T3 samples | Timed in the browser from the click: transcript on screen after 2.8 s (T1) and 1.8 s (T3); result after 22.2 s (T1, model 19.5 s) and 15.8 s (T3, model 14.0 s). T1 shows 3 agreed, 1 open question, 2 not commitments; T3 shows the "Who is who?" clarification, 0 agreed, 2 needing confirmation |
+| Browser UI, T2 through the file picker | The browser read the duration (1:12) before uploading; upload 2.2 s with a progress percentage; transcript after 4.6 s; result after 15.7 s (server total 12.9 s); the migration script is agreed, as expected for T2 |
+| Browser UI, G1 and G2 samples | G1 refused in the browser flow after a 34 ms server check, no paid call, $0. G2 refused after recognition in 1.7 s with the Spanish transcript on screen, no model call, $0.0017 |
+| Segment playback | A 1.7 s quote played from 0.15 s before its first word and stopped 2.0 s after the click; the matching transcript line was highlighted while it played |
 
 **Open question:** with effort `high`, the model's latency ranged from 6 s to 42 s, depending on how
 long it reasoned. The eval compares lower effort, no thinking and `deepseek-v4-pro`.
@@ -78,6 +84,11 @@ long it reasoned. The eval compares lower effort, no thinking and `deepseek-v4-p
 | 2026-09-17 | Samples read from the function bundle (`outputFileTracingIncludes`), not through Blob | Faster, no Blob quota, no dependency on deployment protection; still processed live |
 | 2026-09-17 | Per-IP request limit kept in memory | No accounts in scope; on serverless this is only a speed bump, while prepaid and free-credit balances cap the spend |
 | 2026-09-17 | `GET /api/health` reports which variables are present, the shape of each key and whether the provider accepts it; never a value | Configuration problems on Vercel were invisible from outside (see Failures and fixes); the probes are free, read-only requests, and the endpoint is rate-limited |
+| 2026-09-17 | The browser checks type, size and duration (through an audio element's metadata) before uploading anything | A recording over 3 minutes is refused with no upload and no request; the server still checks again |
+| 2026-09-17 | One page, one client component with a session state machine; each run is numbered, so events from an abandoned run are ignored | No history or accounts in scope, so a second page would only add routing; the run number keeps "New recording" safe while a request is in flight |
+| 2026-09-17 | One hidden audio element for all playback; the end of a segment is checked on animation frames and on `timeupdate`; 0.15 s lead-in, 0.1 s tail | Only one thing plays at a time; frames pause in a hidden tab while audio keeps going (see Failures and fixes); word timings clip the first consonant without a lead-in |
+| 2026-09-17 | Results in three blocks: agreed, unresolved, and a collapsed "not commitments" block that also holds answered questions and the model claims that failed verification | The brief asks to check exclusion as well as inclusion; a reviewer can see why each item was left out without leaving the page |
+| 2026-09-17 | Speakers are "Speaker 1" and "Speaker 2" until a self-introduction is verified; editing the mapping in the UI is deferred to the if-time-allows list | Names come only from the recording, as planned; with 3:25 left for steps 9–10, the buffer matters more than the editor |
 
 ## AI usage log
 
@@ -94,6 +105,7 @@ Tools and models used, and how their output was checked.
 | 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`); DeepSeek `deepseek-flash` | Verification and status logic | Each rule has unit tests written from the design table, not from the implementation. Real DeepSeek answers for T1–T3 were then run through the new code and compared automatically with the hand-written expected results. That comparison caught a duplicated topic in T3 that reading the output had not flagged as a problem |
 | 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`) | API routes, pipeline, pricing | The Vercel Blob and Next.js docs, and the installed type definitions, were read before writing the routes. Every pipeline branch has a unit test with mocked providers that checks the paid-call counts. Then four samples went through the local API end to end, and the production build was checked to include the sample files in the function |
 | 2026-09-17 | Claude Code (desktop app), Claude Fable 5.1 (`claude-fable-5-1`) | Production check | The health check and a direct request to the upload route showed the Blob token missing while the store ID was present, which pointed at the deployment rather than at the store. After the redeploy, a throwaway script ran a bundled sample and a real Blob upload through the deployed API, compared both results with `expected.json` automatically (both passed), and requested the uploaded path a second time to confirm the blob had been deleted |
+| 2026-09-17 | Claude Code (desktop app), Claude Fable 5.1 (`claude-fable-5-1`) | UI | The Next.js 16 guide on server and client components was read before writing the page. The client helpers (NDJSON reader, file checks) have unit tests, including a multi-byte character split across chunks. Then every path was exercised in the app's browser pane: all five samples and a real file upload through the file input, with the cards read against the expected items. Playback was measured by polling the button state, which caught a real bug (see Failures and fixes). The production build was run before committing |
 
 ## Failures and fixes
 
@@ -109,3 +121,4 @@ Tools and models used, and how their output was checked.
 | 2026-09-17 | With prompt v3, T3 had the support inbox twice: as an open question ("What about the support inbox?") and as a task. The expected-results comparison failed ("found 2 matching items") | Prompt v4, rule 5: one item per topic; a question that suggests doing something is the task's "proposed" event. T3 had no duplicates in 3 of 3 runs, and T1's real question stayed a question. The rule is general, but it was found on a fixture, so the holdout recording is the real check |
 | 2026-09-17 | On the first deployment, recognition failed within 1 ms and the cause was hidden: the pipeline returned a generic message and logged nothing | The real cause is now logged server-side (users still get a generic message), API keys are trimmed because a pasted key with a trailing newline makes an invalid header, and `/api/health` shows whether each provider accepts its key. The keys were re-entered in Vercel; the health check now shows both accepted |
 | 2026-09-17 | After the Blob store was connected, the deployed upload route still answered "No read-write token found", although the store ID variable was present | Vercel injects environment variables at deploy time, so a token added after a deployment is not visible until the next one. A redeploy fixed it; the health check and the upload probe confirmed the token before the end-to-end run |
+| 2026-09-17 | The first segment player checked the end of a quote only on animation frames. In the browser pane a quote kept "playing" for several seconds instead of about two, and browsers pause animation frames in a hidden tab, so a user switching tabs would hear the recording run on to the end | The end is now also checked on the audio element's `timeupdate` event, which fires in hidden tabs. Re-measured: a 1.7 s quote stopped 2.0 s after the click |

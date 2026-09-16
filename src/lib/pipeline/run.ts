@@ -9,8 +9,7 @@ import {
   type LlmAttempt,
 } from "@/lib/extraction/extract";
 import { PROMPT_VERSION } from "@/lib/extraction/prompt";
-import { formatTimestamp } from "@/lib/format-time";
-import { MAX_DURATION_SEC } from "@/lib/limits";
+import { MAX_DURATION_SEC, tooLongMessage } from "@/lib/limits";
 import { asrCost, blobCost, isDeepSeekPeak, llmCost } from "@/lib/pricing";
 
 import {
@@ -118,8 +117,7 @@ export async function runPipeline(audio: Buffer, options: RunOptions): Promise<P
     transcript,
     metrics: metrics(),
   });
-  const tooLong = (seconds: number) =>
-    decline("too_long", `The recording is ${formatTimestamp(seconds)} long; the limit is 3:00.`);
+  const tooLong = (seconds: number) => decline("too_long", tooLongMessage(seconds));
 
   // 1. Duration, before any paid call.
   emit({ type: "stage", stage: "checking" });

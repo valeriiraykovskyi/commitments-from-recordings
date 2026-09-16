@@ -33,7 +33,7 @@ editing results, storing run history.
 
 **If time allows** (first to cut): microphone recording, copy as JSON/Markdown, resolving
 weekday deadlines when the recording states its own date, model comparison, a holdout
-recording with human voices.
+recording with human voices, editing a wrong speaker-name mapping in the UI.
 
 ## 3. Requirements traceability
 
@@ -82,7 +82,8 @@ the local copy of the file in the browser.
    events with quotes: proposed, accepted, assigned, deadline set/changed, cancelled, and so on.
    A deterministic, unit-tested fold turns them into the final status, owner and deadline.
 4. **Owners are speaker labels.** Names are resolved separately from self-introductions, with
-   evidence. The user can fix a wrong mapping in the UI without re-running the model.
+   evidence. Fixing a wrong mapping in the UI without re-running the model is on the
+   if-time-allows list.
 5. **Relative dates stay as spoken.** The model never receives today's date. Code strips any
    concrete date that has no anchor quote from the recording. Expressions that cannot be
    resolved ("by Friday", "before launch", "next Friday") are flagged "date not stated in the
@@ -210,7 +211,7 @@ One step at a time, in this order. The estimates keep the total within about 8 h
 | 5 | Extraction: DeepSeek prompt, schema, retry | 0:50 | ✅ done |
 | 6 | Quote verification, event fold, flags + unit tests | 0:50 | ✅ done |
 | 7 | API route, guardrails, metrics | 0:25 (realistic: 0:50) | ✅ done (1:15 incl. deployment troubleshooting) |
-| 8 | UI: upload, progress, results, transcript, playback, metrics | 1:20 | |
+| 8 | UI: upload, progress, results, transcript, playback, metrics | 1:20 | ✅ done (0:30) |
 | 9 | Eval runs and report; model comparison if time allows (the comparison with `expected.json` already exists: `scripts/lib/compare.ts`) | 0:40 | |
 | 10 | Deploy, README, delivery notes, video | 0:40 | |
 | | **Total** | **7:30** | |
