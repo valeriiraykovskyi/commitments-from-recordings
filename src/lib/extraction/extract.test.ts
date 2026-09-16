@@ -95,6 +95,16 @@ describe("extractCommitments", () => {
     });
   });
 
+  it("trims whitespace around the API key", async () => {
+    vi.stubEnv("DEEPSEEK_API_KEY", "  test-key\n");
+    const { fetchImpl } = mockFetch(completion(validOutput));
+
+    await extractCommitments(transcript, DEFAULT_LLM_CONFIG, fetchImpl);
+
+    const init = vi.mocked(fetchImpl).mock.calls[0][1];
+    expect(new Headers(init?.headers).get("Authorization")).toBe("Bearer test-key");
+  });
+
   it("does not send reasoning_effort when thinking is disabled", async () => {
     const { fetchImpl, bodies } = mockFetch(completion(validOutput));
 

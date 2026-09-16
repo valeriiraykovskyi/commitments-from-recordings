@@ -34,7 +34,8 @@ export type AsrResult = {
 let client: DeepgramClient | undefined;
 
 function getClient(): DeepgramClient {
-  const apiKey = process.env.DEEPGRAM_API_KEY;
+  // Trimmed: a pasted key with a trailing newline makes an invalid header.
+  const apiKey = process.env.DEEPGRAM_API_KEY?.trim();
   if (!apiKey) throw new Error("DEEPGRAM_API_KEY is not set");
   // Retries are handled below, so every attempt is counted in the metrics.
   client ??= new DeepgramClient({ apiKey, maxRetries: 0, timeoutInSeconds: 60 });

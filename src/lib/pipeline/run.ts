@@ -33,8 +33,14 @@ export type RunOptions = {
   storage?: { bytes: number; fetchMs: number };
   llmConfig?: LlmConfig;
   onEvent?: (event: PipelineEvent) => void;
+  /** Server-side log for the real cause of a failure; users only see a generic message. */
+  logFailure?: (stage: "asr" | "llm", detail: string) => void;
   now?: () => Date;
 };
+
+function describe(error: Error): string {
+  return error.cause instanceof Error ? `${error.message}: ${error.cause.message}` : error.message;
+}
 
 /** Small tolerance for rounding between the file's duration and Deepgram's. */
 const DURATION_TOLERANCE_SEC = 1;
@@ -52,6 +58,9 @@ export async function runPipeline(audio: Buffer, options: RunOptions): Promise<P
   const requestedAt = (options.now ?? (() => new Date()))();
   const llmConfig = options.llmConfig ?? DEFAULT_LLM_CONFIG;
   const emit = options.onEvent ?? (() => {});
+  const logFailure =
+    options.logFailure ??
+    ((stage, detail) => console.error(`pipeline: ${stage} failed: ${detail}`));
 
   const timings: Metrics["timings"] = {
     fetchMs: options.storage?.fetchMs ?? 0,
@@ -130,6 +139,7 @@ export async function runPipeline(audio: Buffer, options: RunOptions): Promise<P
     timings.asrMs = since(asrStart);
     if (!(error instanceof AsrError)) throw error;
     calls.asr = error.attempts;
+    logFailure("asr", describe(error));
     return error.status === 400
       ? decline("unreadable_audio", "The file could not be read as audio.")
       : fail("Speech recognition failed. Please try again.");
@@ -174,6 +184,7 @@ export async function runPipeline(audio: Buffer, options: RunOptions): Promise<P
     if (!(error instanceof ExtractionError)) throw error;
     llmAttempts = error.attempts;
     calls.llm = error.attempts.length;
+    logFailure("llm", describe(error));
     return fail("The language model did not return a usable answer. Please try again.");
   }
   timings.llmMs = since(llmStart);

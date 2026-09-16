@@ -26,8 +26,9 @@ vi.mock("@/lib/asr/deepgram", () => {
       message: string,
       readonly attempts: number,
       readonly status: number | undefined,
+      options?: { cause?: unknown },
     ) {
-      super(message);
+      super(message, options);
     }
   }
   return { ASR_MODEL: "nova-3", ASR_DIARIZER: "v2", AsrError, transcribe: mocks.transcribe };
@@ -65,13 +66,15 @@ const offPeak = () => new Date("2026-09-14T12:00:00Z");
 
 async function run(options: Partial<Parameters<typeof runPipeline>[1]> = {}) {
   const events: PipelineEvent[] = [];
+  const failures: string[] = [];
   const result = await runPipeline(Buffer.from("audio"), {
     tag: "test",
     now: offPeak,
     onEvent: (event) => events.push(event),
+    logFailure: (stage, detail) => failures.push(`${stage}: ${detail}`),
     ...options,
   });
-  return { result, events };
+  return { result, events, failures };
 }
 
 beforeEach(() => {
@@ -185,13 +188,30 @@ describe("runPipeline", () => {
     expect(result.metrics.calls.asr).toBe(2);
   });
 
+  it("logs the real cause of a failure but shows the user a generic message", async () => {
+    mocks.transcribe.mockRejectedValue(
+      new AsrError("Deepgram request failed", 1, undefined, {
+        cause: new Error("DEEPGRAM_API_KEY is not set"),
+      }),
+    );
+
+    const { result, failures } = await run();
+
+    expect(failures).toEqual(["asr: Deepgram request failed: DEEPGRAM_API_KEY is not set"]);
+    expect(result).toMatchObject({
+      outcome: "failed",
+      message: "Speech recognition failed. Please try again.",
+    });
+  });
+
   it("counts failed model attempts as retries", async () => {
     mocks.extractCommitments.mockRejectedValue(
       new ExtractionError("invalid", [attempt(false), attempt(false)]),
     );
 
-    const { result } = await run();
+    const { result, failures } = await run();
 
+    expect(failures).toEqual(["llm: invalid"]);
     expect(result.outcome).toBe("failed");
     expect(result.metrics.calls).toEqual({ asr: 1, llm: 2 });
     expect(result.metrics.cost.reasoningUsd).toBe(0);

@@ -76,7 +76,8 @@ export async function chat(
   config: LlmConfig,
   fetchImpl: typeof fetch = fetch,
 ): Promise<ChatResult> {
-  const apiKey = process.env.DEEPSEEK_API_KEY;
+  // Trimmed: a pasted key with a trailing newline makes an invalid header.
+  const apiKey = process.env.DEEPSEEK_API_KEY?.trim();
   if (!apiKey) throw new Error("DEEPSEEK_API_KEY is not set");
 
   let response: Response;
