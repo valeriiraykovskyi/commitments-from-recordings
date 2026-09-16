@@ -42,6 +42,12 @@ slightly different audio, so only regenerate when a script changes, and check th
 - Every line of T1, T2, T3 and G2 is attributed to the right speaker.
 - G2 is detected as Spanish.
 
+## ASR snapshots
+
+`<id>/asr-response.json` holds a real Deepgram response for each scripted fixture, recorded
+with `npm run asr:snapshot`. Unit tests of later pipeline stages use these files to run on
+realistic transcripts without network calls. The app and the eval always call Deepgram live.
+
 ## `script.md`
 
 Each dialogue line is a numbered Markdown list item: `N. **Speaker:** text`.

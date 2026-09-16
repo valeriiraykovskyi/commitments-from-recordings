@@ -39,3 +39,9 @@ Scripts, expected results and timelines live in [`fixtures/`](fixtures/README.md
 ```bash
 npm run fixtures -- --force
 ```
+
+To re-record the Deepgram responses that unit tests use:
+
+```bash
+npm run asr:snapshot -- --force
+```

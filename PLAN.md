@@ -206,7 +206,7 @@ One step at a time, in this order. The estimates keep the total within about 8 h
 | 1 | Test set on paper: T1–T3 scripts + expected results → commit | 0:40 | ✅ done |
 | 2 | Scaffold: Next.js, Tailwind, shadcn/ui, Vitest; first Vercel deploy | 0:25 | ✅ done |
 | 3 | Generate fixture audio (Deepgram Aura-2) | 0:25 | ✅ done |
-| 4 | ASR module → normalised transcript | 0:25 | |
+| 4 | ASR module → normalised transcript | 0:25 | ✅ done |
 | 5 | Extraction: DeepSeek prompt, schema, retry | 0:50 | |
 | 6 | Quote verification, event fold, flags + unit tests | 0:50 | |
 | 7 | API route, guardrails, metrics | 0:25 | |

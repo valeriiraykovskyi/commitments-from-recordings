@@ -1,0 +1,429 @@
+{
+  "metadata": {
+    "transaction_key": "deprecated",
+    "request_id": "01a0ac0c-33ee-7920-8864-7cd0cfaf5547",
+    "sha256": "03bf4dca74ff31dca7c7e2d39ecbe7e80d70632b254585612e3ac1c6ffaa99cd",
+    "created": "2026-09-16T21:07:57.465Z",
+    "duration": 16.01,
+    "channels": 1,
+    "models": [
+      "9f79f67e-5728-46cb-abd1-54e76de17e83"
+    ],
+    "model_info": {
+      "9f79f67e-5728-46cb-abd1-54e76de17e83": {
+        "name": "general-nova-3",
+        "version": "2026-08-03.26592",
+        "arch": "nova-3"
+      }
+    },
+    "tags": [
+      "snapshot"
+    ],
+    "diarize_info": {
+      "model_uuid": "6946b038-8264-4505-acf7-9822c009fecb",
+      "arch": "v2"
+    }
+  },
+  "results": {
+    "channels": [
+      {
+        "alternatives": [
+          {
+            "transcript": "Hola, soy Lucía. ¿Repasamos el plan del lanzamiento? Sí, claro, yo preparo las notas de la versión para el viernes. Perfecto, y yo reviso unas capturas de pantalla antes del lanzamiento. De acuerdo, hablamos el lunes.",
+            "confidence": 1,
+            "words": [
+              {
+                "word": "hola",
+                "start": 0.64,
+                "end": 1.12,
+                "confidence": 0.99902344,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "Hola,"
+              },
+              {
+                "word": "soy",
+                "start": 1.12,
+                "end": 1.28,
+                "confidence": 0.8774414,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "soy"
+              },
+              {
+                "word": "lucía",
+                "start": 1.28,
+                "end": 1.92,
+                "confidence": 0.83496094,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "Lucía."
+              },
+              {
+                "word": "repasamos",
+                "start": 1.92,
+                "end": 2.48,
+                "confidence": 0.9977214,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "¿Repasamos"
+              },
+              {
+                "word": "el",
+                "start": 2.48,
+                "end": 2.8,
+                "confidence": 1,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "el"
+              },
+              {
+                "word": "plan",
+                "start": 2.8,
+                "end": 3.04,
+                "confidence": 1,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "plan"
+              },
+              {
+                "word": "del",
+                "start": 3.04,
+                "end": 3.28,
+                "confidence": 0.97802734,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "del"
+              },
+              {
+                "word": "lanzamiento",
+                "start": 3.28,
+                "end": 3.76,
+                "confidence": 1,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "lanzamiento?"
+              },
+              {
+                "word": "sí",
+                "start": 4.715,
+                "end": 5.1150002,
+                "confidence": 1,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "Sí,"
+              },
+              {
+                "word": "claro",
+                "start": 5.1150002,
+                "end": 5.435,
+                "confidence": 0.99316406,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "claro,"
+              },
+              {
+                "word": "yo",
+                "start": 5.435,
+                "end": 5.755,
+                "confidence": 1,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "yo"
+              },
+              {
+                "word": "preparo",
+                "start": 5.755,
+                "end": 6.155,
+                "confidence": 1,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "preparo"
+              },
+              {
+                "word": "las",
+                "start": 6.155,
+                "end": 6.395,
+                "confidence": 1,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "las"
+              },
+              {
+                "word": "notas",
+                "start": 6.395,
+                "end": 6.5550003,
+                "confidence": 1,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "notas"
+              },
+              {
+                "word": "de",
+                "start": 6.5550003,
+                "end": 6.715,
+                "confidence": 1,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "la",
+                "start": 6.715,
+                "end": 6.875,
+                "confidence": 0.99121094,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "la"
+              },
+              {
+                "word": "versión",
+                "start": 6.875,
+                "end": 7.195,
+                "confidence": 0.9921875,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "versión"
+              },
+              {
+                "word": "para",
+                "start": 7.195,
+                "end": 7.435,
+                "confidence": 1,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "para"
+              },
+              {
+                "word": "el",
+                "start": 7.435,
+                "end": 7.675,
+                "confidence": 0.9951172,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "el"
+              },
+              {
+                "word": "viernes",
+                "start": 7.675,
+                "end": 8.315,
+                "confidence": 0.9995117,
+                "speaker": 1,
+                "speaker_confidence": 0.9940209,
+                "punctuated_word": "viernes."
+              },
+              {
+                "word": "perfecto",
+                "start": 8.955,
+                "end": 9.514999,
+                "confidence": 0.98706055,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "Perfecto,"
+              },
+              {
+                "word": "y",
+                "start": 9.514999,
+                "end": 9.675,
+                "confidence": 0.9472656,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "y"
+              },
+              {
+                "word": "yo",
+                "start": 9.675,
+                "end": 9.835,
+                "confidence": 1,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "yo"
+              },
+              {
+                "word": "reviso",
+                "start": 9.835,
+                "end": 10.235001,
+                "confidence": 1,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "reviso"
+              },
+              {
+                "word": "unas",
+                "start": 10.235001,
+                "end": 10.395,
+                "confidence": 1,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "unas"
+              },
+              {
+                "word": "capturas",
+                "start": 10.395,
+                "end": 10.715,
+                "confidence": 1,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "capturas"
+              },
+              {
+                "word": "de",
+                "start": 10.715,
+                "end": 10.875,
+                "confidence": 1,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "de"
+              },
+              {
+                "word": "pantalla",
+                "start": 10.875,
+                "end": 11.275,
+                "confidence": 1,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "pantalla"
+              },
+              {
+                "word": "antes",
+                "start": 11.275,
+                "end": 11.514999,
+                "confidence": 1,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "antes"
+              },
+              {
+                "word": "del",
+                "start": 11.514999,
+                "end": 11.755,
+                "confidence": 1,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "del"
+              },
+              {
+                "word": "lanzamiento",
+                "start": 11.755,
+                "end": 12.555,
+                "confidence": 0.9995117,
+                "speaker": 0,
+                "speaker_confidence": 0.98654693,
+                "punctuated_word": "lanzamiento."
+              },
+              {
+                "word": "de",
+                "start": 13.355,
+                "end": 13.594999,
+                "confidence": 1,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "De"
+              },
+              {
+                "word": "acuerdo",
+                "start": 13.594999,
+                "end": 14.154999,
+                "confidence": 0.90600586,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "acuerdo,"
+              },
+              {
+                "word": "hablamos",
+                "start": 14.395,
+                "end": 14.715,
+                "confidence": 1,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "hablamos"
+              },
+              {
+                "word": "el",
+                "start": 14.715,
+                "end": 14.955,
+                "confidence": 1,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "el"
+              },
+              {
+                "word": "lunes",
+                "start": 14.955,
+                "end": 15.275,
+                "confidence": 0.99902344,
+                "speaker": 1,
+                "speaker_confidence": 1,
+                "punctuated_word": "lunes."
+              }
+            ],
+            "paragraphs": {
+              "transcript": "\nSpeaker 0: Hola, soy Lucía. ¿Repasamos el plan del lanzamiento?\n\nSpeaker 1: Sí, claro, yo preparo las notas de la versión para el viernes.\n\nSpeaker 0: Perfecto, y yo reviso unas capturas de pantalla antes del lanzamiento.\n\nSpeaker 1: De acuerdo, hablamos el lunes.",
+              "paragraphs": [
+                {
+                  "sentences": [
+                    {
+                      "text": "Hola, soy Lucía.",
+                      "start": 0.64,
+                      "end": 1.92
+                    },
+                    {
+                      "text": "¿Repasamos el plan del lanzamiento?",
+                      "start": 1.92,
+                      "end": 3.76
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 8,
+                  "start": 0.64,
+                  "end": 3.76
+                },
+                {
+                  "sentences": [
+                    {
+                      "text": "Sí, claro, yo preparo las notas de la versión para el viernes.",
+                      "start": 4.715,
+                      "end": 8.315
+                    }
+                  ],
+                  "speaker": 1,
+                  "num_words": 12,
+                  "start": 4.715,
+                  "end": 8.315
+                },
+                {
+                  "sentences": [
+                    {
+                      "text": "Perfecto, y yo reviso unas capturas de pantalla antes del lanzamiento.",
+                      "start": 8.955,
+                      "end": 12.555
+                    }
+                  ],
+                  "speaker": 0,
+                  "num_words": 11,
+                  "start": 8.955,
+                  "end": 12.555
+                },
+                {
+                  "sentences": [
+                    {
+                      "text": "De acuerdo, hablamos el lunes.",
+                      "start": 13.355,
+                      "end": 15.275
+                    }
+                  ],
+                  "speaker": 1,
+                  "num_words": 5,
+                  "start": 13.355,
+                  "end": 15.275
+                }
+              ]
+            }
+          }
+        ],
+        "detected_language": "es",
+        "language_confidence": 0.9994322
+      }
+    ]
+  }
+}
