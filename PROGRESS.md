@@ -85,6 +85,13 @@ afterwards; **the ownerless task's deadline was missing again**. Counting every 
 (6 eval runs, 2 re-recordings, 1 production run), the omission happened in 1 of 9; on v4 it was
 1 of 6. Reduced, not eliminated, which led to prompt v6 (see Decisions).
 
+**Production check on prompt v6** (commit `53d09f2`, 04:05, DeepSeek peak tariff): T1 sample —
+transcript after 1.8 s, result after 13.2 s (model 11.4 s), $0.0114, matches `expected.json`.
+T2 uploaded through Blob — upload 2.8 s, transcript after 1.0 s, result after 43.1 s (model
+42.1 s with 9.8k output tokens), $0.0193 plus $0.0001 Blob, matches `expected.json`, blob
+deleted afterwards. Both correct; the second shows the latency tail: across the twelve v6 runs
+on T1–T3 so far, ten took 10–17 s of model time and two took 32 s and 42 s.
+
 **Open question:** with effort `high`, the model's latency ranged from 6 s to 42 s, depending on how
 long it reasoned. The eval compares lower effort, no thinking and `deepseek-v4-pro`.
 

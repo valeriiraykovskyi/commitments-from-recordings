@@ -151,7 +151,7 @@ production runs on Vercel's `iad1` region, close to Deepgram, where recognition 
 |---|---|
 | Transcript on screen (a first useful result) | 1.2–2.8 s after choosing a sample; 4.6 s for a 2.3 MB upload, of which 2.2 s is the upload |
 | Full result, T1–T3, eval (9 runs) | median 12.7 s of model time, 14.3–16.7 s median end to end; worst 34.2 s (one run reasoned with 6.4k tokens instead of the usual 2.4k) |
-| Full result on production (prompt v5) | T1 sample: transcript after 1.2 s, result after 12.8 s; T2 upload: 2.5 s upload, result after 12.5 s |
+| Full result on production (prompt v6, peak tariff) | T1 sample: transcript after 1.8 s, result after 13.2 s, $0.0114; T2 upload: 2.8 s upload, transcript after 1.0 s, result after 43.1 s (the model reasoned with 9.8k tokens), $0.0193. Both correct |
 | Server stages | duration check 1–13 ms · recognition 0.2–2.7 s · model 10–16 s typical, 32 s worst · verification ≤ 6 ms |
 | Refusals | too long: 1–34 ms, $0 · non-English: 0.2–1.7 s |
 | Variance across prompt versions | v4 (effort `high`): 6–42 s of model time on the same input; v5: 7–16 s; v6: 10–32 s. The tail comes from how long the model reasons, not from recognition |
@@ -225,9 +225,10 @@ responses under `fixtures/` are real API outputs kept as test data.
 - **Eval on a clean commit and more runs.** The committed reports were produced with the
   prompt and ESM changes uncommitted (marked in the reports). Five runs per fixture would
   tighten the variance figures.
-- **Latency and its tail.** The model is 80–90% of the wait (10–16 s typical), and one run in
-  nine reasoned twice as long (32 s). Options to measure next: a cap on reasoning tokens with a
-  quality check, or streaming items as they are verified.
+- **Latency and its tail.** The model is 80–90% of the wait (10–17 s typical), and two of the
+  twelve v6 runs on T1–T3 reasoned three to four times longer (32 s and 42 s), which also
+  doubles their cost. Options to measure next: a cap on reasoning tokens with a quality check,
+  or streaming items as they are verified.
 - **Relative dates.** If a recording states its own date, weekdays could be resolved with the
   anchor shown as evidence. Today every relative date is kept as spoken and flagged.
 - **Robustness of verification.** Quotes must match word for word; real recordings with
