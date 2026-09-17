@@ -35,6 +35,7 @@ const event = (
 
 const reportTask = (events: ExtractionEvent[]): Extraction => ({
   speakers: introductions,
+  deadlines_mentioned: [],
   items: [{ kind: "task", title: "Send the report", events }],
 });
 
@@ -65,6 +66,7 @@ describe("buildCommitments", () => {
   it("drops events whose quotes are not in the transcript, and empty items", () => {
     const result = buildCommitments(transcript, {
       speakers: introductions,
+      deadlines_mentioned: [],
       items: [
         {
           kind: "task",
@@ -110,6 +112,7 @@ describe("buildCommitments", () => {
   it("does not accept an owner that the quote does not support", () => {
     const withoutIntroductions: Extraction = {
       speakers: [],
+      deadlines_mentioned: [],
       items: [
         {
           kind: "task",
@@ -157,6 +160,7 @@ describe("buildCommitments", () => {
         { label: "S0", name: "Annie", utterance: "U01", quote: "I'm Anna" },
         { label: "S1", name: "Anna", utterance: "U01", quote: "I'm Anna" },
       ],
+      deadlines_mentioned: [],
       items: [],
     });
 
@@ -173,6 +177,7 @@ describe("buildCommitments", () => {
 
     const result = buildCommitments(monologue, {
       speakers: [{ label: "S0", name: "Anna", utterance: "U01", quote: "I'm Anna" }],
+      deadlines_mentioned: [],
       items: [],
     });
 
@@ -182,6 +187,7 @@ describe("buildCommitments", () => {
   it("orders items by when they were first mentioned", () => {
     const result = buildCommitments(transcript, {
       speakers: introductions,
+      deadlines_mentioned: [],
       items: [
         { kind: "task", title: "Logs", events: [event("proposed", "U05", "check the logs", { by: "S0" })] },
         { kind: "task", title: "Report", events: [event("proposed", "U03", "send the report", { by: "S0" })] },
@@ -192,5 +198,76 @@ describe("buildCommitments", () => {
       ["I1", "Report"],
       ["I2", "Logs"],
     ]);
+  });
+
+  describe("listed deadlines", () => {
+    const mention = { utterance: "U03", quote: "by Friday", task: "Send the report" };
+
+    it("attaches a listed deadline the model left out of the events, at its place in time", () => {
+      const result = buildCommitments(transcript, {
+        ...reportTask([
+          event("requested", "U03", "Mark, can you send the report", { by: "S0", owner: "Mark" }),
+          event("accepted", "U04", "Sure", { by: "S1" }),
+        ]),
+        deadlines_mentioned: [mention],
+      });
+
+      expect(result.dropped).toEqual([]);
+      expect(result.items[0].events.map((e) => e.type)).toEqual([
+        "requested",
+        "deadline",
+        "accepted",
+      ]);
+      expect(result.items[0]).toMatchObject({
+        status: "agreed",
+        owner: { name: "Mark" },
+        deadline: { text: "by Friday", dateStated: false },
+        flags: ["deadline_recovered", "date_not_stated"],
+      });
+    });
+
+    it("does not duplicate a deadline that is already an event", () => {
+      const result = buildCommitments(transcript, {
+        ...reportTask([
+          event("requested", "U03", "Mark, can you send the report", { by: "S0", owner: "Mark" }),
+          event("deadline", "U03", "by Friday", { by: "S0", deadline: "by Friday" }),
+          event("accepted", "U04", "Sure", { by: "S1" }),
+        ]),
+        deadlines_mentioned: [mention],
+      });
+
+      expect(result.items[0].events).toHaveLength(3);
+      expect(result.items[0].previousDeadlines).toEqual([]);
+      expect(result.items[0].flags).toEqual(["date_not_stated"]);
+    });
+
+    it("drops a listed deadline that is not in the transcript or belongs to no item", () => {
+      const result = buildCommitments(transcript, {
+        ...reportTask([event("committed", "U06", "Yes, I will", { by: "S1" })]),
+        deadlines_mentioned: [
+          { utterance: "U03", quote: "by Tuesday", task: "Send the report" },
+          { utterance: "U03", quote: "by Friday", task: "Paint the fence" },
+        ],
+      });
+
+      expect(result.items[0].deadline).toBeNull();
+      expect(result.items[0].flags).toEqual(["events_dropped", "no_deadline"]);
+      expect(result.dropped).toEqual([
+        {
+          item: "Send the report",
+          type: "deadline",
+          utteranceId: "U03",
+          quote: "by Tuesday",
+          reason: "Listed deadline not found in the transcript.",
+        },
+        {
+          item: "Paint the fence",
+          type: "deadline",
+          utteranceId: "U03",
+          quote: "by Friday",
+          reason: "Listed deadline does not belong to any item.",
+        },
+      ]);
+    });
   });
 });

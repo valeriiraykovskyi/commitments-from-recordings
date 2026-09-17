@@ -1,6 +1,6 @@
 {
   "model": "deepseek-flash",
-  "promptVersion": "2026-09-17.5",
+  "promptVersion": "2026-09-17.6",
   "config": {
     "model": "deepseek-flash",
     "thinking": true,
@@ -21,6 +21,33 @@
         "name": "Mark",
         "utterance": "U02",
         "quote": "I'm Mark, the developer on the project"
+      }
+    ],
+    "deadlines_mentioned": [
+      {
+        "utterance": "U06",
+        "quote": "by Wednesday",
+        "task": "Set up analytics on the landing page"
+      },
+      {
+        "utterance": "U07",
+        "quote": "by Friday",
+        "task": "Write the release notes"
+      },
+      {
+        "utterance": "U10",
+        "quote": "before the launch",
+        "task": "Build a dark mode"
+      },
+      {
+        "utterance": "U11",
+        "quote": "before the launch",
+        "task": "Update the App Store screenshots"
+      },
+      {
+        "utterance": "U13",
+        "quote": "Let's say Monday instead",
+        "task": "Write the release notes"
       }
     ],
     "items": [
@@ -111,6 +138,14 @@
             "by": "S1",
             "owner": null,
             "deadline": null
+          },
+          {
+            "type": "accepted",
+            "utterance": "U09",
+            "quote": "Sounds good",
+            "by": "S0",
+            "owner": null,
+            "deadline": null
           }
         ]
       },
@@ -121,7 +156,7 @@
           {
             "type": "proposed",
             "utterance": "U10",
-            "quote": "Maybe we could build a dark mode",
+            "quote": "Maybe we could build a dark mode before the launch too",
             "by": "S1",
             "owner": null,
             "deadline": null
@@ -151,7 +186,7 @@
           {
             "type": "proposed",
             "utterance": "U11",
-            "quote": "Someone also needs to update the App Store screenshots",
+            "quote": "Someone also needs to update the App Store screenshots before the launch",
             "by": "S0",
             "owner": null,
             "deadline": null

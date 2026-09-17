@@ -81,6 +81,8 @@ the local copy of the file in the browser.
 3. **The LLM reports a history; code decides the final state.** For each item the model lists
    events with quotes: proposed, accepted, assigned, deadline set/changed, cancelled, and so on.
    A deterministic, unit-tested fold turns them into the final status, owner and deadline.
+   Since prompt v6 the model also lists every time expression before the events; a listed
+   deadline missing from its task's events is attached in code once its quote is verified.
 4. **Owners are speaker labels.** Names are resolved separately from self-introductions, with
    evidence. Fixing a wrong mapping in the UI without re-running the model is on the
    if-time-allows list.
@@ -213,7 +215,7 @@ One step at a time, in this order. The estimates keep the total within about 8 h
 | 7 | API route, guardrails, metrics | 0:25 (realistic: 0:50) | ✅ done (1:15 incl. deployment troubleshooting) |
 | 8 | UI: upload, progress, results, transcript, playback, metrics | 1:20 | ✅ done (0:30) |
 | 9 | Eval runs and report; model comparison if time allows (the comparison with `expected.json` already exists: `scripts/lib/compare.ts`) | 0:40 | ✅ done (0:30; effort `low` and no thinking compared, `deepseek-v4-pro` skipped) |
-| 10 | Deploy, README, delivery notes, video | 0:40 | |
+| 10 | Deploy, README, delivery notes, video | 0:40 | ✅ docs done (0:20); video recorded by the author |
 | | **Total** | **7:30** | |
 
 If we run over budget, cut in this order:
@@ -228,21 +230,21 @@ Whatever is left unfinished is described in the delivery notes.
 
 ## 9. Definition of done
 
-- [ ] Working browser demo at a public URL
-- [ ] Repository with setup instructions (README)
-- [ ] Video walkthrough, 3 minutes or less
-- [ ] Test set: recordings, scripts, expected results, the second version, the clarification
+- [x] Working browser demo at a public URL
+- [x] Repository with setup instructions (README)
+- [ ] Video walkthrough, 3 minutes or less (script in [docs/VIDEO.md](docs/VIDEO.md))
+- [x] Test set: recordings, scripts, expected results, the second version, the clarification
       case
-- [ ] Delivery notes:
-  - [ ] sample inputs with expected vs actual results
-  - [ ] what failed
-  - [ ] time spent
-  - [ ] exact AI tools and models, plus one example of checking their output
-  - [ ] time to a useful result
-  - [ ] variable cost per operation (recognition, reasoning, speech, retries, intermediaries),
+- [x] Delivery notes ([docs/DELIVERY.md](docs/DELIVERY.md)):
+  - [x] sample inputs with expected vs actual results
+  - [x] what failed
+  - [x] time spent
+  - [x] exact AI tools and models, plus one example of checking their output
+  - [x] time to a useful result
+  - [x] variable cost per operation (recognition, reasoning, speech, retries, intermediaries),
         with pricing assumptions and hosting shown separately
-  - [ ] reused components vs our own work
-  - [ ] unfinished parts and what to improve next
+  - [x] reused components vs our own work
+  - [x] unfinished parts and what to improve next
 
 ## 10. Risks
 

@@ -49,7 +49,9 @@ export type ItemFlag =
   | "deadline_changed"
   | "speaker_mismatch"
   | "evidence_corrected"
-  | "events_dropped";
+  | "events_dropped"
+  /** A deadline the model listed but left out of the events; attached after verification. */
+  | "deadline_recovered";
 
 export type Item = {
   id: string;

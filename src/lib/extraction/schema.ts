@@ -37,6 +37,19 @@ export const extractionSchema = z.object({
       quote: text.nullable(),
     }),
   ),
+  /**
+   * Every time expression, listed before the items so that none is forgotten
+   * while the events are written. Verified and attached to its task in code.
+   */
+  deadlines_mentioned: z.array(
+    z.object({
+      utterance: utteranceId,
+      /** The time expression as spoken. */
+      quote: text,
+      /** The title of the item it belongs to. */
+      task: text,
+    }),
+  ),
   items: z.array(
     z.object({
       kind: z.enum(["task", "question"]),

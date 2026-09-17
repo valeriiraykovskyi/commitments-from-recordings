@@ -1,12 +1,13 @@
 # Progress
 
-**Current step:** 10 — deploy, README, delivery notes, video.
+**Current step:** 10 — done except the video, which the author records
+([script](docs/VIDEO.md)).
 **Done:** 0 — brief, brainstorm, stack, planning docs · 1 — test set on paper · 2 — scaffold and
 first deploy · 3 — fixture audio · 4 — ASR module · 5 — extraction with DeepSeek · 6 — quote
 verification, event fold, flags · 7 — API routes, uploads, guardrails, metrics, production check ·
-8 — UI · 9 — eval, prompt v5, model comparison.
+8 — UI · 9 — eval, prompts v5 and v6, model comparison · 10 — README, delivery notes, video script.
 
-**Demo:** https://commitments-from-recordings.vercel.app (placeholder page for now)
+**Demo:** https://commitments-from-recordings.vercel.app · **Delivery notes:** [docs/DELIVERY.md](docs/DELIVERY.md)
 
 ## Time log
 
@@ -25,8 +26,10 @@ Local time (EEST, UTC+3).
 | 2026-09-17 | 01:25–02:20, with a break (approx.) | 0:35 | 7 | Deployment configuration: hidden failure cause fixed, health check, keys and Blob token re-entered in Vercel, redeploy, production end-to-end check of a sample and a Blob upload |
 | 2026-09-17 | 02:20–02:50 (approx.) | 0:30 | 8 | UI: sample picker and drop zone, browser-side checks, Blob upload with progress, streamed progress steps with timings, early transcript, results in three blocks with playable quotes, clarifications, measurements; unit tests for the client helpers; every sample and one upload checked in the browser |
 | 2026-09-17 | 03:00–03:30 (approx.) | 0:30 | 9 | Eval script and report, first eval run, the tsx duration-probe bug found and fixed (project switched to ESM), prompt v5, re-recorded model responses, eval re-run, comparison of effort `low` and no thinking |
+| 2026-09-17 | 03:30–03:38 and 03:50–04:00 (approx.) | 0:20 | 10 | README, delivery notes, video script, production check |
+| 2026-09-17 | 03:38–03:50 (approx.) | 0:15 | 9 | The production check missed a deadline once more; prompt v6 (deadlines listed first) with a verified attachment in code, tests, re-recorded responses, eval 15 of 15 |
 
-**Total so far:** 5:05 of about 8:00.
+**Total so far:** 5:40 of about 8:00, without the video.
 
 ## Measurements so far
 
@@ -53,25 +56,34 @@ Informal numbers from development runs; the eval in step 9 produces the reported
 
 `npm run eval` runs the fixtures through the same pipeline as the app, one run after another,
 with real API calls, and checks each result against `expected.json`. Reports with every run,
-item and token count: [`eval/`](eval/). Prompt v5, DeepSeek off-peak tariff, list prices.
+item and token count: [`eval/`](eval/). DeepSeek off-peak tariff, list prices.
 
-| Configuration | Fixtures × runs | Passed | Model time, median / worst | Reasoning tokens, median (min–max) | Cost per run, median |
-|---|---|---|---|---|---|
-| `deepseek-flash`, thinking on, effort `high` (the default) | 5 × 3 | **15/15** | 13.3 s / 16.0 s | 2.3k (1.1k–3.0k) | $0.0095 |
-| `deepseek-flash`, thinking on, effort `low` | T1–T3 × 3 | 9/9 | 27.8 s / 36.6 s | 6.2k (1.9k–7.8k) | $0.0097 |
-| `deepseek-flash`, thinking off | T1–T3 × 3 | 4/9 | 3.2 s / 3.5 s | 0 | $0.0082 |
+| Configuration | Prompt | Fixtures × runs | Passed | Model time, median / worst | Reasoning tokens, median (min–max) | Cost per run, median |
+|---|---|---|---|---|---|---|
+| `deepseek-flash`, thinking on, effort `high` (the default) | v6 | 5 × 3 | **15/15** | 12.7 s / 32.1 s | 2.4k (1.7k–6.4k) | $0.0095 |
+| the same | v5 | 5 × 3 | 15/15 | 13.3 s / 16.0 s | 2.3k (1.1k–3.0k) | $0.0095 |
+| `deepseek-flash`, thinking on, effort `low` | v5 | T1–T3 × 3 | 9/9 | 27.8 s / 36.6 s | 6.2k (1.9k–7.8k) | $0.0097 |
+| `deepseek-flash`, thinking off | v5 | T1–T3 × 3 | 4/9 | 3.2 s / 3.5 s | 0 | $0.0082 |
 
-Default configuration, per fixture: T1 3/3, result after 13.5 s (worst 15.6 s), $0.0095 per run;
-T2 3/3, 16.3 s (18.0 s), $0.0099; T3 3/3, 14.3 s (15.3 s), $0.0067, one run needed a retry after
-the model omitted both arrays; G1 3/3 refused before any paid call, $0; G2 3/3 refused after
-recognition, $0.0017. Per audio minute: $0.0079–0.0087. Total cost of the three evals: $0.24 at
-list prices, plus $0.15 for the first eval on prompt v4 and about $0.03 for re-recording the
-model responses.
+Default configuration on prompt v6, per fixture: T1 3/3, result after 14.8 s (worst 34.2 s, one
+run with 6.4k reasoning tokens), $0.0095 per run; T2 3/3, 16.7 s (18.1 s), $0.0100; T3 3/3,
+14.3 s (16.8 s), $0.0066; G1 3/3 refused before any paid call, $0; G2 3/3 refused after
+recognition, $0.0017. No retries, no warnings, and the code-side attachment of listed deadlines
+was never needed: the model attached every deadline itself in all nine scripted runs. Per audio
+minute: $0.0079–0.0087. Total cost of all evals: $0.32 at list prices (v4 $0.15, v5 $0.24 incl.
+the comparison, v6 $0.09), plus about $0.06 for re-recording the model responses twice.
 
 What the comparison showed: effort `low` reasoned almost three times longer than `high` on this
 task and cost the same; without thinking, the model was five times faster but marked the
 ownerless task "not agreed" in 5 of 6 T1/T2 runs, duplicated the migration-script item twice and
 dropped a deadline once. The default stays `high`.
+
+**Production check on prompt v5** (commit `a1da07b`, 03:40): T1 sample — transcript after 1.2 s,
+result after 12.8 s (model 11.6 s), $0.0093, matches `expected.json`. T2 uploaded through Blob —
+upload 2.5 s, result after 12.5 s (model 10.4 s), $0.0091 plus $0.0001 Blob, blob deleted
+afterwards; **the ownerless task's deadline was missing again**. Counting every v5 run on T1/T2
+(6 eval runs, 2 re-recordings, 1 production run), the omission happened in 1 of 9; on v4 it was
+1 of 6. Reduced, not eliminated, which led to prompt v6 (see Decisions).
 
 **Open question:** with effort `high`, the model's latency ranged from 6 s to 42 s, depending on how
 long it reasoned. The eval compares lower effort, no thinking and `deepseek-v4-pro`.
@@ -118,6 +130,7 @@ long it reasoned. The eval compares lower effort, no thinking and `deepseek-v4-p
 | 2026-09-17 | The package is ESM (`"type": "module"`); scripts import `@next/env` as a default export | Under CommonJS, tsx broke music-metadata's MIME parsing (see Failures and fixes), so the eval and the app disagreed on a 3.6-minute file. With ESM, Next, vitest and tsx load the same code the same way |
 | 2026-09-17 | Prompt v5: a closing rule that makes the model re-check every task for a stated deadline and for separate acceptance, deadline-change and cancellation events | The v4 eval missed the ownerless task's deadline in 1 of 6 T1/T2 runs, the third time this weakness showed; with v5 the default configuration passed 15 of 15 runs and T2 got twice as fast |
 | 2026-09-17 | Keep `deepseek-flash` with thinking on and effort `high`; `deepseek-v4-pro` not tried | The eval showed effort `low` slower and no cheaper on this task, and thinking off wrong in 5 of 9 runs; a model three times more expensive was not needed once flash passed everything |
+| 2026-09-17 | Prompt v6: the model lists every time expression (`deadlines_mentioned`: utterance, words, task) before it writes the events; code verifies each listed deadline and attaches it to its task at its place in time when the model left it out, with a `deadline_recovered` flag | Wording alone (v5) lowered the omission rate but a production run missed the deadline again. Listing first is easier for the model than attaching, and the attachment in code needs no judgement: the quote and the task come from the model, the timestamps from the recording. On v6 the model attached every deadline itself (15 of 15, no recovery needed); the code path is unit-tested and stays as a safety net |
 
 ## AI usage log
 
@@ -136,6 +149,7 @@ Tools and models used, and how their output was checked.
 | 2026-09-17 | Claude Code (desktop app), Claude Fable 5.1 (`claude-fable-5-1`) | Production check | The health check and a direct request to the upload route showed the Blob token missing while the store ID was present, which pointed at the deployment rather than at the store. After the redeploy, a throwaway script ran a bundled sample and a real Blob upload through the deployed API, compared both results with `expected.json` automatically (both passed), and requested the uploaded path a second time to confirm the blob had been deleted |
 | 2026-09-17 | Claude Code (desktop app), Claude Fable 5.1 (`claude-fable-5-1`) | UI | The Next.js 16 guide on server and client components was read before writing the page. The client helpers (NDJSON reader, file checks) have unit tests, including a multi-byte character split across chunks. Then every path was exercised in the app's browser pane: all five samples and a real file upload through the file input, with the cards read against the expected items. Playback was measured by polling the button state, which caught a real bug (see Failures and fixes). The production build was run before committing |
 | 2026-09-17 | Claude Code (desktop app), Claude Fable 5.1 (`claude-fable-5-1`); DeepSeek `deepseek-flash` | Eval script, prompt v5, model comparison | The report builder has a unit test on synthetic runs. The first real eval was not trusted blindly: its check of paid calls ("asr calls: 1, expected 0") exposed that the duration probe behaved differently under tsx than in the app, and the cause was traced with music-metadata's debug log to a nested ESM dependency, not guessed. The prompt change was judged by the eval, not by reading one answer: 15 of 15 after, 11 of 15 before (of which 3 were the tooling bug). The comparison ran the same script with different flags |
+| 2026-09-17 | Claude Code (desktop app), Claude Fable 5.1 (`claude-fable-5-1`); DeepSeek `deepseek-flash` | Prompt v6 and the deadline attachment, delivery notes | A production run after the v5 eval was checked against `expected.json` like any eval run, which is how the remaining omission was caught. The v6 attachment logic has unit tests for the four cases (attached in time order, not duplicated, quote not found, task unknown); the re-recorded answers were inspected for the new list; the eval judged the result (15 of 15). The delivery notes quote only measured figures from the eval reports and the production checks |
 
 ## Failures and fixes
 
@@ -155,3 +169,4 @@ Tools and models used, and how their output was checked.
 | 2026-09-17 | In the first eval, the 3.6-minute G1 recording went to Deepgram three times ($0.07 of credits) instead of being refused for free. Under tsx the duration probe returned null in 1 ms: music-metadata resolves a nested, ESM-only `media-typer` 2.0, and tsx's CommonJS interop broke its `parse`, so the library logged "Invalid HTTP Content-Type header value: audio/wav" and gave up. Next and vitest load the same code as native ESM, so the app was never affected | The package is now `"type": "module"`, and the scripts import `@next/env` (CommonJS) as a default export. Verified in all three runtimes: unit tests, production build, the eval (G1 refused, $0) and the UI on a restarted dev server (G1 refused in 4 ms) |
 | 2026-09-17 | With prompt v4, one T2 run dropped every deadline event but two and one acceptance ("store-screenshots: deadline is missing"); its answer was half the usual length | Prompt v5 adds a closing self-check for deadlines and for separate acceptance, change and cancellation events. Recorded responses were re-recorded on v5, and the eval passed 15 of 15 |
 | 2026-09-17 | Two transient model failures during the evals: one v5 answer on T3 had no `speakers` and `items` arrays, and one no-thinking request failed at the network level | Both were caught by the existing retry, counted as attempts in the metrics, and the retried runs passed |
+| 2026-09-17 | The production check on prompt v5 dropped the ownerless task's deadline once more (T2 upload). The self-check rule lowered the rate (1 of 9 v5 runs against 1 of 6 on v4) but did not remove it | Prompt v6 changes the shape of the answer instead of the wording: deadlines are listed before the events, and code attaches any listed deadline the model left out, after verifying the quote. Re-recorded, unit-tested, eval 15 of 15 with no recovery needed |

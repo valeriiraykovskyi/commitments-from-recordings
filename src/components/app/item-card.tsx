@@ -60,6 +60,11 @@ const CHECK_FLAGS: Partial<Record<ItemFlag, { label: string; detail: string }>> 
     detail:
       "Some of what the model said about this item could not be found in the transcript word for word, so it was left out.",
   },
+  deadline_recovered: {
+    label: "Deadline attached by verification",
+    detail:
+      "The model listed this time expression for the task but left it out of the task’s events. The quote was found in the transcript and attached in code.",
+  },
 };
 
 function ownerText(owner: Owner): string {

@@ -14,11 +14,14 @@ import type {
   Clarification,
   Commitments,
   DroppedEvidence,
+  Evidence,
   Item,
   ItemEvent,
   ItemFlag,
   Speaker,
 } from "./types";
+
+type Mention = Extraction["deadlines_mentioned"][number] & { used: boolean };
 
 /** The brief's scope: exactly two speakers. */
 const EXPECTED_SPEAKERS = 2;
@@ -37,6 +40,7 @@ export function buildCommitments(transcript: Transcript, extraction: Extraction)
     labelOf: (name) => speakers.find((s) => sameName(s.name, name))?.label ?? null,
   };
 
+  const mentions: Mention[] = extraction.deadlines_mentioned.map((m) => ({ ...m, used: false }));
   const items: Item[] = [];
   for (const raw of extraction.items) {
     const events: ItemEvent[] = [];
@@ -79,7 +83,21 @@ export function buildCommitments(transcript: Transcript, extraction: Extraction)
     }
 
     if (events.length === 0) continue; // nothing verifiable is left
-    items.push(buildItem(raw.kind, raw.title, events, participants, corrected, droppedCount > 0));
+    const recovered =
+      raw.kind === "task" &&
+      attachListedDeadlines(transcript, index, raw.title, events, mentions, drop);
+    items.push(
+      buildItem(raw.kind, raw.title, events, participants, corrected, droppedCount > 0, recovered),
+    );
+  }
+  for (const mention of mentions.filter((m) => !m.used)) {
+    dropped.push({
+      item: mention.task,
+      type: "deadline",
+      utteranceId: mention.utterance,
+      quote: mention.quote,
+      reason: "Listed deadline does not belong to any item.",
+    });
   }
 
   items.sort((a, b) => a.events[0].evidence.start - b.events[0].evidence.start);
@@ -90,6 +108,55 @@ export function buildCommitments(transcript: Transcript, extraction: Extraction)
   return { speakers, items, clarifications: clarify(transcript, speakers), dropped };
 }
 
+/**
+ * The model lists every time expression before it writes the events, which it
+ * finds easier than attaching each one to its task. A listed deadline that is
+ * missing from its task's events is attached here, at its place in time, once
+ * its quote is found in the transcript. Nothing is invented: the quote and the
+ * task come from the model, the timestamps from the recording.
+ */
+function attachListedDeadlines(
+  transcript: Transcript,
+  index: TranscriptIndex,
+  title: string,
+  events: ItemEvent[],
+  mentions: Mention[],
+  drop: (entry: Omit<DroppedEvidence, "item">) => void,
+): boolean {
+  let recovered = false;
+  for (const mention of mentions) {
+    if (mention.used || !sameTopic(mention.task, title)) continue;
+    mention.used = true;
+    const where = { utteranceId: mention.utterance, quote: mention.quote };
+    const match = locateQuote(transcript, index, mention.quote, mention.utterance);
+    if (!match) {
+      drop({ type: "deadline", ...where, reason: "Listed deadline not found in the transcript." });
+      continue;
+    }
+    const present = events.some(
+      (event) => event.type === "deadline" && overlaps(event.evidence, match.evidence),
+    );
+    if (present) continue;
+    const at = events.findIndex((event) => event.evidence.start > match.evidence.start);
+    events.splice(at === -1 ? events.length : at, 0, {
+      type: "deadline",
+      by: null,
+      owner: null,
+      deadline: mention.quote,
+      evidence: match.evidence,
+    });
+    recovered = true;
+  }
+  return recovered;
+}
+
+const overlaps = (a: Evidence, b: Evidence): boolean => a.start < b.end && b.start < a.end;
+
+/** Titles match when one contains the other's words in order, e.g. with or without a trailing "before the launch". */
+function sameTopic(a: string, b: string): boolean {
+  return containsPhrase(a, b) || containsPhrase(b, a);
+}
+
 function buildItem(
   kind: Item["kind"],
   title: string,
@@ -97,11 +164,13 @@ function buildItem(
   participants: Participants,
   corrected: boolean,
   hasDropped: boolean,
+  recovered: boolean,
 ): Item {
   const types = events.map((event) => event.type);
   const flags = new Set<ItemFlag>();
   if (corrected) flags.add("evidence_corrected");
   if (hasDropped) flags.add("events_dropped");
+  if (recovered) flags.add("deadline_recovered");
 
   if (kind === "question") {
     return {

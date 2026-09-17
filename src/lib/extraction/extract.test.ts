@@ -20,6 +20,7 @@ const transcript: Transcript = {
 
 const validOutput = JSON.stringify({
   speakers: [{ label: "S0", name: null, utterance: null, quote: null }],
+  deadlines_mentioned: [],
   items: [
     {
       kind: "task",

@@ -1,6 +1,6 @@
 {
   "model": "deepseek-flash",
-  "promptVersion": "2026-09-17.5",
+  "promptVersion": "2026-09-17.6",
   "config": {
     "model": "deepseek-flash",
     "thinking": true,
@@ -21,6 +21,13 @@
         "name": null,
         "utterance": null,
         "quote": null
+      }
+    ],
+    "deadlines_mentioned": [
+      {
+        "utterance": "U02",
+        "quote": "next week",
+        "task": "Look at the onboarding flow"
       }
     ],
     "items": [
@@ -67,6 +74,14 @@
             "deadline": null
           },
           {
+            "type": "tentative",
+            "utterance": "U04",
+            "quote": "Possibly",
+            "by": "S1",
+            "owner": null,
+            "deadline": null
+          },
+          {
             "type": "declined",
             "utterance": "U04",
             "quote": "Let's see how the sprint goes before we pick anything up",
@@ -91,7 +106,7 @@
           {
             "type": "tentative",
             "utterance": "U06",
-            "quote": "Not sure. It's hard to say right now.",
+            "quote": "Not sure. It's hard to say right now",
             "by": "S1",
             "owner": null,
             "deadline": null
@@ -111,9 +126,9 @@
             "deadline": null
           },
           {
-            "type": "tentative",
+            "type": "proposed",
             "utterance": "U08",
-            "quote": "Somebody might want to look at it, but it's not urgent",
+            "quote": "Somebody might want to look at it",
             "by": "S1",
             "owner": null,
             "deadline": null
