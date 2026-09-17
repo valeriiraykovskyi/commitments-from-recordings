@@ -11,7 +11,7 @@ import { existsSync } from "node:fs";
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { loadEnvConfig } from "@next/env";
+import nextEnv from "@next/env";
 
 import { transcribe } from "@/lib/asr/deepgram";
 
@@ -22,7 +22,7 @@ const SAMPLES_DIR = path.join(ROOT, "public", "samples");
 const snapshotFile = (id: string) => path.join(FIXTURES_DIR, id, "asr-response.json");
 
 async function main() {
-  loadEnvConfig(ROOT, true, { info: () => {}, error: console.error });
+  nextEnv.loadEnvConfig(ROOT, true, { info: () => {}, error: console.error });
 
   const entries = await readdir(FIXTURES_DIR, { withFileTypes: true });
   const ids = entries

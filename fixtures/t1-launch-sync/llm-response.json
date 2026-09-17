@@ -1,6 +1,6 @@
 {
   "model": "deepseek-flash",
-  "promptVersion": "2026-09-17.4",
+  "promptVersion": "2026-09-17.5",
   "config": {
     "model": "deepseek-flash",
     "thinking": true,
@@ -14,13 +14,13 @@
         "label": "S0",
         "name": "Anna",
         "utterance": "U01",
-        "quote": "I'm Anna, the product manager"
+        "quote": "I'm Anna"
       },
       {
         "label": "S1",
         "name": "Mark",
         "utterance": "U02",
-        "quote": "I'm Mark, the developer on the project"
+        "quote": "I'm Mark"
       }
     ],
     "items": [
@@ -45,6 +45,14 @@
             "deadline": null
           },
           {
+            "type": "committed",
+            "utterance": "U06",
+            "quote": "I'll have it done",
+            "by": "S1",
+            "owner": null,
+            "deadline": null
+          },
+          {
             "type": "deadline",
             "utterance": "U06",
             "quote": "by Wednesday",
@@ -61,7 +69,7 @@
           {
             "type": "committed",
             "utterance": "U07",
-            "quote": "I'll write the release notes by Friday",
+            "quote": "I'll write the release notes",
             "by": "S0",
             "owner": null,
             "deadline": null
@@ -129,7 +137,7 @@
           {
             "type": "proposed",
             "utterance": "U10",
-            "quote": "Maybe we could build a dark mode before the launch too",
+            "quote": "Maybe we could build a dark mode",
             "by": "S1",
             "owner": null,
             "deadline": null
@@ -154,12 +162,12 @@
       },
       {
         "kind": "task",
-        "title": "Update the App Store screenshots before the launch",
+        "title": "Update the App Store screenshots",
         "events": [
           {
             "type": "proposed",
             "utterance": "U11",
-            "quote": "Someone also needs to update the App Store screenshots before the launch",
+            "quote": "Someone also needs to update the App Store screenshots",
             "by": "S0",
             "owner": null,
             "deadline": null
@@ -175,7 +183,7 @@
           {
             "type": "accepted",
             "utterance": "U12",
-            "quote": "Yeah. That has to happen",
+            "quote": "Yeah. That has to happen.",
             "by": "S1",
             "owner": null,
             "deadline": null

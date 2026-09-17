@@ -16,7 +16,7 @@ import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import { DeepgramClient } from "@deepgram/sdk";
-import { loadEnvConfig } from "@next/env";
+import nextEnv from "@next/env";
 
 import { parseScript } from "./lib/script-parser";
 import { encodeWav, pcmDuration, silence } from "./lib/wav";
@@ -139,7 +139,7 @@ async function writeFixture(
 }
 
 async function main() {
-  loadEnvConfig(ROOT, true, { info: () => {}, error: console.error });
+  nextEnv.loadEnvConfig(ROOT, true, { info: () => {}, error: console.error });
   const apiKey = process.env.DEEPGRAM_API_KEY;
   if (!apiKey) {
     throw new Error("DEEPGRAM_API_KEY is not set. Copy .env.example to .env.local and fill it in.");

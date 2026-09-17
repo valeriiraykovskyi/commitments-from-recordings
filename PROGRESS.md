@@ -1,10 +1,10 @@
 # Progress
 
-**Current step:** 9 — eval runs and report.
+**Current step:** 10 — deploy, README, delivery notes, video.
 **Done:** 0 — brief, brainstorm, stack, planning docs · 1 — test set on paper · 2 — scaffold and
 first deploy · 3 — fixture audio · 4 — ASR module · 5 — extraction with DeepSeek · 6 — quote
 verification, event fold, flags · 7 — API routes, uploads, guardrails, metrics, production check ·
-8 — UI.
+8 — UI · 9 — eval, prompt v5, model comparison.
 
 **Demo:** https://commitments-from-recordings.vercel.app (placeholder page for now)
 
@@ -24,8 +24,9 @@ Local time (EEST, UTC+3).
 | 2026-09-17 | 00:45–01:25 (approx.) | 0:40 | 7 | Upload and process routes, one pipeline function with streamed progress, guardrails, pricing and metrics, unit tests, local end-to-end runs of four samples and one Blob upload |
 | 2026-09-17 | 01:25–02:20, with a break (approx.) | 0:35 | 7 | Deployment configuration: hidden failure cause fixed, health check, keys and Blob token re-entered in Vercel, redeploy, production end-to-end check of a sample and a Blob upload |
 | 2026-09-17 | 02:20–02:50 (approx.) | 0:30 | 8 | UI: sample picker and drop zone, browser-side checks, Blob upload with progress, streamed progress steps with timings, early transcript, results in three blocks with playable quotes, clarifications, measurements; unit tests for the client helpers; every sample and one upload checked in the browser |
+| 2026-09-17 | 03:00–03:30 (approx.) | 0:30 | 9 | Eval script and report, first eval run, the tsx duration-probe bug found and fixed (project switched to ESM), prompt v5, re-recorded model responses, eval re-run, comparison of effort `low` and no thinking |
 
-**Total so far:** 4:35 of about 8:00.
+**Total so far:** 5:05 of about 8:00.
 
 ## Measurements so far
 
@@ -47,6 +48,30 @@ Informal numbers from development runs; the eval in step 9 produces the reported
 | Browser UI, T2 through the file picker | The browser read the duration (1:12) before uploading; upload 2.2 s with a progress percentage; transcript after 4.6 s; result after 15.7 s (server total 12.9 s); the migration script is agreed, as expected for T2 |
 | Browser UI, G1 and G2 samples | G1 refused in the browser flow after a 34 ms server check, no paid call, $0. G2 refused after recognition in 1.7 s with the Spanish transcript on screen, no model call, $0.0017 |
 | Segment playback | A 1.7 s quote played from 0.15 s before its first word and stopped 2.0 s after the click; the matching transcript line was highlighted while it played |
+
+### Eval (step 9)
+
+`npm run eval` runs the fixtures through the same pipeline as the app, one run after another,
+with real API calls, and checks each result against `expected.json`. Reports with every run,
+item and token count: [`eval/`](eval/). Prompt v5, DeepSeek off-peak tariff, list prices.
+
+| Configuration | Fixtures × runs | Passed | Model time, median / worst | Reasoning tokens, median (min–max) | Cost per run, median |
+|---|---|---|---|---|---|
+| `deepseek-flash`, thinking on, effort `high` (the default) | 5 × 3 | **15/15** | 13.3 s / 16.0 s | 2.3k (1.1k–3.0k) | $0.0095 |
+| `deepseek-flash`, thinking on, effort `low` | T1–T3 × 3 | 9/9 | 27.8 s / 36.6 s | 6.2k (1.9k–7.8k) | $0.0097 |
+| `deepseek-flash`, thinking off | T1–T3 × 3 | 4/9 | 3.2 s / 3.5 s | 0 | $0.0082 |
+
+Default configuration, per fixture: T1 3/3, result after 13.5 s (worst 15.6 s), $0.0095 per run;
+T2 3/3, 16.3 s (18.0 s), $0.0099; T3 3/3, 14.3 s (15.3 s), $0.0067, one run needed a retry after
+the model omitted both arrays; G1 3/3 refused before any paid call, $0; G2 3/3 refused after
+recognition, $0.0017. Per audio minute: $0.0079–0.0087. Total cost of the three evals: $0.24 at
+list prices, plus $0.15 for the first eval on prompt v4 and about $0.03 for re-recording the
+model responses.
+
+What the comparison showed: effort `low` reasoned almost three times longer than `high` on this
+task and cost the same; without thinking, the model was five times faster but marked the
+ownerless task "not agreed" in 5 of 6 T1/T2 runs, duplicated the migration-script item twice and
+dropped a deadline once. The default stays `high`.
 
 **Open question:** with effort `high`, the model's latency ranged from 6 s to 42 s, depending on how
 long it reasoned. The eval compares lower effort, no thinking and `deepseek-v4-pro`.
@@ -89,6 +114,10 @@ long it reasoned. The eval compares lower effort, no thinking and `deepseek-v4-p
 | 2026-09-17 | One hidden audio element for all playback; the end of a segment is checked on animation frames and on `timeupdate`; 0.15 s lead-in, 0.1 s tail | Only one thing plays at a time; frames pause in a hidden tab while audio keeps going (see Failures and fixes); word timings clip the first consonant without a lead-in |
 | 2026-09-17 | Results in three blocks: agreed, unresolved, and a collapsed "not commitments" block that also holds answered questions and the model claims that failed verification | The brief asks to check exclusion as well as inclusion; a reviewer can see why each item was left out without leaving the page |
 | 2026-09-17 | Speakers are "Speaker 1" and "Speaker 2" until a self-introduction is verified; editing the mapping in the UI is deferred to the if-time-allows list | Names come only from the recording, as planned; with 3:25 left for steps 9–10, the buffer matters more than the editor |
+| 2026-09-17 | The eval calls `runPipeline` directly, runs sequentially, and writes one Markdown + JSON report per configuration into `eval/`, with git SHA, prompt version, pass rate, medians, worst cases, tokens and cost; flags choose runs, fixtures, model, effort and thinking | The eval measures exactly what users get, without network noise or our own rate limit; the model comparison is the same script with different flags |
+| 2026-09-17 | The package is ESM (`"type": "module"`); scripts import `@next/env` as a default export | Under CommonJS, tsx broke music-metadata's MIME parsing (see Failures and fixes), so the eval and the app disagreed on a 3.6-minute file. With ESM, Next, vitest and tsx load the same code the same way |
+| 2026-09-17 | Prompt v5: a closing rule that makes the model re-check every task for a stated deadline and for separate acceptance, deadline-change and cancellation events | The v4 eval missed the ownerless task's deadline in 1 of 6 T1/T2 runs, the third time this weakness showed; with v5 the default configuration passed 15 of 15 runs and T2 got twice as fast |
+| 2026-09-17 | Keep `deepseek-flash` with thinking on and effort `high`; `deepseek-v4-pro` not tried | The eval showed effort `low` slower and no cheaper on this task, and thinking off wrong in 5 of 9 runs; a model three times more expensive was not needed once flash passed everything |
 
 ## AI usage log
 
@@ -106,6 +135,7 @@ Tools and models used, and how their output was checked.
 | 2026-09-17 | Claude Code (desktop app), Claude Opus 5 (`claude-opus-5`) | API routes, pipeline, pricing | The Vercel Blob and Next.js docs, and the installed type definitions, were read before writing the routes. Every pipeline branch has a unit test with mocked providers that checks the paid-call counts. Then four samples went through the local API end to end, and the production build was checked to include the sample files in the function |
 | 2026-09-17 | Claude Code (desktop app), Claude Fable 5.1 (`claude-fable-5-1`) | Production check | The health check and a direct request to the upload route showed the Blob token missing while the store ID was present, which pointed at the deployment rather than at the store. After the redeploy, a throwaway script ran a bundled sample and a real Blob upload through the deployed API, compared both results with `expected.json` automatically (both passed), and requested the uploaded path a second time to confirm the blob had been deleted |
 | 2026-09-17 | Claude Code (desktop app), Claude Fable 5.1 (`claude-fable-5-1`) | UI | The Next.js 16 guide on server and client components was read before writing the page. The client helpers (NDJSON reader, file checks) have unit tests, including a multi-byte character split across chunks. Then every path was exercised in the app's browser pane: all five samples and a real file upload through the file input, with the cards read against the expected items. Playback was measured by polling the button state, which caught a real bug (see Failures and fixes). The production build was run before committing |
+| 2026-09-17 | Claude Code (desktop app), Claude Fable 5.1 (`claude-fable-5-1`); DeepSeek `deepseek-flash` | Eval script, prompt v5, model comparison | The report builder has a unit test on synthetic runs. The first real eval was not trusted blindly: its check of paid calls ("asr calls: 1, expected 0") exposed that the duration probe behaved differently under tsx than in the app, and the cause was traced with music-metadata's debug log to a nested ESM dependency, not guessed. The prompt change was judged by the eval, not by reading one answer: 15 of 15 after, 11 of 15 before (of which 3 were the tooling bug). The comparison ran the same script with different flags |
 
 ## Failures and fixes
 
@@ -122,3 +152,6 @@ Tools and models used, and how their output was checked.
 | 2026-09-17 | On the first deployment, recognition failed within 1 ms and the cause was hidden: the pipeline returned a generic message and logged nothing | The real cause is now logged server-side (users still get a generic message), API keys are trimmed because a pasted key with a trailing newline makes an invalid header, and `/api/health` shows whether each provider accepts its key. The keys were re-entered in Vercel; the health check now shows both accepted |
 | 2026-09-17 | After the Blob store was connected, the deployed upload route still answered "No read-write token found", although the store ID variable was present | Vercel injects environment variables at deploy time, so a token added after a deployment is not visible until the next one. A redeploy fixed it; the health check and the upload probe confirmed the token before the end-to-end run |
 | 2026-09-17 | The first segment player checked the end of a quote only on animation frames. In the browser pane a quote kept "playing" for several seconds instead of about two, and browsers pause animation frames in a hidden tab, so a user switching tabs would hear the recording run on to the end | The end is now also checked on the audio element's `timeupdate` event, which fires in hidden tabs. Re-measured: a 1.7 s quote stopped 2.0 s after the click |
+| 2026-09-17 | In the first eval, the 3.6-minute G1 recording went to Deepgram three times ($0.07 of credits) instead of being refused for free. Under tsx the duration probe returned null in 1 ms: music-metadata resolves a nested, ESM-only `media-typer` 2.0, and tsx's CommonJS interop broke its `parse`, so the library logged "Invalid HTTP Content-Type header value: audio/wav" and gave up. Next and vitest load the same code as native ESM, so the app was never affected | The package is now `"type": "module"`, and the scripts import `@next/env` (CommonJS) as a default export. Verified in all three runtimes: unit tests, production build, the eval (G1 refused, $0) and the UI on a restarted dev server (G1 refused in 4 ms) |
+| 2026-09-17 | With prompt v4, one T2 run dropped every deadline event but two and one acceptance ("store-screenshots: deadline is missing"); its answer was half the usual length | Prompt v5 adds a closing self-check for deadlines and for separate acceptance, change and cancellation events. Recorded responses were re-recorded on v5, and the eval passed 15 of 15 |
+| 2026-09-17 | Two transient model failures during the evals: one v5 answer on T3 had no `speakers` and `items` arrays, and one no-thinking request failed at the network level | Both were caught by the existing retry, counted as attempts in the metrics, and the retried runs passed |

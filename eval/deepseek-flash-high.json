@@ -1,0 +1,2317 @@
+{
+  "label": "deepseek-flash-high",
+  "createdAt": "2026-09-17T00:19:57.299Z",
+  "git": {
+    "sha": "ea8052f",
+    "dirty": true
+  },
+  "config": {
+    "asrModel": "nova-3",
+    "diarizer": "v2",
+    "llmModel": "deepseek-flash",
+    "thinking": true,
+    "reasoningEffort": "high",
+    "promptVersion": "2026-09-17.5",
+    "runsPerFixture": 3
+  },
+  "runs": [
+    {
+      "fixture": "t1-launch-sync",
+      "run": 1,
+      "metrics": {
+        "audioSec": 72.25,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 4,
+          "asrMs": 2075,
+          "llmMs": 11336,
+          "verifyMs": 5,
+          "totalMs": 13421
+        },
+        "calls": {
+          "asr": 1,
+          "llm": 1
+        },
+        "asr": {
+          "model": "nova-3",
+          "diarizer": "v2",
+          "requestId": "01a0acba-0045-7970-9bc2-4f854d8136e5",
+          "attempts": 1
+        },
+        "llm": {
+          "model": "deepseek-flash",
+          "promptVersion": "2026-09-17.5",
+          "thinking": true,
+          "reasoningEffort": "high",
+          "attempts": [
+            {
+              "ok": true,
+              "error": null,
+              "finishReason": "stop",
+              "latencyMs": 11336,
+              "usage": {
+                "cacheHitTokens": 1408,
+                "cacheMissTokens": 219,
+                "outputTokens": 3115,
+                "reasoningTokens": 2117
+              }
+            }
+          ]
+        },
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0.00758625,
+          "reasoningUsd": 0.001906074,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0.009492324,
+          "operationPeakUsd": 0.011398398,
+          "perAudioMinuteUsd": 0.007882898823529412,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "ok",
+      "reason": null,
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [
+        {
+          "label": 0,
+          "name": "Anna"
+        },
+        {
+          "label": 1,
+          "name": "Mark"
+        }
+      ],
+      "clarifications": [],
+      "items": [
+        {
+          "title": "Set up analytics on the landing page",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Mark",
+          "deadline": "by Wednesday",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "requested",
+              "start": 16.535,
+              "end": 19.574999
+            },
+            {
+              "type": "committed",
+              "start": 20.455,
+              "end": 21.255
+            },
+            {
+              "type": "deadline",
+              "start": 21.255,
+              "end": 22.294998
+            }
+          ]
+        },
+        {
+          "title": "Write the release notes",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Anna",
+          "deadline": "Monday",
+          "flags": [
+            "date_not_stated",
+            "deadline_changed"
+          ],
+          "events": [
+            {
+              "type": "committed",
+              "start": 23.494999,
+              "end": 24.775
+            },
+            {
+              "type": "deadline",
+              "start": 24.775,
+              "end": 25.654999
+            },
+            {
+              "type": "deadline",
+              "start": 56.275,
+              "end": 57.715
+            },
+            {
+              "type": "accepted",
+              "start": 58.34,
+              "end": 59.62
+            }
+          ]
+        },
+        {
+          "title": "Write a migration script for the old beta users",
+          "kind": "task",
+          "status": "cancelled",
+          "owner": "Mark",
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "committed",
+              "start": 26.454998,
+              "end": 29.255
+            },
+            {
+              "type": "accepted",
+              "start": 30.07,
+              "end": 31.029999
+            },
+            {
+              "type": "cancelled",
+              "start": 64.18,
+              "end": 67.3
+            }
+          ]
+        },
+        {
+          "title": "Build a dark mode before the launch",
+          "kind": "task",
+          "status": "not_agreed",
+          "owner": null,
+          "deadline": "before the launch",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 31.35,
+              "end": 35.989998
+            },
+            {
+              "type": "deadline",
+              "start": 34.31,
+              "end": 35.27
+            },
+            {
+              "type": "declined",
+              "start": 36.31,
+              "end": 37.91
+            }
+          ]
+        },
+        {
+          "title": "Update the App Store screenshots before the launch",
+          "kind": "task",
+          "status": "agreed",
+          "owner": null,
+          "deadline": "before the launch",
+          "flags": [
+            "no_owner",
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 38.309998,
+              "end": 41.83
+            },
+            {
+              "type": "deadline",
+              "start": 40.95,
+              "end": 41.83
+            },
+            {
+              "type": "accepted",
+              "start": 42.515,
+              "end": 44.355
+            }
+          ]
+        },
+        {
+          "title": "Are we launching in Canada at the same time?",
+          "kind": "question",
+          "status": "open",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "asked",
+              "start": 44.675,
+              "end": 47.555
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "t1-launch-sync",
+      "run": 2,
+      "metrics": {
+        "audioSec": 72.25,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 1,
+          "asrMs": 2207,
+          "llmMs": 13362,
+          "verifyMs": 2,
+          "totalMs": 15572
+        },
+        "calls": {
+          "asr": 1,
+          "llm": 1
+        },
+        "asr": {
+          "model": "nova-3",
+          "diarizer": "v2",
+          "requestId": "01a0acba-345e-7000-a7d1-3615fb20fd9a",
+          "attempts": 1
+        },
+        "llm": {
+          "model": "deepseek-flash",
+          "promptVersion": "2026-09-17.5",
+          "thinking": true,
+          "reasoningEffort": "high",
+          "attempts": [
+            {
+              "ok": true,
+              "error": null,
+              "finishReason": "stop",
+              "latencyMs": 13362,
+              "usage": {
+                "cacheHitTokens": 1408,
+                "cacheMissTokens": 219,
+                "outputTokens": 3318,
+                "reasoningTokens": 2175
+              }
+            }
+          ]
+        },
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0.00758625,
+          "reasoningUsd": 0.002027874,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0.009614124,
+          "operationPeakUsd": 0.011641998,
+          "perAudioMinuteUsd": 0.007984047612456748,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "ok",
+      "reason": null,
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [
+        {
+          "label": 0,
+          "name": "Anna"
+        },
+        {
+          "label": 1,
+          "name": "Mark"
+        }
+      ],
+      "clarifications": [],
+      "items": [
+        {
+          "title": "Set up analytics on the landing page",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Mark",
+          "deadline": "by Wednesday",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "requested",
+              "start": 16.535,
+              "end": 19.574999
+            },
+            {
+              "type": "accepted",
+              "start": 19.814999,
+              "end": 20.455
+            },
+            {
+              "type": "committed",
+              "start": 20.455,
+              "end": 22.294998
+            },
+            {
+              "type": "deadline",
+              "start": 21.255,
+              "end": 22.294998
+            }
+          ]
+        },
+        {
+          "title": "Write the release notes",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Anna",
+          "deadline": "Monday",
+          "flags": [
+            "date_not_stated",
+            "deadline_changed"
+          ],
+          "events": [
+            {
+              "type": "committed",
+              "start": 23.494999,
+              "end": 25.654999
+            },
+            {
+              "type": "deadline",
+              "start": 24.775,
+              "end": 25.654999
+            },
+            {
+              "type": "deadline",
+              "start": 56.275,
+              "end": 57.715
+            },
+            {
+              "type": "accepted",
+              "start": 58.34,
+              "end": 59.62
+            }
+          ]
+        },
+        {
+          "title": "Write a migration script for the old beta users",
+          "kind": "task",
+          "status": "cancelled",
+          "owner": "Mark",
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "committed",
+              "start": 26.454998,
+              "end": 29.255
+            },
+            {
+              "type": "accepted",
+              "start": 30.07,
+              "end": 31.029999
+            },
+            {
+              "type": "cancelled",
+              "start": 64.18,
+              "end": 67.3
+            }
+          ]
+        },
+        {
+          "title": "Build a dark mode",
+          "kind": "task",
+          "status": "not_agreed",
+          "owner": null,
+          "deadline": "before the launch",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 31.35,
+              "end": 35.989998
+            },
+            {
+              "type": "deadline",
+              "start": 34.31,
+              "end": 35.27
+            },
+            {
+              "type": "declined",
+              "start": 36.31,
+              "end": 37.91
+            }
+          ]
+        },
+        {
+          "title": "Update the App Store screenshots",
+          "kind": "task",
+          "status": "agreed",
+          "owner": null,
+          "deadline": "before the launch",
+          "flags": [
+            "no_owner",
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 38.309998,
+              "end": 41.83
+            },
+            {
+              "type": "deadline",
+              "start": 40.95,
+              "end": 41.83
+            },
+            {
+              "type": "accepted",
+              "start": 42.515,
+              "end": 44.355
+            }
+          ]
+        },
+        {
+          "title": "Are we launching in Canada at the same time?",
+          "kind": "question",
+          "status": "open",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "asked",
+              "start": 44.675,
+              "end": 47.555
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "t1-launch-sync",
+      "run": 3,
+      "metrics": {
+        "audioSec": 72.25,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 1,
+          "asrMs": 2089,
+          "llmMs": 11428,
+          "verifyMs": 1,
+          "totalMs": 13520
+        },
+        "calls": {
+          "asr": 1,
+          "llm": 1
+        },
+        "asr": {
+          "model": "nova-3",
+          "diarizer": "v2",
+          "requestId": "01a0acba-717a-72a1-970d-f39dc7cfd98f",
+          "attempts": 1
+        },
+        "llm": {
+          "model": "deepseek-flash",
+          "promptVersion": "2026-09-17.5",
+          "thinking": true,
+          "reasoningEffort": "high",
+          "attempts": [
+            {
+              "ok": true,
+              "error": null,
+              "finishReason": "stop",
+              "latencyMs": 11428,
+              "usage": {
+                "cacheHitTokens": 1408,
+                "cacheMissTokens": 219,
+                "outputTokens": 2975,
+                "reasoningTokens": 1901
+              }
+            }
+          ]
+        },
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0.00758625,
+          "reasoningUsd": 0.0018220740000000001,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0.009408324000000001,
+          "operationPeakUsd": 0.011230398,
+          "perAudioMinuteUsd": 0.007813141038062285,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "ok",
+      "reason": null,
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [
+        {
+          "label": 0,
+          "name": "Anna"
+        },
+        {
+          "label": 1,
+          "name": "Mark"
+        }
+      ],
+      "clarifications": [],
+      "items": [
+        {
+          "title": "Set up analytics on the landing page",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Mark",
+          "deadline": "by Wednesday",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "requested",
+              "start": 16.535,
+              "end": 19.574999
+            },
+            {
+              "type": "accepted",
+              "start": 19.814999,
+              "end": 20.455
+            },
+            {
+              "type": "committed",
+              "start": 20.455,
+              "end": 21.255
+            },
+            {
+              "type": "deadline",
+              "start": 21.255,
+              "end": 22.294998
+            }
+          ]
+        },
+        {
+          "title": "Write the release notes",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Anna",
+          "deadline": "Monday",
+          "flags": [
+            "date_not_stated",
+            "deadline_changed"
+          ],
+          "events": [
+            {
+              "type": "committed",
+              "start": 23.494999,
+              "end": 24.775
+            },
+            {
+              "type": "deadline",
+              "start": 24.775,
+              "end": 25.654999
+            },
+            {
+              "type": "deadline",
+              "start": 56.275,
+              "end": 57.715
+            },
+            {
+              "type": "accepted",
+              "start": 58.34,
+              "end": 59.62
+            }
+          ]
+        },
+        {
+          "title": "Write a migration script for the old beta users",
+          "kind": "task",
+          "status": "cancelled",
+          "owner": "Mark",
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "committed",
+              "start": 26.454998,
+              "end": 29.255
+            },
+            {
+              "type": "cancelled",
+              "start": 66.18,
+              "end": 67.3
+            }
+          ]
+        },
+        {
+          "title": "Build a dark mode before the launch",
+          "kind": "task",
+          "status": "not_agreed",
+          "owner": null,
+          "deadline": "before the launch",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 31.35,
+              "end": 34.31
+            },
+            {
+              "type": "deadline",
+              "start": 34.31,
+              "end": 35.27
+            },
+            {
+              "type": "declined",
+              "start": 36.31,
+              "end": 37.91
+            }
+          ]
+        },
+        {
+          "title": "Update the App Store screenshots before the launch",
+          "kind": "task",
+          "status": "agreed",
+          "owner": null,
+          "deadline": "before the launch",
+          "flags": [
+            "no_owner",
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 38.309998,
+              "end": 40.95
+            },
+            {
+              "type": "deadline",
+              "start": 40.95,
+              "end": 41.83
+            },
+            {
+              "type": "accepted",
+              "start": 42.515,
+              "end": 44.355
+            }
+          ]
+        },
+        {
+          "title": "Are we launching in Canada at the same time?",
+          "kind": "question",
+          "status": "open",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "asked",
+              "start": 44.675,
+              "end": 47.555
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "t2-migration-kept",
+      "run": 1,
+      "metrics": {
+        "audioSec": 72.13,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 1,
+          "asrMs": 2010,
+          "llmMs": 15956,
+          "verifyMs": 2,
+          "totalMs": 17969
+        },
+        "calls": {
+          "asr": 1,
+          "llm": 1
+        },
+        "asr": {
+          "model": "nova-3",
+          "diarizer": "v2",
+          "requestId": "01a0acba-a616-7813-9746-90640653139e",
+          "attempts": 1
+        },
+        "llm": {
+          "model": "deepseek-flash",
+          "promptVersion": "2026-09-17.5",
+          "thinking": true,
+          "reasoningEffort": "high",
+          "attempts": [
+            {
+              "ok": true,
+              "error": null,
+              "finishReason": "stop",
+              "latencyMs": 15956,
+              "usage": {
+                "cacheHitTokens": 1408,
+                "cacheMissTokens": 215,
+                "outputTokens": 4006,
+                "reasoningTokens": 2970
+              }
+            }
+          ]
+        },
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0.0075736499999999995,
+          "reasoningUsd": 0.002440074,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0.010013724,
+          "operationPeakUsd": 0.012453797999999999,
+          "perAudioMinuteUsd": 0.00832973020934424,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "ok",
+      "reason": null,
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [
+        {
+          "label": 0,
+          "name": "Anna"
+        },
+        {
+          "label": 1,
+          "name": "Mark"
+        }
+      ],
+      "clarifications": [],
+      "items": [
+        {
+          "title": "Set up analytics on the landing page",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Mark",
+          "deadline": "by Wednesday",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "requested",
+              "start": 16.535,
+              "end": 19.574999
+            },
+            {
+              "type": "accepted",
+              "start": 19.814999,
+              "end": 20.455
+            },
+            {
+              "type": "deadline",
+              "start": 21.255,
+              "end": 22.294998
+            }
+          ]
+        },
+        {
+          "title": "Write the release notes",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Anna",
+          "deadline": "Monday",
+          "flags": [
+            "date_not_stated",
+            "deadline_changed"
+          ],
+          "events": [
+            {
+              "type": "committed",
+              "start": 23.494999,
+              "end": 25.654999
+            },
+            {
+              "type": "deadline",
+              "start": 24.775,
+              "end": 25.654999
+            },
+            {
+              "type": "deadline",
+              "start": 56.275,
+              "end": 57.715
+            },
+            {
+              "type": "accepted",
+              "start": 58.34,
+              "end": 59.62
+            }
+          ]
+        },
+        {
+          "title": "Write a migration script for the old beta users",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Mark",
+          "deadline": null,
+          "flags": [
+            "no_deadline"
+          ],
+          "events": [
+            {
+              "type": "committed",
+              "start": 26.454998,
+              "end": 29.255
+            },
+            {
+              "type": "accepted",
+              "start": 30.07,
+              "end": 31.029999
+            }
+          ]
+        },
+        {
+          "title": "Build a dark mode before the launch",
+          "kind": "task",
+          "status": "not_agreed",
+          "owner": null,
+          "deadline": "before the launch",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 31.35,
+              "end": 35.989998
+            },
+            {
+              "type": "deadline",
+              "start": 34.23,
+              "end": 35.27
+            },
+            {
+              "type": "declined",
+              "start": 36.31,
+              "end": 37.91
+            }
+          ]
+        },
+        {
+          "title": "Update the App Store screenshots before the launch",
+          "kind": "task",
+          "status": "agreed",
+          "owner": null,
+          "deadline": "before the launch",
+          "flags": [
+            "no_owner",
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 38.309998,
+              "end": 41.83
+            },
+            {
+              "type": "deadline",
+              "start": 40.95,
+              "end": 41.83
+            },
+            {
+              "type": "accepted",
+              "start": 42.515,
+              "end": 44.355
+            }
+          ]
+        },
+        {
+          "title": "Are we launching in Canada at the same time?",
+          "kind": "question",
+          "status": "open",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "asked",
+              "start": 44.675,
+              "end": 47.555
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "t2-migration-kept",
+      "run": 2,
+      "metrics": {
+        "audioSec": 72.13,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 1,
+          "asrMs": 2042,
+          "llmMs": 13259,
+          "verifyMs": 1,
+          "totalMs": 15304
+        },
+        "calls": {
+          "asr": 1,
+          "llm": 1
+        },
+        "asr": {
+          "model": "nova-3",
+          "diarizer": "v2",
+          "requestId": "01a0acba-ec37-73f3-93d8-ad44fff09311",
+          "attempts": 1
+        },
+        "llm": {
+          "model": "deepseek-flash",
+          "promptVersion": "2026-09-17.5",
+          "thinking": true,
+          "reasoningEffort": "high",
+          "attempts": [
+            {
+              "ok": true,
+              "error": null,
+              "finishReason": "stop",
+              "latencyMs": 13259,
+              "usage": {
+                "cacheHitTokens": 1408,
+                "cacheMissTokens": 215,
+                "outputTokens": 3492,
+                "reasoningTokens": 2445
+              }
+            }
+          ]
+        },
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0.0075736499999999995,
+          "reasoningUsd": 0.002131674,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0.009705324,
+          "operationPeakUsd": 0.011836998,
+          "perAudioMinuteUsd": 0.008073193400804105,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "ok",
+      "reason": null,
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [
+        {
+          "label": 0,
+          "name": "Anna"
+        },
+        {
+          "label": 1,
+          "name": "Mark"
+        }
+      ],
+      "clarifications": [],
+      "items": [
+        {
+          "title": "Set up analytics on the landing page",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Mark",
+          "deadline": "by Wednesday",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "requested",
+              "start": 16.535,
+              "end": 19.574999
+            },
+            {
+              "type": "committed",
+              "start": 19.814999,
+              "end": 22.294998
+            },
+            {
+              "type": "deadline",
+              "start": 21.255,
+              "end": 22.294998
+            }
+          ]
+        },
+        {
+          "title": "Write the release notes",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Anna",
+          "deadline": "Monday",
+          "flags": [
+            "date_not_stated",
+            "deadline_changed"
+          ],
+          "events": [
+            {
+              "type": "committed",
+              "start": 23.494999,
+              "end": 25.654999
+            },
+            {
+              "type": "deadline",
+              "start": 24.775,
+              "end": 25.654999
+            },
+            {
+              "type": "deadline",
+              "start": 56.275,
+              "end": 57.715
+            },
+            {
+              "type": "accepted",
+              "start": 58.34,
+              "end": 59.62
+            }
+          ]
+        },
+        {
+          "title": "Write a migration script for the old beta users",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Mark",
+          "deadline": null,
+          "flags": [
+            "no_deadline"
+          ],
+          "events": [
+            {
+              "type": "committed",
+              "start": 26.215,
+              "end": 29.255
+            },
+            {
+              "type": "accepted",
+              "start": 30.07,
+              "end": 31.029999
+            }
+          ]
+        },
+        {
+          "title": "Build a dark mode",
+          "kind": "task",
+          "status": "not_agreed",
+          "owner": null,
+          "deadline": "before the launch",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 31.35,
+              "end": 35.989998
+            },
+            {
+              "type": "deadline",
+              "start": 34.23,
+              "end": 35.27
+            },
+            {
+              "type": "declined",
+              "start": 36.31,
+              "end": 37.91
+            }
+          ]
+        },
+        {
+          "title": "Update the App Store screenshots",
+          "kind": "task",
+          "status": "agreed",
+          "owner": null,
+          "deadline": "before the launch",
+          "flags": [
+            "no_owner",
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 38.309998,
+              "end": 41.83
+            },
+            {
+              "type": "deadline",
+              "start": 40.95,
+              "end": 41.83
+            },
+            {
+              "type": "accepted",
+              "start": 42.515,
+              "end": 44.355
+            }
+          ]
+        },
+        {
+          "title": "Are we launching in Canada at the same time?",
+          "kind": "question",
+          "status": "open",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "asked",
+              "start": 44.675,
+              "end": 47.555
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "t2-migration-kept",
+      "run": 3,
+      "metrics": {
+        "audioSec": 72.13,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 1,
+          "asrMs": 2089,
+          "llmMs": 14195,
+          "verifyMs": 1,
+          "totalMs": 16287
+        },
+        "calls": {
+          "asr": 1,
+          "llm": 1
+        },
+        "asr": {
+          "model": "nova-3",
+          "diarizer": "v2",
+          "requestId": "01a0acbb-2840-76f3-a306-5fd3fee4eb7a",
+          "attempts": 1
+        },
+        "llm": {
+          "model": "deepseek-flash",
+          "promptVersion": "2026-09-17.5",
+          "thinking": true,
+          "reasoningEffort": "high",
+          "attempts": [
+            {
+              "ok": true,
+              "error": null,
+              "finishReason": "stop",
+              "latencyMs": 14195,
+              "usage": {
+                "cacheHitTokens": 1408,
+                "cacheMissTokens": 215,
+                "outputTokens": 3769,
+                "reasoningTokens": 2716
+              }
+            }
+          ]
+        },
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0.0075736499999999995,
+          "reasoningUsd": 0.002297874,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0.009871524,
+          "operationPeakUsd": 0.012169398,
+          "perAudioMinuteUsd": 0.008211443782060169,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "ok",
+      "reason": null,
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [
+        {
+          "label": 0,
+          "name": "Anna"
+        },
+        {
+          "label": 1,
+          "name": "Mark"
+        }
+      ],
+      "clarifications": [],
+      "items": [
+        {
+          "title": "Set up analytics on the landing page",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Mark",
+          "deadline": "by Wednesday",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "requested",
+              "start": 16.535,
+              "end": 19.574999
+            },
+            {
+              "type": "committed",
+              "start": 20.455,
+              "end": 22.294998
+            },
+            {
+              "type": "deadline",
+              "start": 21.255,
+              "end": 22.294998
+            }
+          ]
+        },
+        {
+          "title": "Write the release notes",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Anna",
+          "deadline": "Monday",
+          "flags": [
+            "date_not_stated",
+            "deadline_changed"
+          ],
+          "events": [
+            {
+              "type": "committed",
+              "start": 23.494999,
+              "end": 25.654999
+            },
+            {
+              "type": "deadline",
+              "start": 24.775,
+              "end": 25.654999
+            },
+            {
+              "type": "deadline",
+              "start": 56.275,
+              "end": 57.715
+            },
+            {
+              "type": "accepted",
+              "start": 58.34,
+              "end": 59.62
+            }
+          ]
+        },
+        {
+          "title": "Write a migration script for the old beta users",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Mark",
+          "deadline": null,
+          "flags": [
+            "no_deadline"
+          ],
+          "events": [
+            {
+              "type": "committed",
+              "start": 26.454998,
+              "end": 29.255
+            },
+            {
+              "type": "accepted",
+              "start": 30.07,
+              "end": 31.029999
+            }
+          ]
+        },
+        {
+          "title": "Build a dark mode before the launch",
+          "kind": "task",
+          "status": "not_agreed",
+          "owner": null,
+          "deadline": "before the launch",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 31.35,
+              "end": 35.989998
+            },
+            {
+              "type": "deadline",
+              "start": 34.31,
+              "end": 35.27
+            },
+            {
+              "type": "declined",
+              "start": 36.31,
+              "end": 37.91
+            }
+          ]
+        },
+        {
+          "title": "Update the App Store screenshots before the launch",
+          "kind": "task",
+          "status": "agreed",
+          "owner": null,
+          "deadline": "before the launch",
+          "flags": [
+            "no_owner",
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 38.309998,
+              "end": 41.83
+            },
+            {
+              "type": "deadline",
+              "start": 40.95,
+              "end": 41.83
+            },
+            {
+              "type": "accepted",
+              "start": 42.515,
+              "end": 44.355
+            }
+          ]
+        },
+        {
+          "title": "Are we launching in Canada at the same time?",
+          "kind": "question",
+          "status": "open",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "asked",
+              "start": 44.675,
+              "end": 47.555
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "t3-no-intros-hedged",
+      "run": 1,
+      "metrics": {
+        "audioSec": 45.87,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 1,
+          "asrMs": 1636,
+          "llmMs": 13682,
+          "verifyMs": 0,
+          "totalMs": 15320
+        },
+        "calls": {
+          "asr": 1,
+          "llm": 2
+        },
+        "asr": {
+          "model": "nova-3",
+          "diarizer": "v2",
+          "requestId": "01a0acbb-6761-7891-8275-8f3161cdde20",
+          "attempts": 1
+        },
+        "llm": {
+          "model": "deepseek-flash",
+          "promptVersion": "2026-09-17.5",
+          "thinking": true,
+          "reasoningEffort": "high",
+          "attempts": [
+            {
+              "ok": false,
+              "error": "✖ Invalid input: expected array, received undefined\n  → at speakers\n✖ Invalid input: expected array, received undefined\n  → at items",
+              "finishReason": "stop",
+              "latencyMs": 9577,
+              "usage": {
+                "cacheHitTokens": 1280,
+                "cacheMissTokens": 186,
+                "outputTokens": 2305,
+                "reasoningTokens": 1782
+              }
+            },
+            {
+              "ok": true,
+              "error": null,
+              "finishReason": "stop",
+              "latencyMs": 4105,
+              "usage": {
+                "cacheHitTokens": 1408,
+                "cacheMissTokens": 628,
+                "outputTokens": 995,
+                "reasoningTokens": 482
+              }
+            }
+          ]
+        },
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0.00481635,
+          "reasoningUsd": 0.0006954239999999999,
+          "retriesUsd": 0.00141474,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0.006926514,
+          "operationPeakUsd": 0.009036678,
+          "perAudioMinuteUsd": 0.009060188358404187,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "ok",
+      "reason": null,
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [
+        {
+          "label": 0,
+          "name": null
+        },
+        {
+          "label": 1,
+          "name": null
+        }
+      ],
+      "clarifications": [
+        "speaker_names"
+      ],
+      "items": [
+        {
+          "title": "Look at the onboarding flow",
+          "kind": "task",
+          "status": "needs_confirmation",
+          "owner": null,
+          "deadline": "next week",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 3.04,
+              "end": 5.52
+            },
+            {
+              "type": "tentative",
+              "start": 9.5199995,
+              "end": 12.559999
+            },
+            {
+              "type": "deadline",
+              "start": 10.48,
+              "end": 11.2
+            }
+          ]
+        },
+        {
+          "title": "Refresh the pricing page",
+          "kind": "task",
+          "status": "not_agreed",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 15.174999,
+              "end": 17.734999
+            },
+            {
+              "type": "declined",
+              "start": 21.654999,
+              "end": 24.855
+            }
+          ]
+        },
+        {
+          "title": "Move the team demo",
+          "kind": "task",
+          "status": "not_agreed",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 25.654999,
+              "end": 27.255
+            }
+          ]
+        },
+        {
+          "title": "Look at the support inbox",
+          "kind": "task",
+          "status": "not_agreed",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 32.649998,
+              "end": 34.41
+            },
+            {
+              "type": "proposed",
+              "start": 37.494938,
+              "end": 39.254936
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "t3-no-intros-hedged",
+      "run": 2,
+      "metrics": {
+        "audioSec": 45.87,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 1,
+          "asrMs": 1997,
+          "llmMs": 12327,
+          "verifyMs": 1,
+          "totalMs": 14326
+        },
+        "calls": {
+          "asr": 1,
+          "llm": 1
+        },
+        "asr": {
+          "model": "nova-3",
+          "diarizer": "v2",
+          "requestId": "01a0acbb-a3ce-7b40-a074-c2ff27c50ab9",
+          "attempts": 1
+        },
+        "llm": {
+          "model": "deepseek-flash",
+          "promptVersion": "2026-09-17.5",
+          "thinking": true,
+          "reasoningEffort": "high",
+          "attempts": [
+            {
+              "ok": true,
+              "error": null,
+              "finishReason": "stop",
+              "latencyMs": 12327,
+              "usage": {
+                "cacheHitTokens": 1280,
+                "cacheMissTokens": 186,
+                "outputTokens": 3050,
+                "reasoningTokens": 2419
+              }
+            }
+          ]
+        },
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0.00481635,
+          "reasoningUsd": 0.00186174,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0.006678089999999999,
+          "operationPeakUsd": 0.00853983,
+          "perAudioMinuteUsd": 0.008735238718116416,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "ok",
+      "reason": null,
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [
+        {
+          "label": 0,
+          "name": null
+        },
+        {
+          "label": 1,
+          "name": null
+        }
+      ],
+      "clarifications": [
+        "speaker_names"
+      ],
+      "items": [
+        {
+          "title": "Look at the onboarding flow",
+          "kind": "task",
+          "status": "needs_confirmation",
+          "owner": null,
+          "deadline": "next week",
+          "flags": [
+            "date_not_stated",
+            "deadline_changed"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 3.04,
+              "end": 5.52
+            },
+            {
+              "type": "deadline",
+              "start": 4.56,
+              "end": 5.52
+            },
+            {
+              "type": "tentative",
+              "start": 9.5199995,
+              "end": 12.559999
+            },
+            {
+              "type": "deadline",
+              "start": 10.48,
+              "end": 11.2
+            }
+          ]
+        },
+        {
+          "title": "Refresh the pricing page",
+          "kind": "task",
+          "status": "needs_confirmation",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 15.174999,
+              "end": 17.734999
+            },
+            {
+              "type": "tentative",
+              "start": 20.615,
+              "end": 24.855
+            }
+          ]
+        },
+        {
+          "title": "Move the team demo",
+          "kind": "task",
+          "status": "not_agreed",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 25.654999,
+              "end": 27.255
+            }
+          ]
+        },
+        {
+          "title": "Look at the support inbox",
+          "kind": "task",
+          "status": "not_agreed",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 32.649998,
+              "end": 34.41
+            },
+            {
+              "type": "proposed",
+              "start": 37.494938,
+              "end": 40.774937
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "t3-no-intros-hedged",
+      "run": 3,
+      "metrics": {
+        "audioSec": 45.87,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 1,
+          "asrMs": 1667,
+          "llmMs": 6857,
+          "verifyMs": 0,
+          "totalMs": 8526
+        },
+        "calls": {
+          "asr": 1,
+          "llm": 1
+        },
+        "asr": {
+          "model": "nova-3",
+          "diarizer": "v2",
+          "requestId": "01a0acbb-db70-7170-ac02-a934a70c8fd6",
+          "attempts": 1
+        },
+        "llm": {
+          "model": "deepseek-flash",
+          "promptVersion": "2026-09-17.5",
+          "thinking": true,
+          "reasoningEffort": "high",
+          "attempts": [
+            {
+              "ok": true,
+              "error": null,
+              "finishReason": "stop",
+              "latencyMs": 6857,
+              "usage": {
+                "cacheHitTokens": 1280,
+                "cacheMissTokens": 186,
+                "outputTokens": 1722,
+                "reasoningTokens": 1148
+              }
+            }
+          ]
+        },
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0.00481635,
+          "reasoningUsd": 0.0010649400000000001,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0.00588129,
+          "operationPeakUsd": 0.006946229999999999,
+          "perAudioMinuteUsd": 0.0076929888816219755,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "ok",
+      "reason": null,
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [
+        {
+          "label": 0,
+          "name": null
+        },
+        {
+          "label": 1,
+          "name": null
+        }
+      ],
+      "clarifications": [
+        "speaker_names"
+      ],
+      "items": [
+        {
+          "title": "Look at the onboarding flow",
+          "kind": "task",
+          "status": "needs_confirmation",
+          "owner": null,
+          "deadline": "next week",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 3.04,
+              "end": 5.52
+            },
+            {
+              "type": "tentative",
+              "start": 9.5199995,
+              "end": 12.559999
+            },
+            {
+              "type": "deadline",
+              "start": 10.48,
+              "end": 11.2
+            }
+          ]
+        },
+        {
+          "title": "Refresh the pricing page",
+          "kind": "task",
+          "status": "needs_confirmation",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 15.174999,
+              "end": 17.734999
+            },
+            {
+              "type": "tentative",
+              "start": 20.615,
+              "end": 24.855
+            }
+          ]
+        },
+        {
+          "title": "Move the team demo",
+          "kind": "task",
+          "status": "needs_confirmation",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 25.654999,
+              "end": 27.255
+            },
+            {
+              "type": "tentative",
+              "start": 29.13,
+              "end": 32.17
+            }
+          ]
+        },
+        {
+          "title": "Look at the support inbox",
+          "kind": "task",
+          "status": "needs_confirmation",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 32.649998,
+              "end": 34.41
+            },
+            {
+              "type": "tentative",
+              "start": 37.494938,
+              "end": 40.774937
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "g1-too-long",
+      "run": 1,
+      "metrics": {
+        "audioSec": 216.75,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 1,
+          "asrMs": 0,
+          "llmMs": 0,
+          "verifyMs": 0,
+          "totalMs": 2
+        },
+        "calls": {
+          "asr": 0,
+          "llm": 0
+        },
+        "asr": null,
+        "llm": null,
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0,
+          "reasoningUsd": 0,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0,
+          "operationPeakUsd": 0,
+          "perAudioMinuteUsd": 0,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "declined",
+      "reason": "too_long",
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [],
+      "clarifications": [],
+      "items": []
+    },
+    {
+      "fixture": "g1-too-long",
+      "run": 2,
+      "metrics": {
+        "audioSec": 216.75,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 1,
+          "asrMs": 0,
+          "llmMs": 0,
+          "verifyMs": 0,
+          "totalMs": 1
+        },
+        "calls": {
+          "asr": 0,
+          "llm": 0
+        },
+        "asr": null,
+        "llm": null,
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0,
+          "reasoningUsd": 0,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0,
+          "operationPeakUsd": 0,
+          "perAudioMinuteUsd": 0,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "declined",
+      "reason": "too_long",
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [],
+      "clarifications": [],
+      "items": []
+    },
+    {
+      "fixture": "g1-too-long",
+      "run": 3,
+      "metrics": {
+        "audioSec": 216.75,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 0,
+          "asrMs": 0,
+          "llmMs": 0,
+          "verifyMs": 0,
+          "totalMs": 0
+        },
+        "calls": {
+          "asr": 0,
+          "llm": 0
+        },
+        "asr": null,
+        "llm": null,
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0,
+          "reasoningUsd": 0,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0,
+          "operationPeakUsd": 0,
+          "perAudioMinuteUsd": 0,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "declined",
+      "reason": "too_long",
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [],
+      "clarifications": [],
+      "items": []
+    },
+    {
+      "fixture": "g2-spanish",
+      "run": 1,
+      "metrics": {
+        "audioSec": 16.01,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 1,
+          "asrMs": 1163,
+          "llmMs": 0,
+          "verifyMs": 0,
+          "totalMs": 1164
+        },
+        "calls": {
+          "asr": 1,
+          "llm": 0
+        },
+        "asr": {
+          "model": "nova-3",
+          "diarizer": "v2",
+          "requestId": "01a0acbb-fc77-7fd2-809c-4af007820056",
+          "attempts": 1
+        },
+        "llm": null,
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0.0016810500000000001,
+          "reasoningUsd": 0,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0.0016810500000000001,
+          "operationPeakUsd": 0.0016810500000000001,
+          "perAudioMinuteUsd": 0.0063,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "declined",
+      "reason": "unsupported_language",
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [],
+      "clarifications": [],
+      "items": []
+    },
+    {
+      "fixture": "g2-spanish",
+      "run": 2,
+      "metrics": {
+        "audioSec": 16.01,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 1,
+          "asrMs": 340,
+          "llmMs": 0,
+          "verifyMs": 0,
+          "totalMs": 341
+        },
+        "calls": {
+          "asr": 1,
+          "llm": 0
+        },
+        "asr": {
+          "model": "nova-3",
+          "diarizer": "v2",
+          "requestId": "01a0acbb-ff35-7832-bde0-42f35caafcee",
+          "attempts": 1
+        },
+        "llm": null,
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0.0016810500000000001,
+          "reasoningUsd": 0,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0.0016810500000000001,
+          "operationPeakUsd": 0.0016810500000000001,
+          "perAudioMinuteUsd": 0.0063,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "declined",
+      "reason": "unsupported_language",
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [],
+      "clarifications": [],
+      "items": []
+    },
+    {
+      "fixture": "g2-spanish",
+      "run": 3,
+      "metrics": {
+        "audioSec": 16.01,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 1,
+          "asrMs": 199,
+          "llmMs": 0,
+          "verifyMs": 0,
+          "totalMs": 200
+        },
+        "calls": {
+          "asr": 1,
+          "llm": 0
+        },
+        "asr": {
+          "model": "nova-3",
+          "diarizer": "v2",
+          "requestId": "01a0acbc-008a-7750-9ae6-142c264b0a3f",
+          "attempts": 1
+        },
+        "llm": null,
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0.0016810500000000001,
+          "reasoningUsd": 0,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0.0016810500000000001,
+          "operationPeakUsd": 0.0016810500000000001,
+          "perAudioMinuteUsd": 0.0063,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "declined",
+      "reason": "unsupported_language",
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [],
+      "clarifications": [],
+      "items": []
+    }
+  ],
+  "summary": {
+    "runs": 15,
+    "passed": 15
+  },
+  "fixtures": [
+    {
+      "fixture": "t1-launch-sync",
+      "runs": 3,
+      "passed": 3,
+      "outcomes": [
+        "ok"
+      ],
+      "totalMs": {
+        "median": 13520,
+        "worst": 15572
+      },
+      "llmMs": {
+        "median": 11428,
+        "worst": 13362
+      },
+      "llmAttempts": {
+        "median": 1,
+        "worst": 1
+      },
+      "operationUsd": {
+        "median": 0.009492324,
+        "worst": 0.009614124
+      },
+      "operationPeakUsd": {
+        "median": 0.011398398,
+        "worst": 0.011641998
+      },
+      "perAudioMinuteUsd": 0.007882898823529412,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "fixture": "t2-migration-kept",
+      "runs": 3,
+      "passed": 3,
+      "outcomes": [
+        "ok"
+      ],
+      "totalMs": {
+        "median": 16287,
+        "worst": 17969
+      },
+      "llmMs": {
+        "median": 14195,
+        "worst": 15956
+      },
+      "llmAttempts": {
+        "median": 1,
+        "worst": 1
+      },
+      "operationUsd": {
+        "median": 0.009871524,
+        "worst": 0.010013724
+      },
+      "operationPeakUsd": {
+        "median": 0.012169398,
+        "worst": 0.012453797999999999
+      },
+      "perAudioMinuteUsd": 0.008211443782060169,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "fixture": "t3-no-intros-hedged",
+      "runs": 3,
+      "passed": 3,
+      "outcomes": [
+        "ok"
+      ],
+      "totalMs": {
+        "median": 14326,
+        "worst": 15320
+      },
+      "llmMs": {
+        "median": 12327,
+        "worst": 13682
+      },
+      "llmAttempts": {
+        "median": 1,
+        "worst": 2
+      },
+      "operationUsd": {
+        "median": 0.006678089999999999,
+        "worst": 0.006926514
+      },
+      "operationPeakUsd": {
+        "median": 0.00853983,
+        "worst": 0.009036678
+      },
+      "perAudioMinuteUsd": 0.008735238718116416,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "fixture": "g1-too-long",
+      "runs": 3,
+      "passed": 3,
+      "outcomes": [
+        "declined (too_long)"
+      ],
+      "totalMs": {
+        "median": 1,
+        "worst": 2
+      },
+      "llmMs": {
+        "median": 0,
+        "worst": 0
+      },
+      "llmAttempts": {
+        "median": 0,
+        "worst": 0
+      },
+      "operationUsd": {
+        "median": 0,
+        "worst": 0
+      },
+      "operationPeakUsd": {
+        "median": 0,
+        "worst": 0
+      },
+      "perAudioMinuteUsd": 0,
+      "failures": [],
+      "warnings": []
+    },
+    {
+      "fixture": "g2-spanish",
+      "runs": 3,
+      "passed": 3,
+      "outcomes": [
+        "declined (unsupported_language)"
+      ],
+      "totalMs": {
+        "median": 341,
+        "worst": 1164
+      },
+      "llmMs": {
+        "median": 0,
+        "worst": 0
+      },
+      "llmAttempts": {
+        "median": 0,
+        "worst": 0
+      },
+      "operationUsd": {
+        "median": 0.0016810500000000001,
+        "worst": 0.0016810500000000001
+      },
+      "operationPeakUsd": {
+        "median": 0.0016810500000000001,
+        "worst": 0.0016810500000000001
+      },
+      "perAudioMinuteUsd": 0.0063,
+      "failures": [],
+      "warnings": []
+    }
+  ]
+}

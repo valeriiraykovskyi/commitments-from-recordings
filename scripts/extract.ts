@@ -13,7 +13,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { parseArgs } from "node:util";
 
-import { loadEnvConfig } from "@next/env";
+import nextEnv from "@next/env";
 
 import { toTranscript } from "@/lib/asr/transcript";
 import { buildCommitments } from "@/lib/commitments/build";
@@ -32,7 +32,7 @@ function oneOf<T extends string>(value: string, allowed: T[], flag: string): T {
 }
 
 async function main() {
-  loadEnvConfig(process.cwd(), true, { info: () => {}, error: console.error });
+  nextEnv.loadEnvConfig(process.cwd(), true, { info: () => {}, error: console.error });
   const { values, positionals } = parseArgs({
     allowPositionals: true,
     options: {

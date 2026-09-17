@@ -1,6 +1,6 @@
 {
   "model": "deepseek-flash",
-  "promptVersion": "2026-09-17.4",
+  "promptVersion": "2026-09-17.5",
   "config": {
     "model": "deepseek-flash",
     "thinking": true,
@@ -87,6 +87,14 @@
             "by": "S0",
             "owner": null,
             "deadline": null
+          },
+          {
+            "type": "tentative",
+            "utterance": "U06",
+            "quote": "Not sure. It's hard to say right now.",
+            "by": "S1",
+            "owner": null,
+            "deadline": null
           }
         ]
       },
@@ -103,9 +111,9 @@
             "deadline": null
           },
           {
-            "type": "proposed",
+            "type": "tentative",
             "utterance": "U08",
-            "quote": "Somebody might want to look at it",
+            "quote": "Somebody might want to look at it, but it's not urgent",
             "by": "S1",
             "owner": null,
             "deadline": null

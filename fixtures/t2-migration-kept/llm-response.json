@@ -1,6 +1,6 @@
 {
   "model": "deepseek-flash",
-  "promptVersion": "2026-09-17.4",
+  "promptVersion": "2026-09-17.5",
   "config": {
     "model": "deepseek-flash",
     "thinking": true,
@@ -47,7 +47,7 @@
           {
             "type": "committed",
             "utterance": "U06",
-            "quote": "I'll have it done by Wednesday",
+            "quote": "I'll have it done",
             "by": "S1",
             "owner": null,
             "deadline": null
@@ -69,7 +69,7 @@
           {
             "type": "committed",
             "utterance": "U07",
-            "quote": "I'll write the release notes by Friday",
+            "quote": "I'll write the release notes",
             "by": "S0",
             "owner": null,
             "deadline": null
@@ -111,30 +111,6 @@
             "by": "S1",
             "owner": null,
             "deadline": null
-          },
-          {
-            "type": "accepted",
-            "utterance": "U09",
-            "quote": "Sounds good",
-            "by": "S0",
-            "owner": null,
-            "deadline": null
-          },
-          {
-            "type": "reinstated",
-            "utterance": "U15",
-            "quote": "we still need the migration script. Let's keep it",
-            "by": "S0",
-            "owner": null,
-            "deadline": null
-          },
-          {
-            "type": "accepted",
-            "utterance": "U16",
-            "quote": "Okay",
-            "by": "S1",
-            "owner": null,
-            "deadline": null
           }
         ]
       },
@@ -145,7 +121,7 @@
           {
             "type": "proposed",
             "utterance": "U10",
-            "quote": "Maybe we could build a dark mode before the launch too",
+            "quote": "Maybe we could build a dark mode",
             "by": "S1",
             "owner": null,
             "deadline": null
@@ -175,7 +151,7 @@
           {
             "type": "proposed",
             "utterance": "U11",
-            "quote": "Someone also needs to update the App Store screenshots before the launch",
+            "quote": "Someone also needs to update the App Store screenshots",
             "by": "S0",
             "owner": null,
             "deadline": null

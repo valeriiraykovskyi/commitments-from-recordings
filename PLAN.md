@@ -117,7 +117,7 @@ the local copy of the file in the browser.
 | UI | Tailwind CSS + shadcn/ui | — |
 | Hosting | Vercel (Hobby) + Vercel Blob | Render: free tier sleeps. Railway / Fly.io: paid from day one. Firebase: paid plan required |
 | ASR | Deepgram Nova-3, pre-recorded, `diarize_model=v2` | AssemblyAI: async polling. OpenAI diarize model: segment-level timestamps only. Multimodal LLM: imprecise timestamps |
-| LLM | DeepSeek: `deepseek-flash` by default; `deepseek-v4-pro` and thinking mode compared in eval | Claude Opus 5: strongest candidate (schema-guaranteed output), dropped because of the budget |
+| LLM | DeepSeek `deepseek-flash`, thinking on, effort `high`. The eval compared effort `low` (as accurate, twice as slow) and no thinking (fast, wrong in 5 of 9 runs); `deepseek-v4-pro` was skipped as unnecessary and three times more expensive | Claude Opus 5: strongest candidate (schema-guaranteed output), dropped because of the budget |
 | LLM client | `fetch` to DeepSeek's OpenAI-compatible endpoint, behind a thin adapter, response validated with Zod | `openai` npm package: `thinking`, `reasoning_effort: "max"` and the cache fields in `usage` are not in its types |
 | Validation | Zod | — |
 | Tests | Vitest + eval script | — |
@@ -212,7 +212,7 @@ One step at a time, in this order. The estimates keep the total within about 8 h
 | 6 | Quote verification, event fold, flags + unit tests | 0:50 | ✅ done |
 | 7 | API route, guardrails, metrics | 0:25 (realistic: 0:50) | ✅ done (1:15 incl. deployment troubleshooting) |
 | 8 | UI: upload, progress, results, transcript, playback, metrics | 1:20 | ✅ done (0:30) |
-| 9 | Eval runs and report; model comparison if time allows (the comparison with `expected.json` already exists: `scripts/lib/compare.ts`) | 0:40 | |
+| 9 | Eval runs and report; model comparison if time allows (the comparison with `expected.json` already exists: `scripts/lib/compare.ts`) | 0:40 | ✅ done (0:30; effort `low` and no thinking compared, `deepseek-v4-pro` skipped) |
 | 10 | Deploy, README, delivery notes, video | 0:40 | |
 | | **Total** | **7:30** | |
 
