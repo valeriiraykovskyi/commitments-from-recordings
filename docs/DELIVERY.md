@@ -245,7 +245,7 @@ responses under `fixtures/` are real API outputs kept as test data.
 
 ```bash
 npm install && cp .env.example .env.local   # fill in DEEPGRAM_API_KEY and DEEPSEEK_API_KEY
-npm test                                     # offline: 173 unit and snapshot tests
+npm test                                     # offline: 176 unit and snapshot tests
 npm run eval                                 # live: 5 fixtures × 3 runs, writes eval/*.md and *.json
 npm run eval -- --fixture t1-launch-sync --effort low --runs 3   # a comparison configuration
 ```

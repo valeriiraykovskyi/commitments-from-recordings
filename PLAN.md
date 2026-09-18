@@ -254,7 +254,7 @@ Whatever is left unfinished is described in the delivery notes.
 | Paraphrased or invented quotes | Quote verification in code |
 | DeepSeek returns invalid or empty JSON | Zod + one retry, counted in metrics |
 | DeepSeek latency spikes | Timeouts; latency measured and reported |
-| Diarization mislabels a short reply, so "I'll do it" is credited to the wrong person | `diarize_model=v2` (the deprecated `diarize=true` mislabelled a reply in T1); the prompt treats speaker labels as hints to check against content; speaker attribution is visible and editable |
+| Diarization mislabels a short reply, so "I'll do it" is credited to the wrong person | `diarize_model=v2` (the deprecated `diarize=true` mislabelled a reply in T1); the prompt treats speaker labels as hints to check against content; every quote carries its speaker, and an owner that disagrees with the speaker labels is flagged "Check who said it", so a mislabel is visible. Correcting it in the UI is unfinished (delivery notes §9) |
 | A short recording merges both voices into one speaker | Fewer than two detected speakers triggers a clarification instead of guessed owners |
 | Prompt overfits the fixtures | Rules written generally; holdout run after the prompt is frozen |
 | Public demo abused, exhausting Blob or API quotas | File type and size limits, basic rate limiting, spend visible in provider dashboards |
