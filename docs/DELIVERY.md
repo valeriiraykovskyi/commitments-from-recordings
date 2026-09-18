@@ -6,9 +6,10 @@ timestamped quote that can be played.
 
 - **Demo:** https://commitments-from-recordings.vercel.app — the bundled samples and your own
   uploads go through the same live pipeline; nothing is prepared in advance.
-- **Repository:** https://github.com/valeriiraykovskyi/commitments-from-recordings (private;
+- **Repository:** https://github.com/valeriiraykovskyi/commitments-from-recordings (public;
   setup in [README.md](../README.md)).
-- **Video:** _link added by the author_ (script in [VIDEO.md](VIDEO.md)).
+- **Video:** https://drive.google.com/drive/folders/1Hwoz9gMaVnugeNtRo1iEgx2muCSMNQ_J?usp=sharing
+  — a walkthrough of about a minute and a half (script in [VIDEO.md](VIDEO.md)).
 - **Plan and log:** [PLAN.md](../PLAN.md) (scope, architecture, stack, test strategy) and
   [PROGRESS.md](../PROGRESS.md) (time log, every decision with its reason, AI usage log,
   failures and fixes).
