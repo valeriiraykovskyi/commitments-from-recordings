@@ -1,28 +1,76 @@
-# Test task brief
+# What the assignment asked for
 
-Received by email on 2026-09-16. Copied verbatim; the submission window mentioned in the
-email is not reproduced here.
+The assignment arrived by email on 2026-09-16. **Its wording is not reproduced here** — it is the
+company's text, and this repository is public. What follows is my own restatement of the
+requirements, kept as a checklist because every other document in the repository points back at
+it: [PLAN.md](../PLAN.md) maps each requirement to what addresses it, and
+[DELIVERY.md](DELIVERY.md) reports the result against the same list.
 
----
+## The problem
 
-## Recorded conversation to final commitments
+A recorded project discussion goes in. What comes out is the list of things the two people
+actually agreed — tasks, who owns them, when they are due — together with the questions nobody
+settled. Every entry has to carry the words that justify it. It is a commitments list, not a
+meeting summary.
 
-A user uploads a recorded project discussion. Return the final agreed tasks, owners, deadlines and unresolved questions, each with a timestamped supporting quotation. The output is a reliable commitments list, not a general meeting summary.
+## Scope, fixed by the assignment
 
-Scope: one language, two clearly distinguishable speakers, audio up to three minutes, no overlapping speech requirement. Speakers introduce themselves in the recording. Create a short fictional conversation containing a proposal that is never accepted, an accepted task, a corrected deadline, a cancelled task and a task with no named owner.
+- One language, two speakers who can be told apart, at most three minutes of audio.
+- The speakers introduce themselves in the recording.
+- No requirement to handle people talking over each other.
+- Calendar integration and sending tasks anywhere are explicitly out of scope.
 
-Keep the final state of each commitment. Do not turn “we could” into “we will”, retain a cancelled task as active, or infer an owner/deadline that was never agreed. If relative dates cannot be resolved from the recording, preserve their wording and mark the missing date context. Let users listen to the supporting segment.
+## Rules the output must follow
 
-Include the recording, an independently written expected commitments list, and a second version changing one agreement. Check both inclusion of real commitments and exclusion of unsupported ones. Report processing time and estimated cost per audio minute. Calendar integration and sending tasks to anyone are outside scope.
+- Report the **final** state of each commitment, not the discussion that led to it.
+- "We could" must not become "we will".
+- A task that was cancelled must not still be listed as active.
+- Never invent an owner or a deadline that nobody agreed to.
+- A relative date that the recording does not pin down keeps its wording and is marked as having
+  no date context.
+- The supporting segment must be playable, at its timestamp.
 
-## Working agreement and submission
+## The test set
 
-Build a new working prototype for this brief during your assignment window. The main user flow starts with voice, photos, video or existing documents. Upload buttons, confirmations and spoken clarifications are fine; asking users to retype the source into a form is not the solution.
+- Write one short fictional conversation containing all five of: a proposal nobody accepts, an
+  accepted task, a deadline that gets corrected, a task that gets cancelled, and a task with no
+  named owner.
+- Ship the recording, an expected commitments list written independently, and a second version of
+  the recording in which exactly one agreement changes.
+- Cover a normal input, a correction or an ambiguity, and an input where the right behaviour is to
+  ask for clarification or refuse to conclude.
+- Write the expected outcomes down **before** running anything.
+- Check both that real commitments are included and that unsupported ones are excluded.
+- The app must process new input; it may not replay prepared answers for the demo files.
 
-Keep the scope small: one language and the specified input limits are enough. Aim for up to eight focused working hours; stop and describe unfinished parts. The submission window is stated in this email. Reply if you need to arrange a different start date. Use any AI tools, models and existing libraries; identify reused components and your own changes. Do not submit an existing finished product as new work. No accounts, payments or native app-store release are required. The work and code remain yours.
+## What has to be measured and reported
 
-Create and include the small, reproducible test set described in the brief. Use material you can share and record the expected outcomes before testing. Include normal input, a correction or ambiguity, and an input on which the product should ask for clarification or decline to conclude. The app must process new input, not return prepared answers for the demo files.
+- Time to a useful result, measured rather than promised.
+- Variable cost per operation, broken down into recognition, reasoning, speech, retries and any
+  paid middleman, and also expressed per audio minute.
+- The pricing assumptions behind those numbers, with hosting costs kept separate.
+- Free credits do not count as zero cost.
+- The sample inputs with expected versus actual results, and what failed.
+- Time spent; the exact AI tools and models used, with one worked example of how their output was
+  checked.
+- Which components were reused as they are, and what is my own work.
+- What is unfinished and what I would do next.
 
-Submit a working browser demo, a repository with setup instructions (private access is fine), and a video walkthrough up to three minutes. In your delivery notes include the sample inputs and expected/actual results; what failed; time spent; exact AI tools and models and one example of how you checked their output. Measure time to a useful result and the estimated variable cost per operation, including recognition, reasoning, speech, retries and paid intermediaries. Name the pricing assumptions and separate hosting costs. Free credits are not zero operating cost. Report measurements rather than promising an untested speed or cost target.
+## What to submit
 
-We assess implementation and quality first (80%): a correct complete flow, difficult inputs, evidence, usability, measured speed/cost and reproducibility. Product judgment is 20%: useful scope, sensible tradeoffs and what you would improve next. We supplied the problem; you do not need to invent a different business or prove sales. A later live session may introduce one small change or a new input within this scope.
+A working demo in the browser, a repository with setup instructions (private access would have
+been acceptable), and a walkthrough video of at most three minutes, plus the delivery notes above.
+
+## How it is assessed
+
+Implementation and quality carry 80%: a complete flow that works, behaviour on difficult inputs,
+evidence for what it claims, usability, measured speed and cost, and reproducibility. Product
+judgment carries 20%: sensible scope, defensible trade-offs, and a clear view of what to improve.
+The problem was given; inventing a business around it was explicitly not asked for.
+
+## Working conditions
+
+Build a new prototype inside the assignment window, aiming at about eight focused hours and
+describing whatever is left unfinished. Any AI tools, models and libraries may be used, as long as
+reused components are identified. Submitting an existing finished product as new work is not
+allowed. No accounts, payments or app-store release are required, and the work stays mine.

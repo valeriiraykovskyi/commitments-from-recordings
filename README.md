@@ -5,7 +5,7 @@ actually agreed: tasks, owners and deadlines, plus the questions left open. Ever
 with a verbatim, timestamped quote you can play. Nothing is inferred: if it was not said, it is
 not shown.
 
-A prototype built for a test assignment ([brief](docs/TASK.md)).
+A prototype built for a test assignment ([what it asked for](docs/TASK.md)).
 **Demo:** https://commitments-from-recordings.vercel.app — the bundled samples and your own
 uploads go through the same live pipeline.
 

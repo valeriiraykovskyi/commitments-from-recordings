@@ -1,6 +1,6 @@
 # Plan — recorded conversation → final commitments
 
-Working plan. The brief is in [docs/TASK.md](docs/TASK.md); progress, time log and
+Working plan. The assignment's requirements are restated in [docs/TASK.md](docs/TASK.md); progress, time log and
 decisions are in [PROGRESS.md](PROGRESS.md).
 
 ## 1. Goal

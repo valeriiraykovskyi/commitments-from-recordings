@@ -1,6 +1,6 @@
 # Delivery notes
 
-A prototype for the brief in [TASK.md](TASK.md): a recorded two-person project discussion goes
+A prototype for the assignment restated in [TASK.md](TASK.md): a recorded two-person project discussion goes
 in; the final agreed tasks, owners, deadlines and open questions come out, each with a verbatim,
 timestamped quote that can be played.
 
