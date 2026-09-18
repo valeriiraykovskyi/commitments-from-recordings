@@ -1,8 +1,8 @@
 {
   "label": "deepseek-flash-high",
-  "createdAt": "2026-09-17T00:47:03.164Z",
+  "createdAt": "2026-09-18T10:59:48.683Z",
   "git": {
-    "sha": "a1da07b",
+    "sha": "eed20cb",
     "dirty": true
   },
   "config": {
@@ -23,10 +23,10 @@
         "timings": {
           "fetchMs": 0,
           "probeMs": 4,
-          "asrMs": 3045,
-          "llmMs": 11760,
+          "asrMs": 1481,
+          "llmMs": 13085,
           "verifyMs": 6,
-          "totalMs": 14817
+          "totalMs": 14577
         },
         "calls": {
           "asr": 1,
@@ -35,7 +35,7 @@
         "asr": {
           "model": "nova-3",
           "diarizer": "v2",
-          "requestId": "01a0acd2-6e33-7be1-b222-c30740fb51ee",
+          "requestId": "01a0b428-cf71-76c3-ab43-059a563b9b04",
           "attempts": 1
         },
         "llm": {
@@ -48,12 +48,12 @@
               "ok": true,
               "error": null,
               "finishReason": "stop",
-              "latencyMs": 11760,
+              "latencyMs": 13085,
               "usage": {
                 "cacheHitTokens": 1536,
                 "cacheMissTokens": 169,
-                "outputTokens": 3164,
-                "reasoningTokens": 1968
+                "outputTokens": 3665,
+                "reasoningTokens": 2374
               }
             }
           ]
@@ -61,13 +61,13 @@
         "cost": {
           "tariff": "off_peak",
           "recognitionUsd": 0.00758625,
-          "reasoningUsd": 0.001928358,
+          "reasoningUsd": 0.002228958,
           "retriesUsd": 0,
           "speechUsd": 0,
           "intermediariesUsd": 0,
-          "operationUsd": 0.009514608,
-          "operationPeakUsd": 0.011442966,
-          "perAudioMinuteUsd": 0.00790140456747405,
+          "operationUsd": 0.009815208,
+          "operationPeakUsd": 0.012044166,
+          "perAudioMinuteUsd": 0.008151037785467129,
           "hostingUsd": 0
         }
       },
@@ -102,6 +102,11 @@
               "type": "requested",
               "start": 16.535,
               "end": 19.574999
+            },
+            {
+              "type": "accepted",
+              "start": 19.814999,
+              "end": 20.455
             },
             {
               "type": "committed",
@@ -162,6 +167,11 @@
               "end": 29.255
             },
             {
+              "type": "accepted",
+              "start": 30.07,
+              "end": 31.029999
+            },
+            {
               "type": "cancelled",
               "start": 64.18,
               "end": 67.3
@@ -185,7 +195,7 @@
             },
             {
               "type": "deadline",
-              "start": 34.23,
+              "start": 34.31,
               "end": 35.27
             },
             {
@@ -248,10 +258,10 @@
         "timings": {
           "fetchMs": 0,
           "probeMs": 1,
-          "asrMs": 2625,
-          "llmMs": 11529,
+          "asrMs": 1677,
+          "llmMs": 49630,
           "verifyMs": 2,
-          "totalMs": 14158
+          "totalMs": 51310
         },
         "calls": {
           "asr": 1,
@@ -260,7 +270,7 @@
         "asr": {
           "model": "nova-3",
           "diarizer": "v2",
-          "requestId": "01a0acd2-a797-7b41-8bba-c1e4cf9552a7",
+          "requestId": "01a0b429-0807-7cb1-b66c-4f6fe636c745",
           "attempts": 1
         },
         "llm": {
@@ -273,12 +283,12 @@
               "ok": true,
               "error": null,
               "finishReason": "stop",
-              "latencyMs": 11529,
+              "latencyMs": 49630,
               "usage": {
                 "cacheHitTokens": 1536,
                 "cacheMissTokens": 169,
-                "outputTokens": 3067,
-                "reasoningTokens": 2186
+                "outputTokens": 13920,
+                "reasoningTokens": 12657
               }
             }
           ]
@@ -286,13 +296,13 @@
         "cost": {
           "tariff": "off_peak",
           "recognitionUsd": 0.00758625,
-          "reasoningUsd": 0.0018701580000000002,
+          "reasoningUsd": 0.008381958,
           "retriesUsd": 0,
           "speechUsd": 0,
           "intermediariesUsd": 0,
-          "operationUsd": 0.009456408,
-          "operationPeakUsd": 0.011326566,
-          "perAudioMinuteUsd": 0.007853072387543252,
+          "operationUsd": 0.015968208,
+          "operationPeakUsd": 0.024350166,
+          "perAudioMinuteUsd": 0.013260795570934257,
           "hostingUsd": 0
         }
       },
@@ -327,6 +337,246 @@
               "type": "requested",
               "start": 16.535,
               "end": 19.574999
+            },
+            {
+              "type": "accepted",
+              "start": 19.814999,
+              "end": 20.455
+            },
+            {
+              "type": "committed",
+              "start": 20.455,
+              "end": 22.294998
+            },
+            {
+              "type": "deadline",
+              "start": 21.255,
+              "end": 22.294998
+            }
+          ]
+        },
+        {
+          "title": "Write the release notes",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Anna",
+          "deadline": "Monday",
+          "flags": [
+            "date_not_stated",
+            "deadline_changed"
+          ],
+          "events": [
+            {
+              "type": "committed",
+              "start": 23.494999,
+              "end": 24.775
+            },
+            {
+              "type": "deadline",
+              "start": 24.775,
+              "end": 25.654999
+            },
+            {
+              "type": "deadline",
+              "start": 56.915,
+              "end": 57.235
+            },
+            {
+              "type": "accepted",
+              "start": 58.34,
+              "end": 59.62
+            }
+          ]
+        },
+        {
+          "title": "Write a migration script for the old beta users",
+          "kind": "task",
+          "status": "cancelled",
+          "owner": "Mark",
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "committed",
+              "start": 26.454998,
+              "end": 29.255
+            },
+            {
+              "type": "accepted",
+              "start": 30.07,
+              "end": 31.029999
+            },
+            {
+              "type": "cancelled",
+              "start": 66.18,
+              "end": 67.3
+            }
+          ]
+        },
+        {
+          "title": "Build a dark mode",
+          "kind": "task",
+          "status": "not_agreed",
+          "owner": null,
+          "deadline": "before the launch",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 31.35,
+              "end": 34.31
+            },
+            {
+              "type": "deadline",
+              "start": 34.31,
+              "end": 35.27
+            },
+            {
+              "type": "declined",
+              "start": 36.31,
+              "end": 37.91
+            }
+          ]
+        },
+        {
+          "title": "Update the App Store screenshots",
+          "kind": "task",
+          "status": "agreed",
+          "owner": null,
+          "deadline": "before the launch",
+          "flags": [
+            "no_owner",
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 38.309998,
+              "end": 40.95
+            },
+            {
+              "type": "deadline",
+              "start": 40.95,
+              "end": 41.83
+            },
+            {
+              "type": "accepted",
+              "start": 42.515,
+              "end": 44.355
+            }
+          ]
+        },
+        {
+          "title": "Are we launching in Canada at the same time?",
+          "kind": "question",
+          "status": "open",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "asked",
+              "start": 44.675,
+              "end": 47.555
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "t1-launch-sync",
+      "run": 3,
+      "metrics": {
+        "audioSec": 72.25,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 1,
+          "asrMs": 2363,
+          "llmMs": 9733,
+          "verifyMs": 1,
+          "totalMs": 12098
+        },
+        "calls": {
+          "asr": 1,
+          "llm": 1
+        },
+        "asr": {
+          "model": "nova-3",
+          "diarizer": "v2",
+          "requestId": "01a0b429-d0a8-7662-a556-c1f999a4842c",
+          "attempts": 1
+        },
+        "llm": {
+          "model": "deepseek-flash",
+          "promptVersion": "2026-09-17.6",
+          "thinking": true,
+          "reasoningEffort": "high",
+          "attempts": [
+            {
+              "ok": true,
+              "error": null,
+              "finishReason": "stop",
+              "latencyMs": 9733,
+              "usage": {
+                "cacheHitTokens": 1536,
+                "cacheMissTokens": 169,
+                "outputTokens": 2914,
+                "reasoningTokens": 1631
+              }
+            }
+          ]
+        },
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0.00758625,
+          "reasoningUsd": 0.0017783579999999998,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0.009364608,
+          "operationPeakUsd": 0.011142966,
+          "perAudioMinuteUsd": 0.007776837093425606,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "ok",
+      "reason": null,
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [
+        {
+          "label": 0,
+          "name": "Anna"
+        },
+        {
+          "label": 1,
+          "name": "Mark"
+        }
+      ],
+      "clarifications": [],
+      "items": [
+        {
+          "title": "Set up analytics on the landing page",
+          "kind": "task",
+          "status": "agreed",
+          "owner": "Mark",
+          "deadline": "by Wednesday",
+          "flags": [
+            "date_not_stated"
+          ],
+          "events": [
+            {
+              "type": "requested",
+              "start": 16.535,
+              "end": 19.574999
+            },
+            {
+              "type": "accepted",
+              "start": 19.814999,
+              "end": 20.455
             },
             {
               "type": "committed",
@@ -471,17 +721,17 @@
       ]
     },
     {
-      "fixture": "t1-launch-sync",
-      "run": 3,
+      "fixture": "t2-migration-kept",
+      "run": 1,
       "metrics": {
-        "audioSec": 72.25,
+        "audioSec": 72.13,
         "timings": {
           "fetchMs": 0,
-          "probeMs": 2,
-          "asrMs": 2154,
-          "llmMs": 32089,
-          "verifyMs": 2,
-          "totalMs": 34247
+          "probeMs": 1,
+          "asrMs": 2817,
+          "llmMs": 33244,
+          "verifyMs": 1,
+          "totalMs": 36062
         },
         "calls": {
           "asr": 1,
@@ -490,7 +740,7 @@
         "asr": {
           "model": "nova-3",
           "diarizer": "v2",
-          "requestId": "01a0acd2-df38-7740-96bb-03a24145b827",
+          "requestId": "01a0b429-ffe0-77f0-bb35-0fc3aa14a092",
           "attempts": 1
         },
         "llm": {
@@ -503,26 +753,26 @@
               "ok": true,
               "error": null,
               "finishReason": "stop",
-              "latencyMs": 32089,
+              "latencyMs": 33243,
               "usage": {
                 "cacheHitTokens": 1536,
-                "cacheMissTokens": 169,
-                "outputTokens": 7810,
-                "reasoningTokens": 6373
+                "cacheMissTokens": 165,
+                "outputTokens": 8485,
+                "reasoningTokens": 7628
               }
             }
           ]
         },
         "cost": {
           "tariff": "off_peak",
-          "recognitionUsd": 0.00758625,
-          "reasoningUsd": 0.004715957999999999,
+          "recognitionUsd": 0.0075736499999999995,
+          "reasoningUsd": 0.005120358,
           "retriesUsd": 0,
           "speechUsd": 0,
           "intermediariesUsd": 0,
-          "operationUsd": 0.012302207999999999,
-          "operationPeakUsd": 0.017018165999999998,
-          "perAudioMinuteUsd": 0.01021636650519031,
+          "operationUsd": 0.012694008,
+          "operationPeakUsd": 0.017814365999999998,
+          "perAudioMinuteUsd": 0.010559274643005684,
           "hostingUsd": 0
         }
       },
@@ -611,10 +861,12 @@
         {
           "title": "Write a migration script for the old beta users",
           "kind": "task",
-          "status": "cancelled",
+          "status": "agreed",
           "owner": "Mark",
           "deadline": null,
-          "flags": [],
+          "flags": [
+            "no_deadline"
+          ],
           "events": [
             {
               "type": "committed",
@@ -625,248 +877,6 @@
               "type": "accepted",
               "start": 30.07,
               "end": 31.029999
-            },
-            {
-              "type": "cancelled",
-              "start": 66.18,
-              "end": 67.3
-            }
-          ]
-        },
-        {
-          "title": "Build a dark mode before the launch",
-          "kind": "task",
-          "status": "not_agreed",
-          "owner": null,
-          "deadline": "before the launch",
-          "flags": [
-            "date_not_stated"
-          ],
-          "events": [
-            {
-              "type": "proposed",
-              "start": 31.35,
-              "end": 35.989998
-            },
-            {
-              "type": "deadline",
-              "start": 34.31,
-              "end": 35.27
-            },
-            {
-              "type": "declined",
-              "start": 36.31,
-              "end": 37.91
-            }
-          ]
-        },
-        {
-          "title": "Update the App Store screenshots",
-          "kind": "task",
-          "status": "agreed",
-          "owner": null,
-          "deadline": "before the launch",
-          "flags": [
-            "no_owner",
-            "date_not_stated"
-          ],
-          "events": [
-            {
-              "type": "proposed",
-              "start": 38.309998,
-              "end": 41.83
-            },
-            {
-              "type": "deadline",
-              "start": 40.95,
-              "end": 41.83
-            },
-            {
-              "type": "accepted",
-              "start": 42.515,
-              "end": 44.355
-            }
-          ]
-        },
-        {
-          "title": "Are we launching in Canada at the same time?",
-          "kind": "question",
-          "status": "open",
-          "owner": null,
-          "deadline": null,
-          "flags": [],
-          "events": [
-            {
-              "type": "asked",
-              "start": 44.675,
-              "end": 47.555
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "fixture": "t2-migration-kept",
-      "run": 1,
-      "metrics": {
-        "audioSec": 72.13,
-        "timings": {
-          "fetchMs": 0,
-          "probeMs": 1,
-          "asrMs": 1529,
-          "llmMs": 15126,
-          "verifyMs": 1,
-          "totalMs": 16658
-        },
-        "calls": {
-          "asr": 1,
-          "llm": 1
-        },
-        "asr": {
-          "model": "nova-3",
-          "diarizer": "v2",
-          "requestId": "01a0acd3-6440-7bd0-a74c-629819882616",
-          "attempts": 1
-        },
-        "llm": {
-          "model": "deepseek-flash",
-          "promptVersion": "2026-09-17.6",
-          "thinking": true,
-          "reasoningEffort": "high",
-          "attempts": [
-            {
-              "ok": true,
-              "error": null,
-              "finishReason": "stop",
-              "latencyMs": 15126,
-              "usage": {
-                "cacheHitTokens": 1536,
-                "cacheMissTokens": 165,
-                "outputTokens": 4049,
-                "reasoningTokens": 2767
-              }
-            }
-          ]
-        },
-        "cost": {
-          "tariff": "off_peak",
-          "recognitionUsd": 0.0075736499999999995,
-          "reasoningUsd": 0.002458758,
-          "retriesUsd": 0,
-          "speechUsd": 0,
-          "intermediariesUsd": 0,
-          "operationUsd": 0.010032408,
-          "operationPeakUsd": 0.012491166,
-          "perAudioMinuteUsd": 0.008345272147511438,
-          "hostingUsd": 0
-        }
-      },
-      "outcome": "ok",
-      "reason": null,
-      "passed": true,
-      "failures": [],
-      "warnings": [],
-      "speakers": [
-        {
-          "label": 0,
-          "name": "Anna"
-        },
-        {
-          "label": 1,
-          "name": "Mark"
-        }
-      ],
-      "clarifications": [],
-      "items": [
-        {
-          "title": "Set up analytics on the landing page",
-          "kind": "task",
-          "status": "agreed",
-          "owner": "Mark",
-          "deadline": "by Wednesday",
-          "flags": [
-            "date_not_stated"
-          ],
-          "events": [
-            {
-              "type": "requested",
-              "start": 16.535,
-              "end": 19.574999
-            },
-            {
-              "type": "accepted",
-              "start": 19.814999,
-              "end": 20.455
-            },
-            {
-              "type": "committed",
-              "start": 20.455,
-              "end": 22.294998
-            },
-            {
-              "type": "deadline",
-              "start": 21.255,
-              "end": 22.294998
-            }
-          ]
-        },
-        {
-          "title": "Write the release notes",
-          "kind": "task",
-          "status": "agreed",
-          "owner": "Anna",
-          "deadline": "Monday instead",
-          "flags": [
-            "date_not_stated",
-            "deadline_changed"
-          ],
-          "events": [
-            {
-              "type": "committed",
-              "start": 23.494999,
-              "end": 25.654999
-            },
-            {
-              "type": "deadline",
-              "start": 24.775,
-              "end": 25.654999
-            },
-            {
-              "type": "deadline",
-              "start": 56.915,
-              "end": 57.715
-            },
-            {
-              "type": "accepted",
-              "start": 58.34,
-              "end": 59.62
-            }
-          ]
-        },
-        {
-          "title": "Write a migration script for the old beta users",
-          "kind": "task",
-          "status": "agreed",
-          "owner": "Mark",
-          "deadline": null,
-          "flags": [
-            "no_deadline"
-          ],
-          "events": [
-            {
-              "type": "committed",
-              "start": 26.215,
-              "end": 29.255
-            },
-            {
-              "type": "accepted",
-              "start": 30.07,
-              "end": 31.029999
-            },
-            {
-              "type": "accepted",
-              "start": 66.1,
-              "end": 67.22
             }
           ]
         },
@@ -887,7 +897,7 @@
             },
             {
               "type": "deadline",
-              "start": 34.31,
+              "start": 34.23,
               "end": 35.27
             },
             {
@@ -926,7 +936,7 @@
           ]
         },
         {
-          "title": "Are we launching in Canada at the same time?",
+          "title": "Launching in Canada at the same time",
           "kind": "question",
           "status": "open",
           "owner": null,
@@ -950,10 +960,10 @@
         "timings": {
           "fetchMs": 0,
           "probeMs": 1,
-          "asrMs": 2006,
-          "llmMs": 16108,
-          "verifyMs": 1,
-          "totalMs": 18116
+          "asrMs": 2116,
+          "llmMs": 16876,
+          "verifyMs": 2,
+          "totalMs": 18995
         },
         "calls": {
           "asr": 1,
@@ -962,7 +972,7 @@
         "asr": {
           "model": "nova-3",
           "diarizer": "v2",
-          "requestId": "01a0acd3-a604-7590-98bd-6627b99406db",
+          "requestId": "01a0b42a-8cf8-7e72-aec3-fdc253291140",
           "attempts": 1
         },
         "llm": {
@@ -975,12 +985,12 @@
               "ok": true,
               "error": null,
               "finishReason": "stop",
-              "latencyMs": 16108,
+              "latencyMs": 16876,
               "usage": {
                 "cacheHitTokens": 1536,
                 "cacheMissTokens": 165,
-                "outputTokens": 4188,
-                "reasoningTokens": 2870
+                "outputTokens": 4651,
+                "reasoningTokens": 3417
               }
             }
           ]
@@ -988,13 +998,13 @@
         "cost": {
           "tariff": "off_peak",
           "recognitionUsd": 0.0075736499999999995,
-          "reasoningUsd": 0.002542158,
+          "reasoningUsd": 0.002819958,
           "retriesUsd": 0,
           "speechUsd": 0,
           "intermediariesUsd": 0,
-          "operationUsd": 0.010115808,
-          "operationPeakUsd": 0.012657966,
-          "perAudioMinuteUsd": 0.00841464688756412,
+          "operationUsd": 0.010393607999999999,
+          "operationPeakUsd": 0.013213566,
+          "perAudioMinuteUsd": 0.008645729654789961,
           "hostingUsd": 0
         }
       },
@@ -1099,16 +1109,6 @@
               "type": "accepted",
               "start": 30.07,
               "end": 31.029999
-            },
-            {
-              "type": "reinstated",
-              "start": 66.1,
-              "end": 67.22
-            },
-            {
-              "type": "accepted",
-              "start": 67.54,
-              "end": 68.1
             }
           ]
         },
@@ -1125,11 +1125,11 @@
             {
               "type": "proposed",
               "start": 31.35,
-              "end": 34.31
+              "end": 35.989998
             },
             {
               "type": "deadline",
-              "start": 34.31,
+              "start": 34.23,
               "end": 35.27
             },
             {
@@ -1153,7 +1153,7 @@
             {
               "type": "proposed",
               "start": 38.309998,
-              "end": 40.95
+              "end": 41.83
             },
             {
               "type": "deadline",
@@ -1192,10 +1192,10 @@
         "timings": {
           "fetchMs": 0,
           "probeMs": 1,
-          "asrMs": 1389,
-          "llmMs": 12552,
+          "asrMs": 1762,
+          "llmMs": 13257,
           "verifyMs": 1,
-          "totalMs": 13942
+          "totalMs": 15021
         },
         "calls": {
           "asr": 1,
@@ -1204,7 +1204,7 @@
         "asr": {
           "model": "nova-3",
           "diarizer": "v2",
-          "requestId": "01a0acd3-ec0b-79b3-9f0d-d6ea959b6a1d",
+          "requestId": "01a0b42a-d730-7a70-af34-074782fa7521",
           "attempts": 1
         },
         "llm": {
@@ -1217,12 +1217,12 @@
               "ok": true,
               "error": null,
               "finishReason": "stop",
-              "latencyMs": 12552,
+              "latencyMs": 13257,
               "usage": {
                 "cacheHitTokens": 1536,
                 "cacheMissTokens": 165,
-                "outputTokens": 3327,
-                "reasoningTokens": 2130
+                "outputTokens": 3787,
+                "reasoningTokens": 2564
               }
             }
           ]
@@ -1230,13 +1230,13 @@
         "cost": {
           "tariff": "off_peak",
           "recognitionUsd": 0.0075736499999999995,
-          "reasoningUsd": 0.002025558,
+          "reasoningUsd": 0.002301558,
           "retriesUsd": 0,
           "speechUsd": 0,
           "intermediariesUsd": 0,
-          "operationUsd": 0.009599208,
-          "operationPeakUsd": 0.011624765999999998,
-          "perAudioMinuteUsd": 0.007984922778316928,
+          "operationUsd": 0.009875208,
+          "operationPeakUsd": 0.012176765999999999,
+          "perAudioMinuteUsd": 0.00821450824899487,
           "hostingUsd": 0
         }
       },
@@ -1273,9 +1273,14 @@
               "end": 19.574999
             },
             {
+              "type": "accepted",
+              "start": 19.814999,
+              "end": 20.455
+            },
+            {
               "type": "committed",
               "start": 20.455,
-              "end": 22.294998
+              "end": 21.255
             },
             {
               "type": "deadline",
@@ -1298,7 +1303,7 @@
             {
               "type": "committed",
               "start": 23.494999,
-              "end": 25.654999
+              "end": 24.775
             },
             {
               "type": "deadline",
@@ -1334,8 +1339,8 @@
             },
             {
               "type": "accepted",
-              "start": 66.1,
-              "end": 67.22
+              "start": 30.07,
+              "end": 31.029999
             }
           ]
         },
@@ -1418,11 +1423,11 @@
         "audioSec": 45.87,
         "timings": {
           "fetchMs": 0,
-          "probeMs": 2,
-          "asrMs": 1323,
-          "llmMs": 10026,
-          "verifyMs": 0,
-          "totalMs": 11351
+          "probeMs": 1,
+          "asrMs": 1492,
+          "llmMs": 29025,
+          "verifyMs": 1,
+          "totalMs": 30519
         },
         "calls": {
           "asr": 1,
@@ -1431,7 +1436,7 @@
         "asr": {
           "model": "nova-3",
           "diarizer": "v2",
-          "requestId": "01a0acd4-225d-7070-9be3-17418f0900b1",
+          "requestId": "01a0b42b-11a2-72a1-9030-5d4b1a909fb9",
           "attempts": 1
         },
         "llm": {
@@ -1444,12 +1449,12 @@
               "ok": true,
               "error": null,
               "finishReason": "stop",
-              "latencyMs": 10026,
+              "latencyMs": 29025,
               "usage": {
                 "cacheHitTokens": 1408,
                 "cacheMissTokens": 136,
-                "outputTokens": 2425,
-                "reasoningTokens": 1731
+                "outputTokens": 7318,
+                "reasoningTokens": 6810
               }
             }
           ]
@@ -1457,178 +1462,13 @@
         "cost": {
           "tariff": "off_peak",
           "recognitionUsd": 0.00481635,
-          "reasoningUsd": 0.0014796240000000001,
+          "reasoningUsd": 0.004415424,
           "retriesUsd": 0,
           "speechUsd": 0,
           "intermediariesUsd": 0,
-          "operationUsd": 0.006295973999999999,
-          "operationPeakUsd": 0.007775598,
-          "perAudioMinuteUsd": 0.008235413996075866,
-          "hostingUsd": 0
-        }
-      },
-      "outcome": "ok",
-      "reason": null,
-      "passed": true,
-      "failures": [],
-      "warnings": [],
-      "speakers": [
-        {
-          "label": 0,
-          "name": null
-        },
-        {
-          "label": 1,
-          "name": null
-        }
-      ],
-      "clarifications": [
-        "speaker_names"
-      ],
-      "items": [
-        {
-          "title": "Look at the onboarding flow",
-          "kind": "task",
-          "status": "needs_confirmation",
-          "owner": null,
-          "deadline": "next week",
-          "flags": [
-            "date_not_stated",
-            "deadline_changed"
-          ],
-          "events": [
-            {
-              "type": "proposed",
-              "start": 3.04,
-              "end": 5.52
-            },
-            {
-              "type": "deadline",
-              "start": 4.56,
-              "end": 5.52
-            },
-            {
-              "type": "tentative",
-              "start": 9.5199995,
-              "end": 12.559999
-            },
-            {
-              "type": "deadline",
-              "start": 10.48,
-              "end": 11.2
-            }
-          ]
-        },
-        {
-          "title": "Refresh the pricing page",
-          "kind": "task",
-          "status": "not_agreed",
-          "owner": null,
-          "deadline": null,
-          "flags": [],
-          "events": [
-            {
-              "type": "proposed",
-              "start": 15.174999,
-              "end": 17.734999
-            },
-            {
-              "type": "declined",
-              "start": 21.654999,
-              "end": 24.855
-            }
-          ]
-        },
-        {
-          "title": "Move the team demo",
-          "kind": "task",
-          "status": "not_agreed",
-          "owner": null,
-          "deadline": null,
-          "flags": [],
-          "events": [
-            {
-              "type": "proposed",
-              "start": 25.654999,
-              "end": 27.255
-            }
-          ]
-        },
-        {
-          "title": "Look at the support inbox",
-          "kind": "task",
-          "status": "not_agreed",
-          "owner": null,
-          "deadline": null,
-          "flags": [],
-          "events": [
-            {
-              "type": "proposed",
-              "start": 32.649998,
-              "end": 34.41
-            },
-            {
-              "type": "proposed",
-              "start": 37.494938,
-              "end": 40.774937
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "fixture": "t3-no-intros-hedged",
-      "run": 2,
-      "metrics": {
-        "audioSec": 45.87,
-        "timings": {
-          "fetchMs": 0,
-          "probeMs": 0,
-          "asrMs": 1648,
-          "llmMs": 12690,
-          "verifyMs": 0,
-          "totalMs": 14339
-        },
-        "calls": {
-          "asr": 1,
-          "llm": 1
-        },
-        "asr": {
-          "model": "nova-3",
-          "diarizer": "v2",
-          "requestId": "01a0acd4-4f12-7070-ac2a-01faa8e2a097",
-          "attempts": 1
-        },
-        "llm": {
-          "model": "deepseek-flash",
-          "promptVersion": "2026-09-17.6",
-          "thinking": true,
-          "reasoningEffort": "high",
-          "attempts": [
-            {
-              "ok": true,
-              "error": null,
-              "finishReason": "stop",
-              "latencyMs": 12690,
-              "usage": {
-                "cacheHitTokens": 1408,
-                "cacheMissTokens": 136,
-                "outputTokens": 3012,
-                "reasoningTokens": 2396
-              }
-            }
-          ]
-        },
-        "cost": {
-          "tariff": "off_peak",
-          "recognitionUsd": 0.00481635,
-          "reasoningUsd": 0.0018318240000000001,
-          "retriesUsd": 0,
-          "speechUsd": 0,
-          "intermediariesUsd": 0,
-          "operationUsd": 0.006648174,
-          "operationPeakUsd": 0.008479997999999999,
-          "perAudioMinuteUsd": 0.008696107259646828,
+          "operationUsd": 0.009231774,
+          "operationPeakUsd": 0.013647198,
+          "perAudioMinuteUsd": 0.012075570961412688,
           "hostingUsd": 0
         }
       },
@@ -1681,7 +1521,7 @@
         {
           "title": "Refresh the pricing page",
           "kind": "task",
-          "status": "needs_confirmation",
+          "status": "not_agreed",
           "owner": null,
           "deadline": null,
           "flags": [],
@@ -1694,6 +1534,11 @@
             {
               "type": "tentative",
               "start": 20.615,
+              "end": 21.414999
+            },
+            {
+              "type": "declined",
+              "start": 21.654999,
               "end": 24.855
             }
           ]
@@ -1701,7 +1546,7 @@
         {
           "title": "Move the team demo",
           "kind": "task",
-          "status": "not_agreed",
+          "status": "needs_confirmation",
           "owner": null,
           "deadline": null,
           "flags": [],
@@ -1710,6 +1555,11 @@
               "type": "proposed",
               "start": 25.654999,
               "end": 27.255
+            },
+            {
+              "type": "tentative",
+              "start": 29.13,
+              "end": 32.17
             }
           ]
         },
@@ -1729,7 +1579,7 @@
             {
               "type": "proposed",
               "start": 37.494938,
-              "end": 39.254936
+              "end": 40.774937
             }
           ]
         }
@@ -1737,16 +1587,16 @@
     },
     {
       "fixture": "t3-no-intros-hedged",
-      "run": 3,
+      "run": 2,
       "metrics": {
         "audioSec": 45.87,
         "timings": {
           "fetchMs": 0,
           "probeMs": 1,
-          "asrMs": 1689,
-          "llmMs": 15157,
-          "verifyMs": 1,
-          "totalMs": 16848
+          "asrMs": 1347,
+          "llmMs": 10807,
+          "verifyMs": 0,
+          "totalMs": 12156
         },
         "calls": {
           "asr": 1,
@@ -1755,7 +1605,7 @@
         "asr": {
           "model": "nova-3",
           "diarizer": "v2",
-          "requestId": "01a0acd4-86b4-76b0-8d43-a69f47820621",
+          "requestId": "01a0b42b-88f6-7422-ae9c-b508e27808fa",
           "attempts": 1
         },
         "llm": {
@@ -1768,12 +1618,12 @@
               "ok": true,
               "error": null,
               "finishReason": "stop",
-              "latencyMs": 15157,
+              "latencyMs": 10807,
               "usage": {
                 "cacheHitTokens": 1408,
                 "cacheMissTokens": 136,
-                "outputTokens": 3801,
-                "reasoningTokens": 3145
+                "outputTokens": 3051,
+                "reasoningTokens": 2388
               }
             }
           ]
@@ -1781,13 +1631,13 @@
         "cost": {
           "tariff": "off_peak",
           "recognitionUsd": 0.00481635,
-          "reasoningUsd": 0.002305224,
+          "reasoningUsd": 0.001855224,
           "retriesUsd": 0,
           "speechUsd": 0,
           "intermediariesUsd": 0,
-          "operationUsd": 0.0071215739999999994,
-          "operationPeakUsd": 0.009426798,
-          "perAudioMinuteUsd": 0.009315335513407456,
+          "operationUsd": 0.0066715739999999996,
+          "operationPeakUsd": 0.008526797999999999,
+          "perAudioMinuteUsd": 0.00872671550032701,
           "hostingUsd": 0
         }
       },
@@ -1880,6 +1730,181 @@
         {
           "title": "Look at the support inbox",
           "kind": "task",
+          "status": "needs_confirmation",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 32.649998,
+              "end": 34.41
+            },
+            {
+              "type": "tentative",
+              "start": 37.494938,
+              "end": 40.774937
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "fixture": "t3-no-intros-hedged",
+      "run": 3,
+      "metrics": {
+        "audioSec": 45.87,
+        "timings": {
+          "fetchMs": 0,
+          "probeMs": 2,
+          "asrMs": 1401,
+          "llmMs": 26107,
+          "verifyMs": 0,
+          "totalMs": 27510
+        },
+        "calls": {
+          "asr": 1,
+          "llm": 1
+        },
+        "asr": {
+          "model": "nova-3",
+          "diarizer": "v2",
+          "requestId": "01a0b42b-b840-7d23-8012-908f025bb7ef",
+          "attempts": 1
+        },
+        "llm": {
+          "model": "deepseek-flash",
+          "promptVersion": "2026-09-17.6",
+          "thinking": true,
+          "reasoningEffort": "high",
+          "attempts": [
+            {
+              "ok": true,
+              "error": null,
+              "finishReason": "stop",
+              "latencyMs": 26107,
+              "usage": {
+                "cacheHitTokens": 1408,
+                "cacheMissTokens": 136,
+                "outputTokens": 6461,
+                "reasoningTokens": 5674
+              }
+            }
+          ]
+        },
+        "cost": {
+          "tariff": "off_peak",
+          "recognitionUsd": 0.00481635,
+          "reasoningUsd": 0.0039012239999999996,
+          "retriesUsd": 0,
+          "speechUsd": 0,
+          "intermediariesUsd": 0,
+          "operationUsd": 0.008717573999999999,
+          "operationPeakUsd": 0.012618797999999999,
+          "perAudioMinuteUsd": 0.011402974493132765,
+          "hostingUsd": 0
+        }
+      },
+      "outcome": "ok",
+      "reason": null,
+      "passed": true,
+      "failures": [],
+      "warnings": [],
+      "speakers": [
+        {
+          "label": 0,
+          "name": null
+        },
+        {
+          "label": 1,
+          "name": null
+        }
+      ],
+      "clarifications": [
+        "speaker_names"
+      ],
+      "items": [
+        {
+          "title": "Look at the onboarding flow",
+          "kind": "task",
+          "status": "needs_confirmation",
+          "owner": null,
+          "deadline": "next week",
+          "flags": [
+            "date_not_stated",
+            "deadline_changed"
+          ],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 3.04,
+              "end": 4.56
+            },
+            {
+              "type": "deadline",
+              "start": 4.56,
+              "end": 5.52
+            },
+            {
+              "type": "tentative",
+              "start": 9.5199995,
+              "end": 12.559999
+            },
+            {
+              "type": "deadline",
+              "start": 10.48,
+              "end": 11.2
+            }
+          ]
+        },
+        {
+          "title": "Refresh the pricing page",
+          "kind": "task",
+          "status": "not_agreed",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 15.174999,
+              "end": 17.734999
+            },
+            {
+              "type": "tentative",
+              "start": 20.615,
+              "end": 21.414999
+            },
+            {
+              "type": "declined",
+              "start": 21.654999,
+              "end": 24.855
+            }
+          ]
+        },
+        {
+          "title": "Move the team demo",
+          "kind": "task",
+          "status": "needs_confirmation",
+          "owner": null,
+          "deadline": null,
+          "flags": [],
+          "events": [
+            {
+              "type": "proposed",
+              "start": 25.654999,
+              "end": 27.255
+            },
+            {
+              "type": "tentative",
+              "start": 29.13,
+              "end": 32.17
+            }
+          ]
+        },
+        {
+          "title": "Look at the support inbox",
+          "kind": "task",
           "status": "not_agreed",
           "owner": null,
           "deadline": null,
@@ -1891,9 +1916,9 @@
               "end": 34.41
             },
             {
-              "type": "proposed",
+              "type": "declined",
               "start": 37.494938,
-              "end": 39.254936
+              "end": 40.774937
             }
           ]
         }
@@ -1906,11 +1931,11 @@
         "audioSec": 216.75,
         "timings": {
           "fetchMs": 0,
-          "probeMs": 2,
+          "probeMs": 1,
           "asrMs": 0,
           "llmMs": 0,
           "verifyMs": 0,
-          "totalMs": 2
+          "totalMs": 1
         },
         "calls": {
           "asr": 0,
@@ -1951,7 +1976,7 @@
           "asrMs": 0,
           "llmMs": 0,
           "verifyMs": 0,
-          "totalMs": 0
+          "totalMs": 1
         },
         "calls": {
           "asr": 0,
@@ -2030,10 +2055,10 @@
         "timings": {
           "fetchMs": 0,
           "probeMs": 1,
-          "asrMs": 1541,
+          "asrMs": 1559,
           "llmMs": 0,
           "verifyMs": 0,
-          "totalMs": 1542
+          "totalMs": 1560
         },
         "calls": {
           "asr": 1,
@@ -2042,7 +2067,7 @@
         "asr": {
           "model": "nova-3",
           "diarizer": "v2",
-          "requestId": "01a0acd4-c91f-75c1-b89d-1ee85fbe388c",
+          "requestId": "01a0b42c-2488-7f02-a254-a943a0e0075f",
           "attempts": 1
         },
         "llm": null,
@@ -2076,10 +2101,10 @@
         "timings": {
           "fetchMs": 0,
           "probeMs": 1,
-          "asrMs": 497,
+          "asrMs": 510,
           "llmMs": 0,
           "verifyMs": 0,
-          "totalMs": 497
+          "totalMs": 511
         },
         "calls": {
           "asr": 1,
@@ -2088,7 +2113,7 @@
         "asr": {
           "model": "nova-3",
           "diarizer": "v2",
-          "requestId": "01a0acd4-cd1f-70d0-ab0d-77374ffc27ad",
+          "requestId": "01a0b42c-2872-7f12-80ef-482e86b261d8",
           "attempts": 1
         },
         "llm": null,
@@ -2122,10 +2147,10 @@
         "timings": {
           "fetchMs": 0,
           "probeMs": 1,
-          "asrMs": 332,
+          "asrMs": 338,
           "llmMs": 0,
           "verifyMs": 0,
-          "totalMs": 332
+          "totalMs": 339
         },
         "calls": {
           "asr": 1,
@@ -2134,7 +2159,7 @@
         "asr": {
           "model": "nova-3",
           "diarizer": "v2",
-          "requestId": "01a0acd4-cf10-7101-84f4-2b3194df9af0",
+          "requestId": "01a0b42c-2a74-77c3-94de-9ef38a7ef731",
           "attempts": 1
         },
         "llm": null,
@@ -2174,26 +2199,26 @@
         "ok"
       ],
       "totalMs": {
-        "median": 14817,
-        "worst": 34247
+        "median": 14577,
+        "worst": 51310
       },
       "llmMs": {
-        "median": 11760,
-        "worst": 32089
+        "median": 13085,
+        "worst": 49630
       },
       "llmAttempts": {
         "median": 1,
         "worst": 1
       },
       "operationUsd": {
-        "median": 0.009514608,
-        "worst": 0.012302207999999999
+        "median": 0.009815208,
+        "worst": 0.015968208
       },
       "operationPeakUsd": {
-        "median": 0.011442966,
-        "worst": 0.017018165999999998
+        "median": 0.012044166,
+        "worst": 0.024350166
       },
-      "perAudioMinuteUsd": 0.00790140456747405,
+      "perAudioMinuteUsd": 0.008151037785467129,
       "failures": [],
       "warnings": []
     },
@@ -2205,26 +2230,26 @@
         "ok"
       ],
       "totalMs": {
-        "median": 16658,
-        "worst": 18116
+        "median": 18995,
+        "worst": 36062
       },
       "llmMs": {
-        "median": 15126,
-        "worst": 16108
+        "median": 16876,
+        "worst": 33244
       },
       "llmAttempts": {
         "median": 1,
         "worst": 1
       },
       "operationUsd": {
-        "median": 0.010032408,
-        "worst": 0.010115808
+        "median": 0.010393607999999999,
+        "worst": 0.012694008
       },
       "operationPeakUsd": {
-        "median": 0.012491166,
-        "worst": 0.012657966
+        "median": 0.013213566,
+        "worst": 0.017814365999999998
       },
-      "perAudioMinuteUsd": 0.008345272147511438,
+      "perAudioMinuteUsd": 0.008645729654789961,
       "failures": [],
       "warnings": []
     },
@@ -2236,26 +2261,26 @@
         "ok"
       ],
       "totalMs": {
-        "median": 14339,
-        "worst": 16848
+        "median": 27510,
+        "worst": 30519
       },
       "llmMs": {
-        "median": 12690,
-        "worst": 15157
+        "median": 26107,
+        "worst": 29025
       },
       "llmAttempts": {
         "median": 1,
         "worst": 1
       },
       "operationUsd": {
-        "median": 0.006648174,
-        "worst": 0.0071215739999999994
+        "median": 0.008717573999999999,
+        "worst": 0.009231774
       },
       "operationPeakUsd": {
-        "median": 0.008479997999999999,
-        "worst": 0.009426798
+        "median": 0.012618797999999999,
+        "worst": 0.013647198
       },
-      "perAudioMinuteUsd": 0.008696107259646828,
+      "perAudioMinuteUsd": 0.011402974493132765,
       "failures": [],
       "warnings": []
     },
@@ -2267,8 +2292,8 @@
         "declined (too_long)"
       ],
       "totalMs": {
-        "median": 0,
-        "worst": 2
+        "median": 1,
+        "worst": 1
       },
       "llmMs": {
         "median": 0,
@@ -2298,8 +2323,8 @@
         "declined (unsupported_language)"
       ],
       "totalMs": {
-        "median": 497,
-        "worst": 1542
+        "median": 511,
+        "worst": 1560
       },
       "llmMs": {
         "median": 0,

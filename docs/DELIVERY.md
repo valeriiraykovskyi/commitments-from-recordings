@@ -44,15 +44,17 @@ Expected results were written from the scripts and committed before any pipeline
 (`fixtures/*/expected.json`; the git history shows the order). The audio was synthesised from
 the scripts with Deepgram Aura-2 so that the two versions differ by exactly one line. "Actual"
 is the eval on prompt v6 with the default configuration, three runs per fixture, one after
-another, with real API calls ([eval/deepseek-flash-high.md](../eval/deepseek-flash-high.md)).
+another, with real API calls, re-run on the delivery-day fix
+([eval/deepseek-flash-high.md](../eval/deepseek-flash-high.md); the report is produced on commit
+`eed20cb`, with only these documents uncommitted — no source file differed from it).
 
 | Fixture | Input | Expected | Actual |
 |---|---|---|---|
-| **T1 Launch sync** (1:12) | Anna (product manager) and Mark (developer) plan a beta launch: a request that is accepted, a self-commitment whose deadline is corrected, a proposal nobody accepts, an accepted task with no owner, a task cancelled later, an open question, and a report of finished work that must not become a task | Agreed: set up analytics — Mark — "by Wednesday"; write the release notes — Anna — "Monday", corrected from Friday; update the App Store screenshots — no owner — "before the launch". Open question: launching in Canada. Not agreed: dark mode. Cancelled: migration script. Not a task: the sign-up bug that was already fixed. Every deadline flagged as having no date context | 3 of 3 runs match exactly, every quote verbatim and on the expected lines; result after 14.8 s (median), 34.2 s (worst: one run reasoned three times longer); $0.0095 per run |
-| **T2 Launch sync, one change** | T1 with line 18 changed: legal approved the import, so the migration script is kept | The migration script becomes agreed — Mark — no deadline; everything else identical to T1 | 3 of 3; 16.7 s (18.1 s); $0.0100 |
-| **T3 Undecided talk** (0:45) | Two speakers who never introduce themselves and only talk in hedges: "we should probably", "no promises", "possibly", "not sure", "somebody might" | A clarification asking who the speakers are; zero agreed tasks; the hedged items need confirmation or are not agreed; nothing invented | 3 of 3: "Who is who?" shown, 0 agreed, 2 items need confirmation, the rest not commitments; 14.3 s (16.8 s); $0.0066 |
-| **G1 Too long** (3:36) | T1 three times in a row | Refused before any paid call | 3 of 3: refused, 0 paid calls, $0; 1 ms on the server, 34 ms end to end in the browser |
-| **G2 Spanish** (0:16) | A short planning talk in Spanish | Refused after recognition, without a model call | 3 of 3: refused as `es`, transcript shown, no model call, 0.5 s, $0.0017 |
+| **T1 Launch sync** (1:12) | Anna (product manager) and Mark (developer) plan a beta launch: a request that is accepted, a self-commitment whose deadline is corrected, a proposal nobody accepts, an accepted task with no owner, a task cancelled later, an open question, and a report of finished work that must not become a task | Agreed: set up analytics — Mark — "by Wednesday"; write the release notes — Anna — "Monday", corrected from Friday; update the App Store screenshots — no owner — "before the launch". Open question: launching in Canada. Not agreed: dark mode. Cancelled: migration script. Not a task: the sign-up bug that was already fixed. Every deadline flagged as having no date context | 3 of 3 runs match exactly, every quote verbatim and on the expected lines; result after 14.6 s (median), 51.3 s (worst: one run reasoned four times longer); $0.0098 per run |
+| **T2 Launch sync, one change** | T1 with line 18 changed: legal approved the import, so the migration script is kept | The migration script becomes agreed — Mark — no deadline; everything else identical to T1 | 3 of 3; 19.0 s (36.1 s); $0.0104 |
+| **T3 Undecided talk** (0:45) | Two speakers who never introduce themselves and only talk in hedges: "we should probably", "no promises", "possibly", "not sure", "somebody might" | A clarification asking who the speakers are; zero agreed tasks; the hedged items need confirmation or are not agreed; nothing invented | 3 of 3: "Who is who?" shown, 0 agreed, 2 items need confirmation, the rest not commitments; 27.5 s (30.5 s); $0.0087 |
+| **G1 Too long** (3:36) | T1 three times in a row | Refused before any paid call | 3 of 3: refused, 0 paid calls, $0; under 1 ms on the server, 34 ms end to end in the browser |
+| **G2 Spanish** (0:16) | A short planning talk in Spanish | Refused after recognition, without a model call | 3 of 3: refused as `es`, transcript shown, no model call, 0.5 s (1.6 s), $0.0017 |
 
 **Inclusion and exclusion are both checked.** The comparison fails a run when an expected item is
 missing or has the wrong status, owner, deadline wording or flags; when anything outside the
@@ -96,6 +98,14 @@ Everything below is recorded with its fix in
   runs under Next, was never affected.
 - Two transient model failures (an answer without the required arrays; one network error) were
   caught by the single retry and are counted in the metrics.
+- The last one, found by the production check on the day of delivery: a T1 run returned the
+  **cancelled migration script as agreed**. The model had labelled Mark's acknowledgement of the
+  cancellation ("Okay. Noted.") as an acceptance, and the state machine let any acceptance
+  re-agree a cancelled task, bypassing the guard that only an explicit reinstatement had. This is
+  the brief's own rule about cancelled tasks, and neither the eval nor the unit table had covered
+  the order: no recorded answer put an acceptance after a cancellation. An acceptance after a
+  cancellation is now ignored, a fresh self-commitment still revives the task, five cases were
+  added to the unit table, and the eval was re-run on a clean commit.
 
 ## 4. Time spent
 
@@ -130,9 +140,10 @@ recorded by the author after the notes.
   output is a static mock, not shipped code: it was read before use, and the task titles, quotes
   and transcript it had invented to fill the layout were discarded, so every string in the app is
   still the one the pipeline produces.
-  The work went step by step: each step was discussed and approved before code was written, and
-  every model output was checked as described in the AI usage log in
-  [PROGRESS.md](../PROGRESS.md#ai-usage-log).
+
+The work went step by step: each step was discussed and approved before code was written, and
+every model output was checked as described in the AI usage log in
+[PROGRESS.md](../PROGRESS.md#ai-usage-log).
 
 **One example of checking model output.** The extraction model's answers are never shown
 directly. Every quote it returns is matched word for word against the transcript in code, and
@@ -155,11 +166,11 @@ production runs on Vercel's `iad1` region, close to Deepgram, where recognition 
 | What | Measured |
 |---|---|
 | Transcript on screen (a first useful result) | 1.2–2.8 s after choosing a sample; 4.6 s for a 2.3 MB upload, of which 2.2 s is the upload |
-| Full result, T1–T3, eval (9 runs) | median 12.7 s of model time, 14.3–16.7 s median end to end; worst 34.2 s (one run reasoned with 6.4k tokens instead of the usual 2.4k) |
+| Full result, T1–T3, eval (9 runs) | 13.1 s (T1), 16.9 s (T2) and 26.1 s (T3) of model time at the median, 14.6–27.5 s median end to end; worst 51.3 s, a run that reasoned with 12.7k tokens instead of the usual 2.4k |
 | Full result on production (prompt v6, peak tariff) | T1 sample: transcript after 1.8 s, result after 13.2 s, $0.0114; T2 upload: 2.8 s upload, transcript after 1.0 s, result after 43.1 s (the model reasoned with 9.8k tokens), $0.0193. Both correct |
-| Server stages | duration check 1–13 ms · recognition 0.2–2.7 s · model 10–16 s typical, 32 s worst · verification ≤ 6 ms |
-| Refusals | too long: 1–34 ms, $0 · non-English: 0.2–1.7 s |
-| Variance across prompt versions | v4 (effort `high`): 6–42 s of model time on the same input; v5: 7–16 s; v6: 10–32 s. The tail comes from how long the model reasons, not from recognition |
+| Server stages | duration check 1–4 ms · recognition 0.3–2.8 s · model 10–29 s typical, 49.6 s worst · verification ≤ 6 ms |
+| Refusals | too long: under 1 ms on the server, 34 ms end to end, $0 · non-English: 0.3–1.6 s |
+| Variance across prompt versions | v4 (effort `high`): 6–42 s of model time on the same input; v5: 7–16 s; v6: 9.7–49.6 s across two eval rounds. The tail comes from how long the model reasons, not from recognition, and it is the first thing to fix (§9) |
 
 ## 7. Variable cost per operation (measured, list prices)
 
@@ -170,14 +181,17 @@ audio**, one run:
 | Component | Cost | Basis |
 |---|---|---|
 | Recognition | $0.0076 | 1.20 min × ($0.0043 Nova-3 + $0.0020 diarization add-on) |
-| Reasoning | $0.0019 | about 1.55k input tokens, of which 1.4k served from DeepSeek's prefix cache, plus 2.2–3.6k output tokens (incl. reasoning) at the off-peak tariff |
-| Retries | $0 | none in the 15 v6 eval runs; a failed attempt is billed and counted when it happens (once in the 15 v5 runs, +$0.0009) |
+| Reasoning | $0.0022 | 1,705 input tokens, of which 1,536 were served from DeepSeek's prefix cache, plus 3,665 output tokens including 2,374 of reasoning, at the off-peak tariff |
+| Retries | $0 | none in either round of 15 v6 eval runs; a failed attempt is billed and counted when it happens (once in the 15 v5 runs, +$0.0009) |
 | Speech | $0 | the product does not synthesise speech |
 | Paid intermediaries | $0 | direct API calls, no middleware services |
-| **Per operation** | **$0.0095** off-peak, **$0.0114** at DeepSeek's peak tariff | |
-| **Per audio minute** | **$0.0079** off-peak, **$0.0095** at peak | recognition is about 80% of it |
+| **Per operation** | **$0.0098** off-peak, **$0.0120** at DeepSeek's peak tariff | |
+| **Per audio minute** | **$0.0082** off-peak, **$0.0100** at peak | recognition is about 77% of it |
 
-Other fixtures: T2 $0.0099, T3 (45 s) $0.0067, G2 $0.0017 (recognition only), G1 $0.
+Other fixtures: T2 $0.0104, T3 (45 s) $0.0087, G2 $0.0017 (recognition only), G1 $0. The
+fifteen runs of the delivery-day eval cost $0.0978 in total. Reasoning is the variable part: the
+nine model runs spent between 2,914 and 13,920 output tokens, so a long-reasoning run costs about
+60% more than a median one.
 
 **Pricing assumptions** (`src/lib/pricing.ts`, checked 2026-09-17):
 
@@ -234,9 +248,11 @@ every component's styling are ours.
 - **Correcting speakers in the UI.** Diarization can mislabel short replies; the app flags a
   mismatch, and a wrong self-introduction mapping could be fixed by the user without re-running
   the model. Designed, not built.
-- **Eval on a clean commit and more runs.** The committed reports were produced with the
-  prompt and ESM changes uncommitted (marked in the reports). Five runs per fixture would
-  tighten the variance figures.
+- **More runs per fixture.** The reports in `eval/` now come from a run where only these
+  documents were uncommitted, so the code under test was the committed code — earlier reports had
+  been produced with prompt and source changes still uncommitted. Three runs per fixture is still
+  thin for the latency tail: the same input came back in 9.7 s and in 49.6 s across two rounds,
+  and five or ten runs would give an honest distribution rather than a median and a worst case.
 - **Latency and its tail.** The model is 80–90% of the wait (10–17 s typical), and two of the
   twelve v6 runs on T1–T3 reasoned three to four times longer (32 s and 42 s), which also
   doubles their cost. Options to measure next: a cap on reasoning tokens with a quality check,
