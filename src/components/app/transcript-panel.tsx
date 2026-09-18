@@ -20,10 +20,10 @@ export function TranscriptPanel({
   player: SegmentPlayer;
 }) {
   return (
-    <aside className="flex flex-col overflow-hidden rounded-xl bg-card ring-1 ring-foreground/10 lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)]">
-      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-foreground/10 px-4 py-3">
+    <aside className="flex flex-col overflow-hidden border border-border bg-card lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)]">
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-border px-4 py-3">
         <div>
-          <p className="text-sm font-medium">Transcript</p>
+          <p className="font-heading text-sm font-semibold text-ink uppercase">Transcript</p>
           <p className="text-xs text-muted-foreground">
             {formatTimestamp(transcript.durationSec)} · click a line to listen
           </p>
@@ -52,13 +52,13 @@ export function TranscriptPanel({
                 type="button"
                 onClick={() => player.play(segment)}
                 className={cn(
-                  "w-full rounded-lg px-2 py-1.5 text-left transition-colors outline-none hover:bg-muted/70 focus-visible:ring-2 focus-visible:ring-ring/50",
-                  highlighted && "bg-muted",
+                  "w-full border-l-[3px] border-transparent px-2 py-1.5 text-left transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
+                  highlighted ? "border-brand bg-brand-mint" : "hover:bg-muted",
                 )}
               >
                 <span className="flex items-center gap-1.5 text-xs">
                   <span className={cn("size-1.5 rounded-full", style.dot)} />
-                  <span className={cn("font-medium", style.text)}>
+                  <span className={cn("font-heading font-semibold", style.text)}>
                     {speakerName(speakers, utterance.speaker)}
                   </span>
                   <span className="font-mono tabular-nums text-muted-foreground">

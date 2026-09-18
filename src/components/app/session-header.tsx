@@ -68,13 +68,13 @@ export function SessionHeader({
   const ended = marks.finished !== undefined;
 
   return (
-    <section className="rounded-xl bg-card ring-1 ring-foreground/10">
+    <section className="border border-border bg-card">
       <div className="flex items-center gap-3 px-4 py-3">
-        <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted">
+        <span className="flex size-9 shrink-0 items-center justify-center bg-muted">
           <FileMusic className="size-4 text-muted-foreground" />
         </span>
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-medium">
+          <p className="truncate font-heading text-sm font-semibold text-ink">
             {source.kind === "sample" ? source.label : source.name}
           </p>
           <p className="truncate text-xs text-muted-foreground">
@@ -89,7 +89,7 @@ export function SessionHeader({
         </Button>
       </div>
 
-      <ol className="flex flex-wrap items-center gap-x-1 gap-y-2 border-t border-foreground/10 px-4 py-2.5">
+      <ol className="flex flex-wrap items-center gap-x-1 gap-y-2 border-t border-border px-4 py-2.5">
         {steps.map((step, index) => {
           const start = marks[step.key];
           const next =
@@ -117,20 +117,29 @@ export function SessionHeader({
           return (
             <li key={step.key} className="flex items-center gap-1.5">
               {index > 0 && <span className="mx-1 h-px w-4 bg-border" aria-hidden />}
-              <StepIcon state={state} />
               <span
                 className={cn(
-                  "text-sm",
-                  state === "pending" || state === "skipped"
-                    ? "text-muted-foreground"
-                    : "font-medium",
+                  "flex items-center gap-1.5 px-1.5 py-1",
+                  state === "active" && "bg-brand-mint",
                 )}
               >
-                {step.label}
+                <StepIcon state={state} />
+                <span
+                  className={cn(
+                    "font-heading text-[13px]",
+                    state === "pending" || state === "skipped"
+                      ? "text-muted-foreground"
+                      : "font-semibold text-ink",
+                  )}
+                >
+                  {step.label}
+                </span>
+                {detail && (
+                  <span className="font-mono text-xs tabular-nums text-muted-foreground">
+                    {detail}
+                  </span>
+                )}
               </span>
-              {detail && (
-                <span className="font-mono text-xs tabular-nums text-muted-foreground">{detail}</span>
-              )}
             </li>
           );
         })}
@@ -144,13 +153,13 @@ function StepIcon({ state }: { state: StepState }) {
   switch (state) {
     case "done":
       return (
-        <span className={cn(base, "bg-foreground text-background")}>
+        <span className={cn(base, "bg-brand text-white")}>
           <Check className="size-3" strokeWidth={3} />
         </span>
       );
     case "active":
       return (
-        <span className={cn(base, "bg-muted")}>
+        <span className={cn(base, "bg-white text-brand-strong")}>
           <LoaderCircle className="size-3.5 animate-spin" />
         </span>
       );
@@ -161,7 +170,7 @@ function StepIcon({ state }: { state: StepState }) {
         </span>
       );
     default:
-      return <span className={cn(base, "ring-1 ring-foreground/15 ring-inset")} />;
+      return <span className={cn(base, "border border-input")} />;
   }
 }
 

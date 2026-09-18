@@ -17,16 +17,17 @@ import type {
 
 import { EvidenceQuote } from "./evidence-quote";
 
+/** Brand teal is reserved for chrome and actions, so no status may use it. */
 const STATUS: Record<ItemStatus, { label: string; className: string }> = {
-  agreed: { label: "Agreed", className: "bg-emerald-50 text-emerald-700 ring-emerald-600/20" },
+  agreed: { label: "Agreed", className: "bg-agreed-soft text-agreed border-agreed-line" },
   needs_confirmation: {
     label: "Needs confirmation",
-    className: "bg-amber-50 text-amber-700 ring-amber-600/20",
+    className: "bg-pending-soft text-pending border-pending-line",
   },
-  not_agreed: { label: "Not agreed", className: "bg-neutral-100 text-neutral-600 ring-neutral-500/20" },
-  cancelled: { label: "Cancelled", className: "bg-rose-50 text-rose-700 ring-rose-600/20" },
-  open: { label: "Open question", className: "bg-sky-50 text-sky-700 ring-sky-600/20" },
-  answered: { label: "Answered", className: "bg-neutral-100 text-neutral-600 ring-neutral-500/20" },
+  not_agreed: { label: "Not agreed", className: "bg-inactive-soft text-inactive border-inactive-line" },
+  cancelled: { label: "Cancelled", className: "bg-cancelled-soft text-cancelled border-cancelled-line" },
+  open: { label: "Open question", className: "bg-open-soft text-open border-open-line" },
+  answered: { label: "Answered", className: "bg-inactive-soft text-inactive border-inactive-line" },
 };
 
 const EVENT_LABELS: Record<EventType, string> = {
@@ -92,13 +93,13 @@ export function ItemCard({
   const showDeadline = item.kind === "task" && (item.deadline !== null || isAgreedTask);
 
   return (
-    <article className="rounded-xl bg-card ring-1 ring-foreground/10">
+    <article className="border border-border bg-card">
       <div className="flex flex-col gap-3 p-4">
         <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
           <h3 className="text-base leading-snug font-medium text-balance">{item.title}</h3>
           <span
             className={cn(
-              "inline-flex h-5 shrink-0 items-center rounded-full px-2 text-xs font-medium ring-1 ring-inset",
+              "inline-flex shrink-0 items-center border px-[9px] py-[3px] font-heading text-[11px] font-semibold tracking-[0.06em] uppercase",
               status.className,
             )}
           >
@@ -137,7 +138,7 @@ export function ItemCard({
               <Tooltip key={check.flag}>
                 <TooltipTrigger
                   render={
-                    <span className="inline-flex cursor-help items-center gap-1 rounded-full bg-amber-50 px-2 py-0.5 text-xs text-amber-800 ring-1 ring-amber-600/20 ring-inset" />
+                    <span className="inline-flex cursor-help items-center gap-1 border border-pending-line bg-pending-soft px-2 py-0.5 text-xs text-pending" />
                   }
                 >
                   <TriangleAlert className="size-3" />
@@ -150,7 +151,7 @@ export function ItemCard({
         )}
       </div>
 
-      <ol className="flex flex-col border-t border-foreground/10 px-2 py-2">
+      <ol className="flex flex-col border-t border-border px-2 py-2">
         {item.events.map((event, index) => (
           <li key={index}>
             <EvidenceQuote
@@ -182,10 +183,10 @@ function Chip({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-sm",
+        "inline-flex items-center gap-1.5 border px-2 py-1 text-sm",
         muted
-          ? "border border-dashed border-foreground/20 text-muted-foreground"
-          : "bg-muted/70 text-foreground",
+          ? "border-dashed border-input text-muted-foreground"
+          : "border-border bg-muted text-foreground",
       )}
     >
       {Icon && <Icon className="size-3.5 shrink-0 text-muted-foreground" />}

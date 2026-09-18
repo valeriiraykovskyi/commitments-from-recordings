@@ -10,12 +10,12 @@ const TONES = {
   warning: {
     icon: TriangleAlert,
     className:
-      "border-amber-200 bg-amber-50 text-amber-900 *:data-[slot=alert-description]:text-amber-900/80",
+      "border-pending-line bg-pending-soft text-pending *:data-[slot=alert-description]:text-pending/90",
   },
   error: {
     icon: CircleX,
     className:
-      "border-destructive/20 bg-destructive/5 text-destructive *:data-[slot=alert-description]:text-destructive/90",
+      "border-cancelled-line bg-cancelled-soft text-cancelled *:data-[slot=alert-description]:text-cancelled/90",
   },
 };
 
@@ -39,7 +39,7 @@ export function Notice({
       <AlertDescription>
         <p>{children}</p>
         {action && (
-          <Button variant="outline" size="sm" onClick={action.onClick} className="mt-2 w-fit">
+          <Button size="sm" onClick={action.onClick} className="mt-3 w-fit">
             {action.label}
           </Button>
         )}

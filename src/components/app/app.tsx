@@ -239,7 +239,7 @@ function Working({ phase }: { phase: Phase }) {
   const text =
     phase.kind === "processing" ? WORKING_TEXT[phase.stage] : WORKING_TEXT[phase.kind as "preparing" | "uploading"];
   return (
-    <div className="rounded-xl bg-card p-5 ring-1 ring-foreground/10" aria-live="polite">
+    <div className="border border-border bg-card p-5" aria-live="polite">
       <div className="flex items-start gap-3">
         <LoaderCircle className="mt-0.5 size-4 shrink-0 animate-spin text-muted-foreground" />
         <p className="text-sm text-pretty">{text}</p>
@@ -248,7 +248,7 @@ function Working({ phase }: { phase: Phase }) {
         {[1, 0.7, 0.4].map((opacity) => (
           <div
             key={opacity}
-            className="h-14 animate-pulse rounded-lg bg-muted"
+            className="h-14 animate-pulse bg-muted"
             style={{ opacity }}
           />
         ))}

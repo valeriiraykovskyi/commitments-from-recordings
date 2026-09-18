@@ -3,10 +3,10 @@ import type { Speaker } from "@/lib/commitments/types";
 export type SpeakerStyle = { dot: string; text: string };
 
 const STYLES: SpeakerStyle[] = [
-  { dot: "bg-indigo-500", text: "text-indigo-700" },
-  { dot: "bg-teal-600", text: "text-teal-700" },
+  { dot: "bg-open", text: "text-open" },
+  { dot: "bg-ink", text: "text-ink" },
 ];
-const FALLBACK: SpeakerStyle = { dot: "bg-neutral-400", text: "text-neutral-600" };
+const FALLBACK: SpeakerStyle = { dot: "bg-inactive", text: "text-inactive" };
 
 export const speakerStyle = (label: number): SpeakerStyle => STYLES[label] ?? FALLBACK;
 

@@ -32,14 +32,14 @@ export function EvidenceQuote({
       onClick={() => player.play(segment)}
       aria-pressed={playing}
       className={cn(
-        "group/quote flex w-full items-start gap-3 rounded-lg px-2 py-1.5 text-left transition-colors outline-none hover:bg-muted/70 focus-visible:ring-2 focus-visible:ring-ring/50",
-        playing && "bg-muted",
+        "group/quote flex w-full items-start gap-3 border-l-[3px] border-transparent px-2 py-1.5 text-left transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
+        playing ? "border-brand bg-brand-mint" : "hover:bg-muted",
       )}
     >
       <span
         className={cn(
-          "mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-foreground/[0.06] text-foreground transition-colors group-hover/quote:bg-foreground group-hover/quote:text-background",
-          playing && "bg-foreground text-background",
+          "mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-muted text-ink transition-colors group-hover/quote:bg-brand group-hover/quote:text-white",
+          playing && "bg-brand text-white",
         )}
       >
         {playing ? (
@@ -51,7 +51,7 @@ export function EvidenceQuote({
       <span className="min-w-0 flex-1">
         <span className="block text-sm leading-relaxed text-foreground/90">“{evidence.text}”</span>
         <span className="mt-0.5 flex flex-wrap items-center gap-x-1.5 text-xs text-muted-foreground">
-          <span className={cn("font-medium", style.text)}>
+          <span className={cn("font-heading font-semibold", style.text)}>
             {speakerName(speakers, evidence.speaker)}
           </span>
           <span aria-hidden>·</span>

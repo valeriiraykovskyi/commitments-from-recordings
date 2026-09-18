@@ -37,7 +37,8 @@ export function ResultsView({
 
       <Section
         icon={CircleCheck}
-        iconClass="text-emerald-600"
+        iconClass="text-agreed"
+        countClass="border-agreed-line bg-agreed-soft text-agreed"
         title="Agreed"
         count={agreed.length}
         hint="Tasks that were explicitly accepted or taken on, and never cancelled."
@@ -48,7 +49,8 @@ export function ResultsView({
 
       <Section
         icon={CircleQuestionMark}
-        iconClass="text-sky-600"
+        iconClass="text-open"
+        countClass="border-open-line bg-open-soft text-open"
         title="Unresolved"
         count={unresolved.length}
         hint="Questions nobody answered, and tasks that only got a tentative reply."
@@ -59,9 +61,11 @@ export function ResultsView({
 
       {(excluded.length > 0 || dropped.length > 0) && (
         <Collapsible className="flex flex-col gap-3">
-          <CollapsibleTrigger className="group/excluded -mx-1 flex items-center gap-2 rounded-lg px-1 py-1 text-left outline-none hover:bg-muted/60 focus-visible:ring-2 focus-visible:ring-ring/50">
+          <CollapsibleTrigger className="group/excluded -mx-1 flex items-center gap-2 px-1 py-1 text-left outline-none hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring/50">
             <Ban className="size-4 text-muted-foreground" />
-            <span className="text-lg font-semibold tracking-tight">Not commitments</span>
+            <span className="font-heading text-[19px] leading-none font-semibold tracking-[0.01em] text-ink uppercase">
+              Not commitments
+            </span>
             <Count value={excluded.length + dropped.length} />
             <ChevronDown className="ml-auto size-4 text-muted-foreground transition-transform group-data-panel-open/excluded:rotate-180" />
           </CollapsibleTrigger>
@@ -72,7 +76,7 @@ export function ResultsView({
           <CollapsibleContent className="flex flex-col gap-3">
             {excluded.map(card)}
             {dropped.length > 0 && (
-              <div className="rounded-xl border border-dashed border-foreground/15 p-4">
+              <div className="border border-dashed border-input p-4">
                 <p className="text-sm font-medium">Unverified model output</p>
                 <p className="mt-0.5 text-xs text-muted-foreground">
                   Claims the model made that could not be found in the transcript word for word.
@@ -98,6 +102,7 @@ export function ResultsView({
 function Section({
   icon: Icon,
   iconClass,
+  countClass,
   title,
   count,
   hint,
@@ -106,6 +111,7 @@ function Section({
 }: {
   icon: LucideIcon;
   iconClass: string;
+  countClass?: string;
   title: string;
   count: number;
   hint: string;
@@ -117,13 +123,15 @@ function Section({
       <header>
         <div className="flex items-center gap-2">
           <Icon className={cn("size-4", iconClass)} />
-          <h2 className="text-lg font-semibold tracking-tight">{title}</h2>
-          <Count value={count} />
+          <h2 className="font-heading text-[19px] leading-none font-semibold tracking-[0.01em] text-ink uppercase">
+            {title}
+          </h2>
+          <Count value={count} className={countClass} />
         </div>
         <p className="mt-0.5 text-sm text-muted-foreground">{hint}</p>
       </header>
       {count === 0 ? (
-        <p className="rounded-xl border border-dashed border-foreground/15 px-4 py-6 text-center text-sm text-muted-foreground">
+        <p className="border border-dashed border-input px-4 py-6 text-center text-sm text-muted-foreground">
           {empty}
         </p>
       ) : (
@@ -133,9 +141,14 @@ function Section({
   );
 }
 
-function Count({ value }: { value: number }) {
+function Count({ value, className }: { value: number; className?: string }) {
   return (
-    <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-medium tabular-nums text-muted-foreground">
+    <span
+      className={cn(
+        "border px-[7px] py-px font-heading text-[13px] font-semibold tabular-nums",
+        className ?? "border-inactive-line bg-inactive-soft text-inactive",
+      )}
+    >
       {value}
     </span>
   );

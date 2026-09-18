@@ -72,9 +72,11 @@ export function MetricsPanel({
   );
 
   return (
-    <section className="rounded-xl bg-card ring-1 ring-foreground/10">
+    <section className="border border-border bg-card">
       <div className="px-4 pt-4">
-        <h2 className="text-base font-medium">Measurements</h2>
+        <h2 className="font-heading text-[19px] leading-none font-semibold tracking-[0.01em] text-ink uppercase">
+          Measurements
+        </h2>
         <p className="text-sm text-muted-foreground">
           This run, at list prices. Free credits are not subtracted; hosting is shown separately.
         </p>
@@ -84,7 +86,7 @@ export function MetricsPanel({
         <Block title="On the server" rows={server} />
         <Block title={`Cost · ${cost.tariff === "peak" ? "peak" : "off-peak"} tariff`} rows={costs} />
       </div>
-      <p className="border-t border-foreground/10 px-4 py-2.5 text-xs text-muted-foreground">
+      <p className="border-t border-border px-4 py-2.5 text-xs text-muted-foreground">
         {asr && `Recognition: Deepgram ${asr.model}, diarizer ${asr.diarizer}.`}{" "}
         {llm &&
           `Model: DeepSeek ${llm.model}, thinking ${llm.thinking ? "on" : "off"}, effort ${llm.reasoningEffort}, prompt ${llm.promptVersion}.`}{" "}

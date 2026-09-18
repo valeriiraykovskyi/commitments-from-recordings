@@ -43,3 +43,7 @@ next-env.d.ts
 
 # local Claude Code settings
 /.claude/
+
+# design reference exported from Claude Design (not part of the build)
+/design/
+*.zip
