@@ -16,14 +16,24 @@ type Resolved<S> = { status: S; reason: string };
  * Walks a task's events in order. Only "committed" and "accepted" make a task
  * agreed; a tentative answer always leaves it unconfirmed; declining or
  * cancelling an agreed task cancels it.
+ *
+ * Once cancelled, a task comes back only through a fresh self-commitment or an
+ * explicit reinstatement. An "accepted" cannot revive it: acceptance answers an
+ * offer, and a cancellation is not one, so the "okay", "sure" or "noted" that
+ * follows "let's drop it" acknowledges the cancellation instead of undoing it.
  */
 export function taskStatus(types: readonly EventType[]): Resolved<TaskStatus> {
   let status: TaskStatus = "not_agreed";
   let decisive: EventType | null = null;
+  let revived = false;
   for (const type of types) {
     switch (type) {
       case "committed":
+        if (status === "cancelled") revived = true;
+        status = "agreed";
+        break;
       case "accepted":
+        if (status === "cancelled") continue;
         status = "agreed";
         break;
       case "tentative":
@@ -32,28 +42,31 @@ export function taskStatus(types: readonly EventType[]): Resolved<TaskStatus> {
       case "declined":
       case "cancelled":
         status = status === "agreed" ? "cancelled" : "not_agreed";
+        revived = false;
         break;
       case "reinstated":
         if (status !== "cancelled") continue;
         status = "agreed";
+        revived = true;
         break;
       default:
         continue;
     }
     decisive = type;
   }
-  return { status, reason: taskReason(status, decisive, types) };
+  return { status, reason: taskReason(status, decisive, types, revived) };
 }
 
 function taskReason(
   status: TaskStatus,
   decisive: EventType | null,
   types: readonly EventType[],
+  revived: boolean,
 ): string {
   switch (status) {
     case "agreed":
+      if (revived) return "Brought back after being cancelled.";
       if (decisive === "committed") return "Someone committed to doing it.";
-      if (decisive === "reinstated") return "Brought back after being cancelled.";
       return "Agreed in the discussion.";
     case "needs_confirmation":
       return "Only a tentative answer was given.";

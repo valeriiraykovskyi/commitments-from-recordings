@@ -51,6 +51,21 @@ describe("taskStatus", () => {
     [["requested", "accepted", "declined"], "cancelled", "Declined after it had been agreed."],
     [["tentative", "declined"], "not_agreed", "Declined or put off."],
     [["committed", "cancelled", "reinstated"], "agreed", "Brought back after being cancelled."],
+    // "Let's drop it." — "Okay. Noted." must stay cancelled, not become agreed again.
+    [["committed", "cancelled", "accepted"], "cancelled", "Cancelled after it had been agreed."],
+    [
+      ["requested", "accepted", "cancelled", "accepted"],
+      "cancelled",
+      "Cancelled after it had been agreed.",
+    ],
+    [["committed", "declined", "accepted"], "cancelled", "Declined after it had been agreed."],
+    // A fresh commitment after the cancellation is a real revival.
+    [["committed", "cancelled", "committed"], "agreed", "Brought back after being cancelled."],
+    [
+      ["committed", "cancelled", "reinstated", "cancelled"],
+      "cancelled",
+      "Cancelled after it had been agreed.",
+    ],
     [["proposed", "reinstated"], "not_agreed", "Proposed, but never accepted."],
   ])("%j → %s", (types, status, reason) => {
     expect(taskStatus(types)).toEqual({ status, reason });
