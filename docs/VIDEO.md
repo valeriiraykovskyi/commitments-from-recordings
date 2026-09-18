@@ -10,7 +10,10 @@ questions, each with a quote you can play. Nothing is inferred: if it was not sa
 shown."
 
 **0:15–1:15 — Normal input.** Click *Launch sync*. Point at the steps and their times; the
-transcript appears after a second, the result after about fifteen. Then, top to bottom:
+transcript appears after a second or two, the result usually in about fifteen. The model's
+reasoning time varies a lot — a run can take forty or fifty seconds — so read the number on
+screen rather than a rehearsed one, and if it is a slow one, say so: the delivery notes report
+the tail and name it as the first thing to fix. Then, top to bottom:
 
 - *Agreed*: three tasks. Analytics has an owner and "by Wednesday", flagged "date not stated in
   the recording". Release notes shows "Monday · corrected from Friday". App Store screenshots

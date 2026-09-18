@@ -167,7 +167,7 @@ production runs on Vercel's `iad1` region, close to Deepgram, where recognition 
 |---|---|
 | Transcript on screen (a first useful result) | 1.2–2.8 s after choosing a sample; 4.6 s for a 2.3 MB upload, of which 2.2 s is the upload |
 | Full result, T1–T3, eval (9 runs) | 13.1 s (T1), 16.9 s (T2) and 26.1 s (T3) of model time at the median, 14.6–27.5 s median end to end; worst 51.3 s, a run that reasoned with 12.7k tokens instead of the usual 2.4k |
-| Full result on production (prompt v6, peak tariff) | T1 sample: transcript after 1.8 s, result after 13.2 s, $0.0114; T2 upload: 2.8 s upload, transcript after 1.0 s, result after 43.1 s (the model reasoned with 9.8k tokens), $0.0193. Both correct |
+| Full result on production | On the delivery build, off-peak: T1 sample transcript after 1.7 s, result after 12.5 s, $0.0095; T2 sample transcript after 0.7 s, result after 14.8 s, $0.0100. Both match `expected.json`, including the migration script cancelled in T1 and kept in T2. Earlier, at the peak tariff: T1 13.2 s and $0.0114; a T2 upload 43.1 s and $0.0193, the model reasoning with 9.8k tokens |
 | Server stages | duration check 1–4 ms · recognition 0.3–2.8 s · model 10–29 s typical, 49.6 s worst · verification ≤ 6 ms |
 | Refusals | too long: under 1 ms on the server, 34 ms end to end, $0 · non-English: 0.3–1.6 s |
 | Variance across prompt versions | v4 (effort `high`): 6–42 s of model time on the same input; v5: 7–16 s; v6: 9.7–49.6 s across two eval rounds. The tail comes from how long the model reasons, not from recognition, and it is the first thing to fix (§9) |
