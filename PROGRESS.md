@@ -31,8 +31,9 @@ Local time (EEST, UTC+3).
 | 2026-09-18 | 01:45–02:35 (approx.) | 0:50 | 11 | Final check of the submission against the brief: every requirement re-verified, T1, T3 and G1 run on production, two defects found in the documents and fixed |
 | 2026-09-18 | 02:35–03:20 (approx.) | 0:45 | 12 | Redesign in the Codebridge visual language: style measured from the site, the mock reviewed, palette, type and shape implemented, one bug fixed, checks and two commits |
 | 2026-09-18 | 13:50–14:40 (approx.) | 0:50 | 13 | Delivery notes and this log updated for the restyle; push and deploy; the production check found a cancelled task shown as agreed, fixed in the state machine with five new unit cases, and the eval re-run on a clean commit |
+| 2026-09-18 | 14:40–15:10 (approx.) | 0:30 | 13 | A sixth recording for the video, uploaded rather than bundled: script, expected results written first, audio generated, and five rewordings until recognition carried the name, the hedge and the short acceptance |
 
-**Total so far:** 8:05 of about 8:00, without the video.
+**Total so far:** 8:35 of about 8:00, without the video itself.
 
 ## Measurements so far
 
@@ -176,6 +177,7 @@ Tools and models used, and how their output was checked.
 | 2026-09-16 | `git` failed because the Xcode licence had not been accepted | Used the Command Line Tools git until the licence was accepted |
 | 2026-09-16 | The SSH remote couldn't be used: this machine has no SSH keys | Switched the remote to HTTPS, which uses the macOS keychain |
 | 2026-09-16 | ASR transcribed T1 line 10 "We could also add a dark mode" as "We can also add…", so the brief's "we could" trap would never reach the model | Reworded line 10 in T1 and T2 to "Maybe we could build a dark mode before the launch, too." The transcript now keeps "could" |
+| 2026-09-18 | Three lines of the video's demo recording did not survive recognition: "I'm Dina, I run the support team" came back as "Hi, Amdina. I'm on the support team", so the speaker was never named and the app asked who was who; "We could record" flattened to "We can record", removing the hedge the way T1 line 10 had; and the two-word turn "Monday works." came back as "Lenny works.", losing the acceptance of the corrected deadline | Each line was reworded and the audio regenerated, the same fix T1 needed: the introduction follows T1's proven "I'm <name>, the <role>" shape, "Maybe" anchors the hedge, and the short acceptance became "Yes, Monday is fine with me." The pipeline then returned the expected list exactly, with both speakers named |
 | 2026-09-16 | In the 22-second T3, diarization found a single speaker, with three different voice pairs | Extended T3 to about 45 seconds with the same meaning, plus a "somebody might…" item. Both voices are now separated and every line is attributed correctly. Lesson for the app: short recordings can merge voices, so fewer than two speakers must trigger a clarification |
 | 2026-09-16 | After regeneration, the deprecated `diarize=true` attributed Mark's short reply (T1/T2 line 17) to Anna | Compared it with `diarize_model=v2`, which attributed every line of every fixture correctly; the app will use v2. Lesson: speaker labels on short replies are hints, not facts |
 | 2026-09-17 | Prompt v1 put surrounding words into a deadline ("Monday instead") in one of two runs | Prompt v2: the deadline field holds only the time expression. "Monday" in all later runs |

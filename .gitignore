@@ -47,3 +47,6 @@ next-env.d.ts
 # design reference exported from Claude Design (not part of the build)
 /design/
 *.zip
+
+# the video demo's audio is committed under fixtures/demo-handover/, not bundled with the app
+/public/samples/demo-*.wav

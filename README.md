@@ -66,7 +66,8 @@ Scripts, expected results and timelines live in [`fixtures/`](fixtures/README.md
 in `public/samples/`. To regenerate the audio after changing a script (requires `DEEPGRAM_API_KEY`):
 
 ```bash
-npm run fixtures -- --force
+npm run fixtures -- --force                      # every fixture
+npm run fixtures -- --only <id> [--force]        # just one, leaving the committed audio alone
 ```
 
 To re-record the provider responses that the snapshot tests use:

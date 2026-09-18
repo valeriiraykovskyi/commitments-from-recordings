@@ -15,6 +15,12 @@ Audio and timelines are generated from the scripts; see [Audio](#audio) below.
 | [`g1-too-long`](g1-too-long/) | Guardrail | T1 three times in a row (about 4 min): rejected before any paid API call |
 | [`g2-spanish`](g2-spanish/) | Guardrail | Spanish speech: rejected after transcription, without an LLM call |
 
+[`demo-handover`](demo-handover/) is **not** part of the test set and is not bundled with the
+app: it is a one-minute recording uploaded in the video walkthrough, so that the demo shows new
+input going through the same pipeline. Its audio lives beside its script as
+`demo-handover/recording.wav`, never in `public/samples/`, and the eval does not run it — the
+eval takes its list from `SAMPLES` in `src/lib/limits.ts`.
+
 The only dialogue difference between T1 and T2 is line 18:
 
 ```diff

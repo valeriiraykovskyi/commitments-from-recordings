@@ -1,0 +1,160 @@
+{
+  "fixture": "demo-handover",
+  "audio": "public/samples/demo-handover.wav",
+  "sample_rate": 16000,
+  "duration_sec": 60,
+  "lines": [
+    {
+      "n": 1,
+      "speaker": "Dina",
+      "text": "Hi, I'm Dina, the head of support.",
+      "voice": "aura-2-luna-en",
+      "start": 0.3,
+      "end": 2.3
+    },
+    {
+      "n": 2,
+      "speaker": "Victor",
+      "text": "And I'm Victor, the technical writer on the team.",
+      "voice": "aura-2-orion-en",
+      "start": 2.75,
+      "end": 5.43
+    },
+    {
+      "n": 3,
+      "speaker": "Dina",
+      "text": "Let's sort out the move to the new help centre.",
+      "voice": "aura-2-luna-en",
+      "start": 5.88,
+      "end": 8.72
+    },
+    {
+      "n": 4,
+      "speaker": "Victor",
+      "text": "I'll export all the current articles by Thursday.",
+      "voice": "aura-2-orion-en",
+      "start": 9.17,
+      "end": 12.13
+    },
+    {
+      "n": 5,
+      "speaker": "Dina",
+      "text": "Good. Victor, can you also rewrite the billing guide?",
+      "voice": "aura-2-luna-en",
+      "start": 12.58,
+      "end": 16.22
+    },
+    {
+      "n": 6,
+      "speaker": "Victor",
+      "text": "Yes, I'll take that one.",
+      "voice": "aura-2-orion-en",
+      "start": 16.67,
+      "end": 18.83
+    },
+    {
+      "n": 7,
+      "speaker": "Victor",
+      "text": "And I'll set up the redirects from the old pages.",
+      "voice": "aura-2-orion-en",
+      "start": 19.28,
+      "end": 21.8
+    },
+    {
+      "n": 8,
+      "speaker": "Dina",
+      "text": "Sounds good.",
+      "voice": "aura-2-luna-en",
+      "start": 22.25,
+      "end": 23.17
+    },
+    {
+      "n": 9,
+      "speaker": "Dina",
+      "text": "Maybe we could record a short video for each article, too.",
+      "voice": "aura-2-luna-en",
+      "start": 23.62,
+      "end": 26.66
+    },
+    {
+      "n": 10,
+      "speaker": "Victor",
+      "text": "Let's hold off on that until the move is done.",
+      "voice": "aura-2-orion-en",
+      "start": 27.11,
+      "end": 29.31
+    },
+    {
+      "n": 11,
+      "speaker": "Victor",
+      "text": "About the export. Thursday is tight, I have the audit. Can we say Monday?",
+      "voice": "aura-2-orion-en",
+      "start": 29.76,
+      "end": 34.8
+    },
+    {
+      "n": 12,
+      "speaker": "Dina",
+      "text": "Yes, Monday is fine with me.",
+      "voice": "aura-2-luna-en",
+      "start": 35.25,
+      "end": 37.53
+    },
+    {
+      "n": 13,
+      "speaker": "Dina",
+      "text": "Someone also needs to warn the customers before the old links break.",
+      "voice": "aura-2-luna-en",
+      "start": 37.98,
+      "end": 41.46
+    },
+    {
+      "n": 14,
+      "speaker": "Victor",
+      "text": "Yeah, that has to happen.",
+      "voice": "aura-2-orion-en",
+      "start": 41.91,
+      "end": 43.59
+    },
+    {
+      "n": 15,
+      "speaker": "Victor",
+      "text": "Do we keep the old help centre online as a backup?",
+      "voice": "aura-2-orion-en",
+      "start": 44.04,
+      "end": 46.84
+    },
+    {
+      "n": 16,
+      "speaker": "Dina",
+      "text": "I'm not sure yet. Nobody has decided that.",
+      "voice": "aura-2-luna-en",
+      "start": 47.29,
+      "end": 50.21
+    },
+    {
+      "n": 17,
+      "speaker": "Dina",
+      "text": "Oh, and the platform team will handle the redirects themselves, so you can drop that one.",
+      "voice": "aura-2-luna-en",
+      "start": 50.66,
+      "end": 54.94
+    },
+    {
+      "n": 18,
+      "speaker": "Victor",
+      "text": "Okay, noted.",
+      "voice": "aura-2-orion-en",
+      "start": 55.39,
+      "end": 56.87
+    },
+    {
+      "n": 19,
+      "speaker": "Dina",
+      "text": "That's everything. Thanks, Victor.",
+      "voice": "aura-2-luna-en",
+      "start": 57.32,
+      "end": 59.4
+    }
+  ]
+}

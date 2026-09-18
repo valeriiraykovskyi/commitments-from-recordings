@@ -56,6 +56,15 @@ another, with real API calls, re-run on the delivery-day fix
 | **G1 Too long** (3:36) | T1 three times in a row | Refused before any paid call | 3 of 3: refused, 0 paid calls, $0; under 1 ms on the server, 34 ms end to end in the browser |
 | **G2 Spanish** (0:16) | A short planning talk in Spanish | Refused after recognition, without a model call | 3 of 3: refused as `es`, transcript shown, no model call, 0.5 s (1.6 s), $0.0017 |
 
+**A sixth recording, for the video only.** `fixtures/demo-handover/` is a one-minute
+conversation about moving a help centre — different people, different work, different wording —
+that is **uploaded** in the walkthrough rather than bundled, so the demo shows new input going
+through the same pipeline. Its expected list was written before the audio existed and it returns
+exactly that: the export corrected from "by Thursday" to "Monday" with Victor as owner, the
+billing guide agreed with no deadline, warning the customers agreed with **no owner**, the
+redirects cancelled, a "maybe we could" video proposal not agreed, and the backup question left
+open. It is not in `SAMPLES`, so the eval does not run it and the app does not offer it.
+
 **Inclusion and exclusion are both checked.** The comparison fails a run when an expected item is
 missing or has the wrong status, owner, deadline wording or flags; when anything outside the
 expected list is agreed; when an owner or deadline was invented; or when a quote does not fall on
@@ -109,13 +118,13 @@ Everything below is recorded with its fix in
 
 ## 4. Time spent
 
-About **7:45 of the 8 focused hours**, from the evening of 2026-09-16 to 2026-09-18
+About **8:35 of the 8 focused hours**, from the evening of 2026-09-16 to 2026-09-18
 (local time), in this order: brief, brainstorm and planning 0:45 · test set on paper 0:10 ·
 scaffold and first deploy 0:20 · fixture audio 0:50 · recognition module 0:15 · extraction 0:10 ·
 verification and final state 0:20 · API, uploads, metrics and production configuration 1:15 ·
 UI 0:30 · eval, prompts v5 and v6, model comparison 0:45 · README, delivery notes and video
 script 0:20 · final check against the brief 0:50 · redesign in the Codebridge visual language
-0:45 · notes, deploy and the production check 0:30. The full log with timestamps is in [PROGRESS.md](../PROGRESS.md#time-log). The video is
+0:45 · notes, deploy and the production check 0:30 · the recording for the video 0:30. The full log with timestamps is in [PROGRESS.md](../PROGRESS.md#time-log). The video is
 recorded by the author after the notes.
 
 ## 5. AI tools and models

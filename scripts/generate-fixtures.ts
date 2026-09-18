@@ -8,8 +8,9 @@
  * - fixtures/<id>/timeline.json records where each line starts and ends.
  * - A fixture with recipe.json (g1-too-long) is concatenated from others.
  *
- * Usage: npm run fixtures            (first run)
- *        npm run fixtures -- --force (overwrite committed audio)
+ * Usage: npm run fixtures                       (first run)
+ *        npm run fixtures -- --force            (overwrite committed audio)
+ *        npm run fixtures -- --only <id>...     (build just these, leaving the rest alone)
  */
 import { existsSync } from "node:fs";
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
@@ -148,10 +149,24 @@ async function main() {
   const entries = await readdir(FIXTURES_DIR, { withFileTypes: true });
   const ids = entries.filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort();
   const has = (id: string, file: string) => existsSync(path.join(FIXTURES_DIR, id, file));
-  const scripted = ids.filter((id) => has(id, "script.md"));
-  const recipes = ids.filter((id) => has(id, "recipe.json"));
+  const scriptedAll = ids.filter((id) => has(id, "script.md"));
+  const recipesAll = ids.filter((id) => has(id, "recipe.json"));
 
   const force = process.argv.includes("--force");
+  const only = process.argv.flatMap((arg, index) =>
+    arg === "--only" ? [process.argv[index + 1]] : [],
+  );
+  for (const id of only) {
+    if (!scriptedAll.includes(id) && !recipesAll.includes(id)) {
+      throw new Error(
+        `Unknown fixture "${id}". Known: ${[...scriptedAll, ...recipesAll].join(", ")}`,
+      );
+    }
+  }
+  const wanted = (id: string) => only.length === 0 || only.includes(id);
+  const scripted = scriptedAll.filter(wanted);
+  const recipes = recipesAll.filter(wanted);
+
   const existing = [...scripted, ...recipes].filter((id) =>
     existsSync(path.join(SAMPLES_DIR, `${id}.wav`)),
   );
