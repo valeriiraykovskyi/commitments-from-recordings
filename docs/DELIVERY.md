@@ -99,12 +99,13 @@ Everything below is recorded with its fix in
 
 ## 4. Time spent
 
-About **5:40 of the 8 focused hours**, on 2026-09-16 evening and the night of 2026-09-17
+About **7:45 of the 8 focused hours**, from the evening of 2026-09-16 to 2026-09-18
 (local time), in this order: brief, brainstorm and planning 0:45 · test set on paper 0:10 ·
 scaffold and first deploy 0:20 · fixture audio 0:50 · recognition module 0:15 · extraction 0:10 ·
 verification and final state 0:20 · API, uploads, metrics and production configuration 1:15 ·
 UI 0:30 · eval, prompts v5 and v6, model comparison 0:45 · README, delivery notes and video
-script 0:20. The full log with timestamps is in [PROGRESS.md](../PROGRESS.md#time-log). The video is
+script 0:20 · final check against the brief 0:50 · redesign in the Codebridge visual language
+0:45 · notes, deploy and the production check 0:30. The full log with timestamps is in [PROGRESS.md](../PROGRESS.md#time-log). The video is
 recorded by the author after the notes.
 
 ## 5. AI tools and models
@@ -122,9 +123,13 @@ recorded by the author after the notes.
 **For building**
 
 - Claude Code (desktop app) with **Claude Opus 5** (`claude-opus-5`) for planning, the test set,
-  the scaffold, recognition, extraction, verification and the API, and **Claude Fable 5.1**
-  (`claude-fable-5-1`) for the production check, the UI, the eval, prompts v5 and v6, and these
-  notes.
+  the scaffold, recognition, extraction, verification, the API, the final check against the brief
+  and the redesign in code, and **Claude Fable 5.1** (`claude-fable-5-1`) for the production
+  check, the UI, the eval, prompts v5 and v6, and these notes.
+- **Claude Design** (claude.ai/design) for the visual mock the redesign was built from. Its
+  output is a static mock, not shipped code: it was read before use, and the task titles, quotes
+  and transcript it had invented to fill the layout were discarded, so every string in the app is
+  still the one the pipeline produces.
   The work went step by step: each step was discussed and approved before code was written, and
   every model output was checked as described in the AI usage log in
   [PROGRESS.md](../PROGRESS.md#ai-usage-log).
@@ -203,8 +208,8 @@ and is not metered separately here.
 **Reused as they are:** Next.js 16 (App Router) and React 19; Tailwind CSS 4; shadcn/ui
 components on Base UI (button, alert, collapsible, tooltip) and Lucide icons; Zod; Vitest and
 tsx; `music-metadata` for the duration probe; `@vercel/blob` for client uploads and private
-storage; `@deepgram/sdk` as the HTTP client for recognition and speech synthesis; Vercel for
-hosting.
+storage; `@deepgram/sdk` as the HTTP client for recognition and speech synthesis; the Montserrat
+and Open Sans typefaces through `next/font`; Vercel for hosting.
 
 **Our own work:** everything under `src/lib` (transcript normalisation with our own utterance
 grouping, the extraction prompt, schema and client with retry and validation, quote verification,
@@ -213,6 +218,13 @@ the metrics and the cost calculator), the API routes (`upload`, `process`, `heal
 UI in `src/components/app` and the client helpers, the fixture generator and the eval
 (`scripts/`), the fixtures, the expected results, and these documents. Recorded provider
 responses under `fixtures/` are real API outputs kept as test data.
+
+**On the look.** The interface follows the visual language of Codebridge's public website —
+palette, Montserrat and Open Sans, square surfaces with pill actions — read from codebridge.tech
+rather than described from memory. The Codebridge logo and wordmark are not used: this is a
+prototype for the brief, not a Codebridge product. The theme tokens, the five status colours
+(retuned so that none of them is the brand teal, which is reserved for chrome and actions) and
+every component's styling are ours.
 
 ## 9. Unfinished parts and what to improve next
 
